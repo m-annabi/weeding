@@ -63,72 +63,102 @@ export default function Home() {
   const { couple, images } = wedding;
   return (
     <main>
-      {/* ─── Héro ─── */}
-      <section
-        className="relative flex min-h-svh items-center justify-center bg-cover bg-center md:bg-fixed"
-        style={{ backgroundImage: `url(${images.hero})` }}
-      >
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-cocoa/55 via-sienna/25 to-cocoa/60"
+      {/* ─── Héro vidéo ─── */}
+      <section className="relative flex min-h-svh items-center justify-center overflow-hidden">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src={images.heroVideo}
+          poster={images.heroPoster}
+          autoPlay
+          muted
+          loop
+          playsInline
           aria-hidden
         />
-        <div className="relative z-10 mx-6 max-w-3xl border border-cream/50 p-2 text-center">
-          <div className="border border-cream/30 px-8 py-14 sm:px-16">
-            <Sunburst className="mx-auto h-9 w-9 text-cream/90 mb-6" />
-            <p className="smallcaps text-cream/90 mb-8">Nous nous marions</p>
-            <h1 className="font-serif italic font-light text-6xl sm:text-8xl text-cream leading-none drop-shadow-[0_2px_16px_rgba(85,64,44,0.45)]">
-              {couple.partner1}
-              <span className="mx-4 not-italic font-serif text-4xl sm:text-5xl text-cream/70 align-middle">
-                &
-              </span>
-              {couple.partner2}
-            </h1>
-            <Divider light />
-            <p className="font-serif text-2xl text-cream mt-2">
-              {wedding.displayDate}
-            </p>
-            <p className="smallcaps text-cream/80 mt-3">
-              {wedding.venue.name} · Sidi Kaouki · Maroc
-            </p>
-          </div>
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-cocoa/45 via-sienna/15 to-cocoa/55"
+          aria-hidden
+        />
+        <div className="relative z-10 mx-6 max-w-3xl px-4 pb-16 text-center">
+          <Sunburst className="mx-auto h-9 w-9 text-cream/90 mb-6" />
+          <p className="smallcaps text-cream/90 mb-8">
+            {couple.partner1} & {couple.partner2}
+          </p>
+          <h1 className="font-serif italic font-light text-5xl sm:text-7xl text-cream leading-tight drop-shadow-[0_2px_16px_rgba(85,64,44,0.5)]">
+            Bienvenue à<br />notre mariage
+          </h1>
+          <Divider light />
+          <p className="font-serif text-2xl text-cream mt-2">
+            {wedding.displayDate}
+          </p>
+          <p className="smallcaps text-cream/85 mt-3">
+            {wedding.venue.name} · Sidi Kaouki · Maroc
+          </p>
         </div>
         {/* Languette en arche, signature de l'identité */}
         <div className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2">
           <div className="arch flex h-20 w-40 items-end justify-center bg-sand/95 pb-3">
-            <a href="#infos" aria-label="Découvrir les informations pratiques">
+            <a href="#infos" aria-label="Découvrir la suite">
               <Sunburst className="h-9 w-9 text-camel transition hover:text-sienna" />
             </a>
           </div>
         </div>
       </section>
 
-      {/* ─── Galerie ─── */}
-      <section className="relative bg-sand/90 py-16 overflow-hidden">
+      {/* ─── Notre histoire, notre concept ─── */}
+      <section className="relative bg-sand/90 py-24 overflow-hidden">
         <PalmLeaf className="pointer-events-none absolute -left-10 -bottom-10 h-64 w-64 text-linen" />
-        <div className="relative max-w-4xl mx-auto px-6">
-          <p className="smallcaps text-center text-olive mb-10">
-            simple · paisible · inoubliable
-          </p>
-          <div className="grid grid-cols-3 gap-4 sm:gap-6">
-            {images.gallery.map((img, i) => (
+        <div className="relative max-w-5xl mx-auto px-6 space-y-24">
+          {wedding.story.map((block, i) => (
+            <div
+              key={block.title}
+              className="grid items-center gap-10 md:grid-cols-2 md:gap-16"
+            >
               <div
-                key={img.src}
-                className={`arch relative overflow-hidden border border-camel/40 p-1.5 bg-cream/70 aspect-[3/4] ${
-                  i === 1 ? "sm:-translate-y-6" : ""
+                className={`arch relative overflow-hidden border border-camel/40 p-1.5 bg-cream/70 aspect-[3/4] max-w-md mx-auto w-full ${
+                  i % 2 === 1 ? "md:order-2" : ""
                 }`}
               >
                 <div className="arch relative h-full w-full overflow-hidden">
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    sizes="(max-width: 640px) 33vw, 300px"
-                    className="object-cover transition duration-700 hover:scale-105"
-                  />
+                  {block.media.type === "video" ? (
+                    <video
+                      className="h-full w-full object-cover"
+                      src={block.media.src}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      aria-label={block.media.alt}
+                    />
+                  ) : (
+                    <Image
+                      src={block.media.src}
+                      alt={block.media.alt}
+                      fill
+                      sizes="(max-width: 768px) 90vw, 440px"
+                      className="object-cover"
+                    />
+                  )}
                 </div>
               </div>
-            ))}
-          </div>
+              <div
+                className={`text-center md:text-left ${i % 2 === 1 ? "md:order-1" : ""}`}
+              >
+                <p className="script text-3xl text-terracotta -rotate-1 mb-3">
+                  {block.label.toLowerCase()}
+                </p>
+                <h2 className="font-serif text-4xl text-sienna mb-6">
+                  {block.title}
+                </h2>
+                <div className="space-y-4 font-light leading-relaxed text-cocoa/80">
+                  {block.paragraphs.map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+                </div>
+                <OliveBranch className="mt-8 h-6 w-16 text-olive inline-block" />
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

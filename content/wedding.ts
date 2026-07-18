@@ -25,16 +25,34 @@ export const wedding = {
     mapsQuery: "Kasbah d'Eau, Sidi Kaouki, Morocco",
   },
 
-  // Images du site (remplacez par vos propres photos dans public/images/)
+  // Images & vidéos du site (public/images et public/videos)
   images: {
-    hero: "/images/hero-plage.jpg",
+    heroVideo: "/videos/hero-plage.mp4",
+    heroPoster: "/images/hero-poster.jpg",
     band: "/images/kasbah.jpg",
-    gallery: [
-      { src: "/images/galerie-essaouira.jpg", alt: "La plage d'Essaouira" },
-      { src: "/images/galerie-kasbah.jpg", alt: "Une kasbah marocaine" },
-      { src: "/images/galerie-porte.jpg", alt: "Une porte marocaine" },
-    ],
   },
+
+  // Les deux blocs de bienvenue sous le héro (média + texte, alternés)
+  story: [
+    {
+      label: "Merci d'être là",
+      title: "Célébrer notre amour, ensemble",
+      paragraphs: [
+        "Merci du fond du cœur de faire le voyage pour nous. Ce mariage, c'est bien sûr la célébration de notre amour — mais c'est surtout l'occasion de passer du temps avec les gens qu'on aime.",
+        "On a choisi un endroit qui nous ressemble : chaleureux, intimiste et simple. Pas de grandes cérémonies figées — juste vous, nous, l'océan, et quelques jours suspendus.",
+      ],
+      media: { type: "image", src: "/images/couple.jpg", alt: "Maureen et Akan au soleil couchant" },
+    },
+    {
+      label: "Notre amour du voyage",
+      title: "On vous emmène au Maroc",
+      paragraphs: [
+        "Voyager fait partie de nous. Alors pour le plus beau jour de notre vie, on a eu envie de partager cette passion avec vous — en vous emmenant là où notre cœur a chaviré.",
+        "Sidi Kaouki : un village de pêcheurs au sud d'Essaouira, des couchers de soleil incendiaires, des tajines face à l'océan et le temps qui ralentit. Vous allez comprendre pourquoi on aime tant cet endroit.",
+      ],
+      media: { type: "video", src: "/videos/tajine-ocean.mp4", alt: "Tajine face à l'océan à Sidi Kaouki" },
+    },
+  ],
 
   // Aéroports pour rejoindre la kasbah (codes utilisés dans le formulaire RSVP et le planning des arrivées)
   airports: [
