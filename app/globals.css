@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette « Terracotta & Botanical / Marrakech » */
+  --color-cream: #faf6ee;
+  --color-sand: #f0e7d8;
+  --color-linen: #e6d9c5;
+  --color-nude: #d3b295;
+  --color-terracotta: #b96a4b;
+  --color-sienna: #8a4f3b;
+  --color-cocoa: #4c382c;
+  --color-olive: #6f7050;
+  --color-sage: #a9a98b;
+
+}
+
+/* Les polices next/font sont des variables définies sur <body>,
+   il faut donc les référencer en mode « inline ». */
+@theme inline {
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-jost), system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-cocoa);
+  font-family: var(--font-jost), system-ui, sans-serif;
+}
+
+/* Arche marocaine */
+.arch {
+  border-radius: 50% 50% 0 0 / 28% 28% 0 0;
+}
+
+.script {
+  font-family: var(--font-script), cursive;
+}
+
+::selection {
+  background-color: var(--color-terracotta);
+  color: var(--color-cream);
+}

@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Group {
+  id     String  @id @default(cuid())
+  name   String  @unique
+  guests Guest[]
+}
+
+model Guest {
+  id        String   @id @default(cuid())
+  token     String   @unique @default(cuid())
+  firstName String
+  lastName  String
+  email     String?
+  phone     String?
+  // Nombre maximum de personnes couvertes par cette invitation (invité inclus)
+  maxGuests Int      @default(1)
+  groupId   String?
+  group     Group?   @relation(fields: [groupId], references: [id], onDelete: SetNull)
+  rsvp      Rsvp?
+  createdAt DateTime @default(now())
+}
+
+model Rsvp {
+  id            String        @id @default(cuid())
+  guestId       String        @unique
+  guest         Guest         @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  attending     Boolean
+  email         String?
+  phone         String?
+  comesByCar    Boolean       @default(false)
+  needsShuttle  Boolean       @default(false)
+  offersCarpool Boolean       @default(false)
+  comment       String?
+  submittedAt   DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  participants  Participant[]
+}
+
+model Participant {
+  id           String  @id @default(cuid())
+  rsvpId       String
+  rsvp         Rsvp    @relation(fields: [rsvpId], references: [id], onDelete: Cascade)
+  firstName    String
+  lastName     String
+  // NONE | VEGETARIAN | VEGAN | HALAL | GLUTEN_FREE | OTHER (SQLite: pas d'enum Prisma)
+  diet         String  @default("NONE")
+  dietOther    String?
+  allergies    String?
+  childMenu    Boolean @default(false)
+  specialNeeds String?
+}
