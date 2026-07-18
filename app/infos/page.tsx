@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { wedding, mapsEmbedUrl, mapsLink } from "@/content/wedding";
-import { Squiggle, icons } from "@/components/ornaments";
+import { Squiggle } from "@/components/ornaments";
 import { Card, PageHeader, SiteFooter, Tick } from "@/components/site";
 import SiteNav from "@/components/site-nav";
 
