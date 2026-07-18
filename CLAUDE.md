@@ -16,16 +16,16 @@ npm run build            # production build
 npm run lint             # ESLint
 npx tsc --noEmit         # type check
 
-npx prisma db push       # push schema to SQLite (prisma/dev.db, no migrations)
+npx prisma db push       # push schema to Postgres (no migration files)
 npx prisma db seed       # seed groups + demo guests (tsx prisma/seed.ts)
 npx prisma studio        # inspect DB
 ```
 
-No test framework is configured. `.env` needs `DATABASE_URL` (SQLite `file:./dev.db`), `ADMIN_PASSWORD`, `AUTH_SECRET` — see `.env.example`.
+No test framework is configured. `.env` needs `DATABASE_URL` (pooled), `DATABASE_URL_UNPOOLED` (direct, used as Prisma `directUrl`), `ADMIN_PASSWORD`, `AUTH_SECRET` — see `.env.example`. Local dev shares the production Neon database.
 
-## Stack
+## Stack & deployment
 
-Next.js 16 App Router, React 19, TypeScript, Tailwind CSS v4, Prisma 6 + SQLite (intentionally pinned to v6 — v7 requires driver adapters), exceljs/jspdf for exports, qrcode for QR PNGs.
+Next.js 16 App Router, React 19, TypeScript, Tailwind CSS v4, Prisma 6 + PostgreSQL (Neon; Prisma intentionally pinned to v6 — v7 requires driver adapters), exceljs/jspdf for exports, qrcode for QR PNGs. Deployed on Vercel (project `weeding`, team akans-projects); pushing to `main` auto-deploys. Neon is connected via the Vercel Storage integration which injects the `DATABASE_URL*` env vars; `postinstall: prisma generate` is required for Vercel builds.
 
 ## Architecture
 

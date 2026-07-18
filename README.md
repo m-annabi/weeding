@@ -9,7 +9,7 @@ Thème visuel « Terracotta & Botanical / Marrakech » : tons sable, terracotta,
 ```bash
 npm install
 cp .env.example .env        # puis personnaliser (voir ci-dessous)
-npx prisma db push          # crée la base SQLite (prisma/dev.db)
+npx prisma db push          # crée les tables sur la base PostgreSQL
 npx prisma db seed          # crée les groupes + 4 invités de démonstration
 npm run dev                 # http://localhost:3000
 ```
@@ -18,7 +18,8 @@ npm run dev                 # http://localhost:3000
 
 | Variable | Rôle |
 |---|---|
-| `DATABASE_URL` | `file:./dev.db` (SQLite) — remplaçable par PostgreSQL en production |
+| `DATABASE_URL` | PostgreSQL, connexion poolée (Neon/Supabase) |
+| `DATABASE_URL_UNPOOLED` | PostgreSQL, connexion directe (pour `prisma db push`) |
 | `ADMIN_PASSWORD` | Mot de passe du tableau de bord des mariés |
 | `AUTH_SECRET` | Secret de signature du cookie de session (`openssl rand -hex 32`) |
 
@@ -36,6 +37,10 @@ npm run dev                 # http://localhost:3000
 | `/admin/invites` | Gestion des invités et des groupes, liens personnels, QR codes |
 
 Exports **CSV / Excel / PDF** disponibles depuis le tableau de bord.
+
+## Déploiement (Vercel + Neon)
+
+Le site est déployé sur Vercel (projet `weeding`) avec une base Neon PostgreSQL connectée via l'onglet *Storage* — les variables `DATABASE_URL` / `DATABASE_URL_UNPOOLED` sont injectées automatiquement ; `ADMIN_PASSWORD` et `AUTH_SECRET` sont définies dans Settings → Environment Variables. Chaque push sur `main` redéploie automatiquement. Le script `postinstall` (`prisma generate`) est requis pour les builds Vercel.
 
 ## Fonctionnement du RSVP
 
