@@ -15,7 +15,7 @@ export default async function AdminLayout({
     <div className="min-h-screen bg-sand/40">
       <header className="bg-cocoa text-cream">
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap items-center gap-x-8 gap-y-2">
-          <p className="script text-2xl text-nude">
+          <p className="font-serif italic text-xl text-nude">
             {wedding.couple.partner1} & {wedding.couple.partner2}
           </p>
           <nav className="flex items-center gap-6 text-sm font-light">

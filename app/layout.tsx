@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Jost, Great_Vibes } from "next/font/google";
+import { Fraunces, Jost, Caveat } from "next/font/google";
 import { wedding } from "@/content/wedding";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "variable",
   style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  axes: ["opsz"],
+  variable: "--font-fraunces",
 });
 
 const jost = Jost({
@@ -16,10 +17,10 @@ const jost = Jost({
   variable: "--font-jost",
 });
 
-const greatVibes = Great_Vibes({
+const caveat = Caveat({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-script",
+  weight: ["400", "500"],
+  variable: "--font-hand",
 });
 
 export const metadata: Metadata = {
@@ -35,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${cormorant.variable} ${jost.variable} ${greatVibes.variable} antialiased`}
+        className={`${fraunces.variable} ${jost.variable} ${caveat.variable} antialiased`}
       >
         {children}
       </body>
