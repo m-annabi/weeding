@@ -16,8 +16,17 @@ export type ExistingRsvp = {
   attending: boolean;
   email: string | null;
   phone: string | null;
-  comesByCar: boolean;
-  needsShuttle: boolean;
+  arrivalMode: string | null;
+  arrivalAirport: string | null;
+  arrivalDate: string | null;
+  arrivalTime: string | null;
+  arrivalFlight: string | null;
+  departureDate: string | null;
+  departureTime: string | null;
+  departureFlight: string | null;
+  needsTransfer: boolean;
+  accommodation: string | null;
+  accommodationOther: string | null;
   offersCarpool: boolean;
   comment: string | null;
   participants: {
@@ -159,14 +168,16 @@ export default function RsvpForm({
   firstName,
   lastName,
   maxGuests,
-  shuttleOffered,
+  transferOffered,
+  airports,
   existing,
 }: {
   token: string;
   firstName: string;
   lastName: string;
   maxGuests: number;
-  shuttleOffered: boolean;
+  transferOffered: boolean;
+  airports: readonly { code: string; name: string; drive: string }[];
   existing: ExistingRsvp | null;
 }) {
   const [state, formAction, pending] = useActionState<RsvpState, FormData>(
@@ -181,17 +192,31 @@ export default function RsvpForm({
       ? existing.participants.length
       : 1
   );
+  const [arrivalMode, setArrivalMode] = useState(existing?.arrivalMode ?? "");
+  const [accommodation, setAccommodation] = useState(
+    existing?.accommodation ?? ""
+  );
 
   if (state?.ok) {
     return (
-      <div className="text-center py-16">
-        <p className="text-5xl mb-6">{attending === "yes" ? "🎉" : "🤍"}</p>
+      <div className="mt-8 rounded-3xl border border-nude/60 bg-white/70 px-6 py-14 text-center">
+        <p className="text-6xl mb-5" aria-hidden>
+          {attending === "yes" ? "🎉" : "🤍"}
+        </p>
+        <p className="script text-4xl text-terracotta mb-4">
+          {attending === "yes" ? "Quelle joie !" : "Merci pour votre réponse"}
+        </p>
         <p className="font-serif text-2xl text-sienna max-w-md mx-auto">
           {state.message}
         </p>
+        {attending === "yes" && (
+          <p className="mt-4 font-serif italic text-olive">
+            Rendez-vous les pieds dans le sable à Sidi Kaouki ✨
+          </p>
+        )}
         <p className="mt-6 font-light text-cocoa/60">
           Vous pouvez revenir sur cette page à tout moment pour modifier votre
-          réponse.
+          réponse ou compléter vos informations de vol.
         </p>
       </div>
     );
@@ -322,39 +347,231 @@ export default function RsvpForm({
             </div>
           </div>
 
-          {/* Transport */}
-          <SectionTitle>Transport</SectionTitle>
-          <div className="space-y-3 font-light">
-            <label className="flex items-center gap-3">
-              <input
-                type="checkbox"
-                name="comesByCar"
-                defaultChecked={existing?.comesByCar}
-                className="h-4 w-4 accent-terracotta"
-              />
-              🚗 Je viendrai en voiture
-            </label>
-            {shuttleOffered && (
-              <label className="flex items-center gap-3">
+          {/* Voyage */}
+          <SectionTitle>Votre voyage</SectionTitle>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {(
+              [
+                ["PLANE", "✈️", "J'arrive en avion"],
+                ["CAR", "🚗", "Je viens en voiture"],
+                ["ON_SITE", "🏠", "Je suis déjà sur place"],
+              ] as const
+            ).map(([value, icon, label]) => (
+              <label
+                key={value}
+                className={`cursor-pointer rounded-2xl border-2 p-4 text-center transition ${
+                  arrivalMode === value
+                    ? "border-terracotta bg-terracotta/10"
+                    : "border-linen bg-white/60 hover:border-nude"
+                }`}
+              >
                 <input
-                  type="checkbox"
-                  name="needsShuttle"
-                  defaultChecked={existing?.needsShuttle}
-                  className="h-4 w-4 accent-terracotta"
+                  type="radio"
+                  name="arrivalMode"
+                  value={value}
+                  checked={arrivalMode === value}
+                  onChange={() => setArrivalMode(value)}
+                  className="sr-only"
                 />
-                🚌 J&apos;aurai besoin de la navette
+                <span className="text-2xl block mb-1">{icon}</span>
+                <span className="font-light text-cocoa">{label}</span>
               </label>
-            )}
-            <label className="flex items-center gap-3">
+            ))}
+          </div>
+
+          {arrivalMode === "PLANE" && (
+            <div className="space-y-4 rounded-2xl border border-linen bg-white/60 p-5">
+              <div>
+                <label className={labelCls} htmlFor="arrivalAirport">
+                  Aéroport d&apos;arrivée
+                </label>
+                <select
+                  id="arrivalAirport"
+                  name="arrivalAirport"
+                  defaultValue={existing?.arrivalAirport ?? "ESU"}
+                  className={inputCls}
+                >
+                  {airports.map((a) => (
+                    <option key={a.code} value={a.code}>
+                      {a.name} ({a.drive})
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <fieldset>
+                <legend className="font-serif text-lg text-terracotta mb-2">
+                  🛬 Arrivée
+                </legend>
+                <div className="grid gap-4 sm:grid-cols-3">
+                  <div>
+                    <label className={labelCls} htmlFor="arrivalDate">
+                      Date
+                    </label>
+                    <input
+                      id="arrivalDate"
+                      name="arrivalDate"
+                      type="date"
+                      defaultValue={existing?.arrivalDate ?? ""}
+                      className={inputCls}
+                    />
+                  </div>
+                  <div>
+                    <label className={labelCls} htmlFor="arrivalTime">
+                      Heure d&apos;atterrissage
+                    </label>
+                    <input
+                      id="arrivalTime"
+                      name="arrivalTime"
+                      type="time"
+                      defaultValue={existing?.arrivalTime ?? ""}
+                      className={inputCls}
+                    />
+                  </div>
+                  <div>
+                    <label className={labelCls} htmlFor="arrivalFlight">
+                      N° de vol
+                    </label>
+                    <input
+                      id="arrivalFlight"
+                      name="arrivalFlight"
+                      placeholder="AT 445"
+                      defaultValue={existing?.arrivalFlight ?? ""}
+                      className={inputCls}
+                    />
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend className="font-serif text-lg text-terracotta mb-2">
+                  🛫 Retour
+                </legend>
+                <div className="grid gap-4 sm:grid-cols-3">
+                  <div>
+                    <label className={labelCls} htmlFor="departureDate">
+                      Date
+                    </label>
+                    <input
+                      id="departureDate"
+                      name="departureDate"
+                      type="date"
+                      defaultValue={existing?.departureDate ?? ""}
+                      className={inputCls}
+                    />
+                  </div>
+                  <div>
+                    <label className={labelCls} htmlFor="departureTime">
+                      Heure de décollage
+                    </label>
+                    <input
+                      id="departureTime"
+                      name="departureTime"
+                      type="time"
+                      defaultValue={existing?.departureTime ?? ""}
+                      className={inputCls}
+                    />
+                  </div>
+                  <div>
+                    <label className={labelCls} htmlFor="departureFlight">
+                      N° de vol
+                    </label>
+                    <input
+                      id="departureFlight"
+                      name="departureFlight"
+                      placeholder="AT 446"
+                      defaultValue={existing?.departureFlight ?? ""}
+                      className={inputCls}
+                    />
+                  </div>
+                </div>
+              </fieldset>
+              {transferOffered && (
+                <label className="flex items-start gap-3 font-light rounded-xl bg-sage/15 border border-sage/40 p-3">
+                  <input
+                    type="checkbox"
+                    name="needsTransfer"
+                    defaultChecked={existing?.needsTransfer}
+                    className="mt-1 h-4 w-4 accent-terracotta"
+                  />
+                  <span>
+                    🚌 <strong className="font-medium">Navette offerte</strong> —
+                    je souhaite être pris(e) en charge entre l&apos;aéroport et
+                    la kasbah (aller et retour).
+                  </span>
+                </label>
+              )}
+              <p className="text-xs text-cocoa/50 font-light">
+                Les billets d&apos;avion et le trajet jusqu&apos;à la kasbah
+                sont à votre charge. Pas encore réservé ? Aucun souci :
+                répondez dès maintenant et revenez compléter vos infos de vol
+                sur cette même page plus tard — elles nous aident à organiser
+                le covoiturage entre invités.
+              </p>
+            </div>
+          )}
+
+          {/* Hébergement */}
+          <SectionTitle>Votre hébergement</SectionTitle>
+          <p className="rounded-xl bg-sage/15 border border-sage/40 px-4 py-3 text-sm font-light text-cocoa/80">
+            🏰 Nous privatisons la kasbah :{" "}
+            <strong className="font-medium">l&apos;hébergement est offert</strong>.
+            Les chambres étant limitées, certains invités seront logés dans des
+            logements annexes à quelques minutes — nous nous occupons de la
+            répartition.
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {(
+              [
+                ["KASBAH", "🤍 Je souhaite être logé(e) sur place (offert)"],
+                ["OTHER", "📍 Je m'organise par moi-même"],
+              ] as const
+            ).map(([value, label]) => (
+              <label
+                key={value}
+                className={`cursor-pointer rounded-2xl border-2 p-4 text-center transition ${
+                  accommodation === value
+                    ? "border-terracotta bg-terracotta/10"
+                    : "border-linen bg-white/60 hover:border-nude"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="accommodation"
+                  value={value}
+                  checked={accommodation === value}
+                  onChange={() => setAccommodation(value)}
+                  className="sr-only"
+                />
+                <span className="font-light text-cocoa">{label}</span>
+              </label>
+            ))}
+          </div>
+          {accommodation === "OTHER" && (
+            <div>
+              <label className={labelCls} htmlFor="accommodationOther">
+                Où logerez-vous ? (utile pour l&apos;organisation)
+              </label>
+              <input
+                id="accommodationOther"
+                name="accommodationOther"
+                placeholder="Riad à Essaouira, maison à Sidi Kaouki…"
+                defaultValue={existing?.accommodationOther ?? ""}
+                className={inputCls}
+              />
+            </div>
+          )}
+
+          {(arrivalMode === "PLANE" || arrivalMode === "CAR") && (
+            <label className="flex items-center gap-3 font-light">
               <input
                 type="checkbox"
                 name="offersCarpool"
                 defaultChecked={existing?.offersCarpool}
                 className="h-4 w-4 accent-terracotta"
               />
-              🤝 Je peux proposer du covoiturage
+              🤝 Je peux proposer du covoiturage (voiture de location, trajets
+              depuis l&apos;aéroport…)
             </label>
-          </div>
+          )}
         </>
       )}
 

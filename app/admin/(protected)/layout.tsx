@@ -25,6 +25,12 @@ export default async function AdminLayout({
             <Link href="/admin/invites" className="hover:text-nude transition">
               💌 Invités & groupes
             </Link>
+            <Link href="/admin/arrivees" className="hover:text-nude transition">
+              ✈️ Arrivées & départs
+            </Link>
+            <Link href="/admin/hebergements" className="hover:text-nude transition">
+              🏨 Hébergements
+            </Link>
             <Link href="/" target="_blank" className="hover:text-nude transition">
               🌐 Voir le site
             </Link>

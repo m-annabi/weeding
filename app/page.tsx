@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { wedding, mapsEmbedUrl, mapsLink } from "@/content/wedding";
 
 function Card({
@@ -26,50 +27,86 @@ function Card({
   );
 }
 
-function Divider() {
+function Divider({ light = false }: { light?: boolean }) {
   return (
     <div className="flex items-center justify-center gap-4 my-2" aria-hidden>
-      <span className="h-px w-16 bg-nude" />
-      <span className="text-olive text-lg">✦</span>
-      <span className="h-px w-16 bg-nude" />
+      <span className={`h-px w-16 ${light ? "bg-cream/60" : "bg-nude"}`} />
+      <span className={light ? "text-cream text-lg" : "text-olive text-lg"}>✦</span>
+      <span className={`h-px w-16 ${light ? "bg-cream/60" : "bg-nude"}`} />
     </div>
   );
 }
 
 export default function Home() {
-  const { couple } = wedding;
+  const { couple, images } = wedding;
   return (
     <main>
-      {/* ─── Héro ─── */}
-      <section className="relative overflow-hidden bg-sand">
-        <div className="max-w-3xl mx-auto px-6 pt-20 pb-16 text-center">
-          <div className="arch border border-nude/70 bg-cream/60 px-8 pt-16 pb-12 sm:px-16">
-            <p className="tracking-[0.35em] text-xs uppercase text-olive mb-6">
-              Nous nous marions
-            </p>
-            <h1 className="script text-6xl sm:text-7xl text-terracotta leading-tight">
-              {couple.partner1}
-              <span className="font-serif italic text-4xl sm:text-5xl text-cocoa/70 mx-3">
-                &
-              </span>
-              {couple.partner2}
-            </h1>
-            <Divider />
-            <p className="font-serif text-2xl text-cocoa mt-2">
-              {wedding.displayDate}
-            </p>
-            <p className="font-light text-cocoa/70 mt-1">
-              {wedding.venue.name} · {wedding.venue.address.split(",").pop()}
-            </p>
-          </div>
-          <p className="mt-10 font-serif italic text-xl text-olive">
+      {/* ─── Héro parallax ─── */}
+      <section
+        className="relative flex min-h-svh items-center justify-center bg-cover bg-center md:bg-fixed"
+        style={{ backgroundImage: `url(${images.hero})` }}
+      >
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-cocoa/60 via-cocoa/30 to-cocoa/60"
+          aria-hidden
+        />
+        <div className="relative z-10 mx-6 max-w-3xl border border-cream/40 px-8 py-14 text-center sm:px-16">
+          <p className="tracking-[0.35em] text-xs uppercase text-cream/90 mb-6">
+            Nous nous marions
+          </p>
+          <h1 className="script text-6xl sm:text-8xl text-cream leading-tight drop-shadow-[0_2px_12px_rgba(76,56,44,0.5)]">
+            {couple.partner1}
+            <span className="font-serif italic text-4xl sm:text-5xl text-cream/80 mx-4">
+              &
+            </span>
+            {couple.partner2}
+          </h1>
+          <Divider light />
+          <p className="font-serif text-2xl text-cream mt-2">
+            {wedding.displayDate}
+          </p>
+          <p className="font-light text-cream/85 mt-1">
+            {wedding.venue.name} · Sidi Kaouki, Maroc
+          </p>
+        </div>
+        <a
+          href="#infos"
+          className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-cream/90 text-3xl animate-bounce"
+          aria-label="Découvrir les informations pratiques"
+        >
+          ↓
+        </a>
+      </section>
+
+      {/* ─── Galerie ─── */}
+      <section className="bg-sand/60 py-16">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-center font-serif italic text-xl text-olive mb-10">
             simple · soulful · unforgettable
           </p>
+          <div className="grid grid-cols-3 gap-4 sm:gap-6">
+            {images.gallery.map((img, i) => (
+              <div
+                key={img.src}
+                className={`arch relative overflow-hidden border border-nude/60 aspect-[3/4] ${
+                  i === 1 ? "sm:-translate-y-6" : ""
+                }`}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  sizes="(max-width: 640px) 33vw, 300px"
+                  className="object-cover transition duration-700 hover:scale-105"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ─── Informations pratiques ─── */}
-      <section className="max-w-5xl mx-auto px-6 py-20">
+      <section id="infos" className="max-w-5xl mx-auto px-6 py-20 scroll-mt-4">
         <h2 className="font-serif text-4xl text-center text-sienna mb-2">
           Informations pratiques
         </h2>
@@ -113,6 +150,33 @@ export default function Home() {
             </a>
           </Card>
 
+          <Card icon="✈️" title="Comment venir ?" className="sm:col-span-2">
+            <div className="grid gap-2 sm:grid-cols-3 mb-4">
+              {wedding.airports.map((a) => (
+                <div
+                  key={a.code}
+                  className="rounded-xl border border-linen bg-sand/50 px-4 py-3 text-center"
+                >
+                  <p className="font-medium text-cocoa">
+                    {a.name}{" "}
+                    <span className="text-xs text-olive">({a.code})</span>
+                  </p>
+                  <p className="text-sm">{a.drive}</p>
+                </div>
+              ))}
+            </div>
+            <ul className="space-y-2 list-none">
+              {wedding.travelTips.map((t) => (
+                <li key={t} className="flex gap-2">
+                  <span className="text-olive" aria-hidden>
+                    ✦
+                  </span>
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </Card>
+
           <Card icon="🚗" title="Parking">
             <ul className="space-y-2 list-none">
               {wedding.parking.map((p) => (
@@ -126,19 +190,40 @@ export default function Home() {
             </ul>
           </Card>
 
-          {wedding.accommodations.length > 0 && (
-            <Card icon="🏨" title="Où dormir ?">
-              <ul className="space-y-3 list-none">
-                {wedding.accommodations.map((a) => (
-                  <li key={a.name}>
-                    <p className="font-medium text-cocoa">{a.name}</p>
-                    <p className="text-sm">{a.detail}</p>
-                    <p className="text-sm text-olive">{a.phone}</p>
+          {wedding.lodging.offered && (
+            <Card icon="🏨" title="Où dormirez-vous ?">
+              <p className="inline-block rounded-full bg-olive/15 border border-olive/40 px-3 py-1 text-sm text-olive mb-3">
+                Hébergement offert
+              </p>
+              <ul className="space-y-2 list-none">
+                {wedding.lodging.notes.map((n) => (
+                  <li key={n} className="flex gap-2">
+                    <span className="text-olive" aria-hidden>
+                      ✦
+                    </span>
+                    {n}
                   </li>
                 ))}
               </ul>
             </Card>
           )}
+        </div>
+      </section>
+
+      {/* ─── Bande parallax ─── */}
+      <section
+        className="relative flex min-h-[55vh] items-center justify-center bg-cover bg-center md:bg-fixed"
+        style={{ backgroundImage: `url(${images.band})` }}
+      >
+        <div className="absolute inset-0 bg-cocoa/45" aria-hidden />
+        <div className="relative z-10 px-6 py-20 text-center">
+          <p className="script text-5xl sm:text-6xl text-cream drop-shadow-[0_2px_12px_rgba(76,56,44,0.6)]">
+            Rendez-vous au Maroc
+          </p>
+          <Divider light />
+          <p className="font-serif italic text-xl text-cream/90">
+            les pieds dans le sable, le cœur dans les étoiles
+          </p>
         </div>
       </section>
 

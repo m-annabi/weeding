@@ -160,21 +160,36 @@ export default async function DashboardPage() {
         />
       </div>
 
-      {/* Transport */}
+      {/* Voyage & navettes */}
       <section>
-        <h2 className="font-serif text-2xl text-sienna mb-4">🚗 Transport</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <Tile label="Viennent en voiture" value={stats.cars} hint="invitations" />
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="font-serif text-2xl text-sienna">✈️ Voyage & navettes</h2>
+          <Link
+            href="/admin/arrivees"
+            className="text-sm text-terracotta hover:text-sienna underline underline-offset-4"
+          >
+            Planning des arrivées →
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <Tile label="En avion" value={stats.byPlane} hint="invitations" />
+          <Tile label="En voiture" value={stats.byCar} hint="invitations" />
+          <Tile label="Déjà sur place" value={stats.onSite} hint="invitations" />
           <Tile
-            label="Navette demandée"
-            value={stats.shuttleSeats}
-            hint={`personnes (${stats.shuttleInvites.length} invitation${stats.shuttleInvites.length > 1 ? "s" : ""})`}
+            label="Logement souhaité"
+            value={stats.wantsLodgingSeats}
+            hint={`personnes (${stats.wantsLodging.length} invitation${stats.wantsLodging.length > 1 ? "s" : ""})`}
+            accent
           />
-          <Tile label="Proposent un covoiturage" value={stats.carpoolOffers.length} />
+          <Tile
+            label="Infos vol manquantes"
+            value={stats.missingTravelInfo.length}
+            hint="invitations à relancer"
+          />
         </div>
         {stats.carpoolOffers.length > 0 && (
           <p className="mt-3 text-sm text-cocoa/60 font-light">
-            Covoiturage proposé par :{" "}
+            🤝 Covoiturage proposé par :{" "}
             {stats.carpoolOffers
               .map((g) => `${g.firstName} ${g.lastName}${g.rsvp?.phone ? ` (${g.rsvp.phone})` : ""}`)
               .join(", ")}

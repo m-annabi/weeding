@@ -5,6 +5,9 @@ import { prisma } from "@/lib/prisma";
 export type RsvpState = { ok: boolean; message: string } | null;
 
 const DIETS = ["NONE", "VEGETARIAN", "VEGAN", "HALAL", "GLUTEN_FREE", "OTHER"];
+const ARRIVAL_MODES = ["PLANE", "CAR", "ON_SITE"];
+const AIRPORTS = ["ESU", "RAK", "AGA"];
+const ACCOMMODATIONS = ["KASBAH", "OTHER"];
 
 export async function submitRsvp(
   token: string,
@@ -30,8 +33,24 @@ export async function submitRsvp(
   const email = str("email", 200);
   const phone = str("phone", 50);
   const comment = str("comment", 2000);
-  const comesByCar = formData.get("comesByCar") === "on";
-  const needsShuttle = formData.get("needsShuttle") === "on";
+
+  const enumOf = (name: string, allowed: string[]) => {
+    const v = str(name, 30);
+    return v && allowed.includes(v) ? v : null;
+  };
+  const arrivalMode = enumOf("arrivalMode", ARRIVAL_MODES);
+  const isPlane = arrivalMode === "PLANE";
+  const arrivalAirport = isPlane ? enumOf("arrivalAirport", AIRPORTS) : null;
+  const arrivalDate = isPlane ? str("arrivalDate", 10) : null;
+  const arrivalTime = isPlane ? str("arrivalTime", 5) : null;
+  const arrivalFlight = isPlane ? str("arrivalFlight", 20) : null;
+  const departureDate = isPlane ? str("departureDate", 10) : null;
+  const departureTime = isPlane ? str("departureTime", 5) : null;
+  const departureFlight = isPlane ? str("departureFlight", 20) : null;
+  const needsTransfer = isPlane && formData.get("needsTransfer") === "on";
+  const accommodation = enumOf("accommodation", ACCOMMODATIONS);
+  const accommodationOther =
+    accommodation === "OTHER" ? str("accommodationOther", 300) : null;
   const offersCarpool = formData.get("offersCarpool") === "on";
 
   type ParticipantInput = {
@@ -79,28 +98,41 @@ export async function submitRsvp(
     }
   }
 
+  const travel = attending
+    ? {
+        arrivalMode,
+        arrivalAirport,
+        arrivalDate,
+        arrivalTime,
+        arrivalFlight,
+        departureDate,
+        departureTime,
+        departureFlight,
+        needsTransfer,
+        accommodation,
+        accommodationOther,
+        offersCarpool,
+      }
+    : {
+        arrivalMode: null,
+        arrivalAirport: null,
+        arrivalDate: null,
+        arrivalTime: null,
+        arrivalFlight: null,
+        departureDate: null,
+        departureTime: null,
+        departureFlight: null,
+        needsTransfer: false,
+        accommodation: null,
+        accommodationOther: null,
+        offersCarpool: false,
+      };
+
   await prisma.$transaction(async (tx) => {
     const rsvp = await tx.rsvp.upsert({
       where: { guestId: guest.id },
-      update: {
-        attending,
-        email,
-        phone,
-        comesByCar: attending && comesByCar,
-        needsShuttle: attending && needsShuttle,
-        offersCarpool: attending && offersCarpool,
-        comment,
-      },
-      create: {
-        guestId: guest.id,
-        attending,
-        email,
-        phone,
-        comesByCar: attending && comesByCar,
-        needsShuttle: attending && needsShuttle,
-        offersCarpool: attending && offersCarpool,
-        comment,
-      },
+      update: { attending, email, phone, comment, ...travel },
+      create: { guestId: guest.id, attending, email, phone, comment, ...travel },
     });
     await tx.participant.deleteMany({ where: { rsvpId: rsvp.id } });
     if (participants.length > 0) {
