@@ -31,7 +31,7 @@ export const wedding = {
   images: {
     heroVideo: "/videos/hero-plage.mp4",
     heroPoster: "/images/hero-poster.jpg",
-    band: "/images/kasbah-d-eau.jpg",
+    band: "/images/kasbah-sunset.jpg",
   },
 
   // Les blocs de bienvenue sous le héro (média + texte, alternés)
