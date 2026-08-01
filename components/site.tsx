@@ -1,14 +1,6 @@
 import { Sunburst, Waves, icons, type IconName } from "@/components/ornaments";
 import { wedding } from "@/content/wedding";
 
-/** Pictos du déroulement (les emojis de content/wedding.ts restent le fallback). */
-export const SCHEDULE_ICONS: Record<string, IconName> = {
-  "💍": "rings",
-  "🥂": "cocktail",
-  "🍽️": "dinner",
-  "🎶": "music",
-};
-
 export function Divider({ light = false }: { light?: boolean }) {
   const line = light ? "bg-cream/50" : "bg-nude/60";
   const star = light ? "text-cream" : "text-camel";
@@ -66,7 +58,7 @@ export function SiteFooter() {
       <Waves className="mx-auto h-5 w-14 text-camel mb-4" />
       <p className="smallcaps text-cocoa/50">
         {wedding.couple.partner1} & {wedding.couple.partner2} —{" "}
-        {wedding.displayDate}
+        {wedding.displayRangeShort}
       </p>
     </footer>
   );

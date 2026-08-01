@@ -12,7 +12,9 @@ export const wedding = {
   // Date & heure
   displayDate: "Samedi 29 mai 2027",
   date: "2027-05-29",
-  ceremonyTime: "15h00",
+  // Séjour complet (affiché sur les pages Infos/Programme et en pied de page)
+  displayRange: "Du jeudi 27 mai au dimanche 30 mai 2027",
+  displayRangeShort: "du 27 au 30 mai 2027",
 
   // Date limite de réponse affichée aux invités
   rsvpDeadline: "15 septembre 2026",
@@ -70,43 +72,97 @@ export const wedding = {
   },
 
   // Aéroports pour rejoindre la kasbah (codes utilisés dans le formulaire RSVP et le planning des arrivées)
+  // Ordre d'affichage : Essaouira en dernier (petit aéroport, peu desservi)
   airports: [
-    { code: "ESU", name: "Essaouira-Mogador", drive: "à ≈ 20 min de la kasbah" },
     { code: "RAK", name: "Marrakech-Menara", drive: "à ≈ 2h45 de route" },
     { code: "AGA", name: "Agadir Al-Massira", drive: "à ≈ 2h30 de route" },
+    {
+      code: "ESU",
+      name: "Essaouira-Mogador",
+      drive:
+        "à ≈ 20 min de la kasbah, mais c'est un petit aéroport qui dessert peu de villes : il y a peu de chances que ce soit celui que vous trouviez pour votre trajet. Si vous avez la chance d'y avoir un vol direct, tant mieux !",
+    },
   ],
 
-  // Conseils d'accès affichés dans la carte « Comment venir »
+  // Conseils d'accès affichés dans la carte « Comment venir » (parking inclus)
   travelTips: [
-    "Les vols directs vers Essaouira (ESU) sont les plus pratiques mais peu fréquents — réservez tôt !",
-    "Sinon, atterrissez à Marrakech (RAK) : c'est l'aéroport le mieux desservi, puis ≈ 2h45 de route.",
-    "Billets d'avion et trajets jusqu'à la kasbah sont à votre charge — indiquez vos horaires de vol dans le formulaire pour faciliter l'organisation et le covoiturage entre invités.",
-    "La location de voiture est simple au Maroc et la kasbah dispose d'un parking gratuit.",
+    "Marrakech (RAK) reste l'aéroport le mieux desservi si vous cherchez un vol depuis chez vous.",
+    "Les billets d'avion et les trajets jusqu'à la kasbah restent à votre charge, mais dites-nous vos horaires dans le formulaire : on sera ravis de vous aider à vous organiser entre invités, covoiturage compris.",
+    "Le plus simple reste de réserver un chauffeur qui vous emmène et vous ramène, très simple à organiser — comptez en moyenne 70 à 85€ le trajet aller, et autant pour le retour. N'hésitez pas à vous mutualiser à plusieurs pour réduire les coûts.",
+    "Si vous vous en sentez, vous pouvez aussi louer une voiture — sachez juste que les routes ne sont pas toujours en très bon état. Un parking gratuit est disponible à la kasbah.",
   ],
 
-  // Parking (pour ceux qui viennent en voiture)
-  parking: [
-    "Parking gratuit à la kasbah pour ceux qui viennent en voiture de location.",
-    "Dépose-minute devant l'entrée pour les personnes à mobilité réduite.",
-  ],
+  // Les transports sur place
+  localTransport:
+    "Sur place, si besoin de vous déplacer, les taxis ne coûtent presque rien. On organisera aussi quelques sorties pour se balader à Essaouira, et vous serez bien sûr libres d'y aller quand bon vous semble.",
 
   // Hébergement : la kasbah est privatisée et les logements sont offerts
   lodging: {
     offered: true,
     notes: [
-      "Nous privatisons la Kasbah d'Eau : l'hébergement est offert à nos invités. 🤍",
-      "Les chambres de la kasbah étant limitées, certains invités seront logés dans des logements annexes à quelques minutes — c'est nous qui répartissons tout le monde.",
-      "Indiquez simplement dans le formulaire de réponse si vous souhaitez être logé(e) sur place, ou si vous préférez vous organiser par vous-même.",
+      "On a voulu prendre en charge le logement pour permettre à chacun de venir. L'idée, c'est d'être tous au même endroit, ensemble, tout en respectant le rythme et la vie de chacun.",
+      "Des chambres adaptées sont prévues pour les parents. Si vous avez des besoins essentiels (lit bébé, etc.), indiquez-les dans le formulaire — on s'occupe du reste.",
     ],
   },
 
-  // Déroulement de la journée
-  schedule: [
-    { time: "15h00", title: "Cérémonie", description: "Face à l'océan, sur la terrasse de la kasbah", icon: "💍" },
-    { time: "17h00", title: "Cocktail", description: "Au coucher du soleil, les pieds dans le sable", icon: "🥂" },
-    { time: "20h00", title: "Repas", description: "Sous les étoiles, dans le patio", icon: "🍽️" },
-    { time: "23h00", title: "Soirée", description: "Piste de danse jusqu'au bout de la nuit", icon: "🎶" },
+  // Ce qui est pris en charge (transparence sur les coûts)
+  covered: {
+    intro: "Pour être transparents sur l'organisation :",
+    included: [
+      "l'hébergement",
+      "les petits déjeuners",
+      "le brunch du dimanche",
+      "le repas du samedi soir",
+      "le repas du vendredi soir",
+    ],
+    excluded: [
+      "le billet d'avion",
+      "le trajet aller-retour jusqu'à la kasbah",
+      "les autres repas",
+    ],
+  },
+
+  // Programme des quelques jours (une entrée par journée)
+  programme: [
+    {
+      day: "Jeudi 27 mai",
+      title: "Arrivée à l'hôtel",
+      icon: "home",
+      paragraphs: [
+        "Vous pouvez arriver dès 14h. On profite d'une soirée tranquille, avec un repas à la kasbah pour ceux qui le souhaitent.",
+      ],
+    },
+    {
+      day: "Vendredi 28 mai",
+      title: "Une journée libre, à vivre comme vous le sentez",
+      icon: "sun",
+      paragraphs: [
+        "On organisera quelques activités selon l'envie du moment — surf, quad, hammam, yoga. Rien d'obligatoire : ceux qui ont envie nous rejoignent, ceux qui préfèrent un moment pour eux ou se poser à la piscine en profitent aussi.",
+        "Sur place, à l'hôtel, vous avez une salle de sport, une piscine, un billard, des échecs, et la plage juste en face pour profiter et vous ressourcer.",
+        "Le soir, direction Essaouira : repas tous ensemble au restaurant, puis balade dans la ville.",
+      ],
+    },
+    {
+      day: "Samedi 29 mai",
+      title: "Le jour du mariage",
+      icon: "rings",
+      paragraphs: [
+        "Le matin, quartier libre pour tout le monde. Nos témoins et nous serons de notre côté pour la cérémonie religieuse en petit comité. L'après-midi, cérémonie tous ensemble, suivie d'un cocktail au bord de la piscine. Le soir, repas convivial à la kasbah et soirée animée.",
+      ],
+    },
+    {
+      day: "Dimanche 30 mai",
+      title: "Brunch et retour tranquille",
+      icon: "dinner",
+      paragraphs: [
+        "On termine ces quelques jours par un brunch ensemble, avant un retour tranquille à la maison.",
+      ],
+    },
   ],
+
+  // Note affichée sous le programme
+  programmeNote:
+    "Chacun est libre d'arriver plus tôt ou plus tard à l'hôtel, et de partir quand il le souhaite. Pour rappel : on prend en charge l'hébergement, les petits déjeuners, le brunch du dimanche, le repas du samedi soir et le repas du vendredi soir — le reste (avion, trajet aller-retour, autres repas) est à votre charge.",
 
   // Contacts utiles
   contacts: [

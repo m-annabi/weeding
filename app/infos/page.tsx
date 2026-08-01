@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { wedding, mapsEmbedUrl, mapsLink } from "@/content/wedding";
-import { Squiggle } from "@/components/ornaments";
+import { Squiggle, icons } from "@/components/ornaments";
 import { Card, PageHeader, SiteFooter, Tick } from "@/components/site";
 import SiteNav from "@/components/site-nav";
 
@@ -11,21 +11,14 @@ export default function InfosPage() {
     <>
       <SiteNav />
       <main className="mx-auto max-w-5xl px-6 pb-24">
-        <PageHeader label="Le jour J" title="Informations pratiques" />
+        <PageHeader label="Pour vous aider" title="Informations pratiques" />
 
         <div className="grid gap-6 sm:grid-cols-2 mt-8">
-          <Card icon="calendar" title="La date">
-            <p className="text-2xl font-serif text-cocoa">{wedding.displayDate}</p>
+          <Card icon="calendar" title="La date" className="sm:col-span-2">
+            <p className="text-2xl font-serif text-cocoa">{wedding.displayRange}</p>
             <p className="mt-3">
               Merci de confirmer votre présence avant le{" "}
               <strong className="font-medium highlight">{wedding.rsvpDeadline}</strong>.
-            </p>
-          </Card>
-
-          <Card icon="clock" title="La cérémonie">
-            <p className="text-2xl font-serif text-cocoa">{wedding.ceremonyTime}</p>
-            <p className="mt-3">
-              Nous vous attendons un peu en avance pour commencer tous ensemble.
             </p>
           </Card>
 
@@ -77,15 +70,8 @@ export default function InfosPage() {
             </ul>
           </Card>
 
-          <Card icon="car" title="Parking">
-            <ul className="space-y-3 list-none">
-              {wedding.parking.map((p) => (
-                <li key={p} className="flex gap-3">
-                  <Tick />
-                  <span>{p}</span>
-                </li>
-              ))}
-            </ul>
+          <Card icon="car" title="Les transports sur place">
+            <p>{wedding.localTransport}</p>
           </Card>
 
           {wedding.lodging.offered && (
@@ -93,16 +79,41 @@ export default function InfosPage() {
               <p className="smallcaps inline-block rounded-full border border-olive/40 bg-olive/10 px-4 py-1.5 text-olive mb-4">
                 Hébergement offert
               </p>
-              <ul className="space-y-3 list-none">
+              <div className="space-y-4">
                 {wedding.lodging.notes.map((n) => (
-                  <li key={n} className="flex gap-3">
-                    <Tick />
-                    <span>{n}</span>
-                  </li>
+                  <p key={n}>{n}</p>
                 ))}
-              </ul>
+              </div>
             </Card>
           )}
+
+          <Card icon="heart" title="Ce qui est pris en charge" className="sm:col-span-2">
+            <p className="mb-5">{wedding.covered.intro}</p>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div>
+                <p className="smallcaps text-olive mb-3">On prend en charge</p>
+                <ul className="space-y-2 list-none">
+                  {wedding.covered.included.map((c) => (
+                    <li key={c} className="flex items-start gap-3">
+                      <span className="mt-1 text-olive">{icons.check("h-4 w-4")}</span>
+                      <span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="smallcaps text-terracotta mb-3">Restent à votre charge</p>
+                <ul className="space-y-2 list-none">
+                  {wedding.covered.excluded.map((c) => (
+                    <li key={c} className="flex items-start gap-3">
+                      <span className="mt-1 text-terracotta">{icons.cross("h-4 w-4")}</span>
+                      <span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </Card>
         </div>
       </main>
       <SiteFooter />
