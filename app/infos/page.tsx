@@ -70,8 +70,8 @@ export default function InfosPage() {
             </ul>
           </Card>
 
-          <Card icon="car" title="Les transports sur place">
-            <p>{wedding.localTransport}</p>
+          <Card icon="car" title="Les transports sur place" className="sm:col-span-2">
+            <p className="max-w-3xl">{wedding.localTransport}</p>
           </Card>
 
           {wedding.lodging.offered && (
@@ -87,9 +87,9 @@ export default function InfosPage() {
             </Card>
           )}
 
-          <Card icon="heart" title="Ce qui est pris en charge" className="sm:col-span-2">
+          <Card icon="heart" title="Ce qui est pris en charge">
             <p className="mb-5">{wedding.covered.intro}</p>
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="space-y-6">
               <div>
                 <p className="smallcaps text-olive mb-3">On prend en charge</p>
                 <ul className="space-y-2 list-none">
