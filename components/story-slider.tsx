@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 export default function StorySlider({
   images,
   alt,
-  interval = 2000,
+  interval = 1000,
 }: {
   images: string[];
   alt: string;
@@ -42,7 +42,7 @@ export default function StorySlider({
             alt={alt}
             fill
             sizes="(max-width: 768px) 90vw, 440px"
-            className={`object-cover transition-opacity duration-1000 ${
+            className={`object-cover transition-opacity duration-500 ${
               i === index ? "opacity-100" : "opacity-0"
             }`}
           />
