@@ -59,7 +59,7 @@ export const wedding = {
         "On a voulu un mariage authentique, entourés des personnes qu'on aime le plus — une trentaine en tout. L'envie, c'est simple : que chacun vienne comme il est, sans autre attente que de profiter les uns des autres.",
         "Du jeudi 27 au dimanche 30 mai 2027, on prendra le temps de tout savourer : des repas partagés, quelques activités et de bons fous rires, le plaisir de découvrir les lieux à notre rythme — et quelque part au milieu de tout ça, se dire oui.",
       ],
-      media: { type: "image", src: "/images/galerie-kasbah.jpg", alt: "La Kasbah d'Eau" },
+      media: { type: "video", src: "/videos/piscine-plage.mp4", alt: "La piscine de la kasbah face à la plage de Sidi Kaouki" },
     },
   ],
 
