@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { wedding } from "@/content/wedding";
 import { Sunburst, OliveBranch, PalmLeaf } from "@/components/ornaments";
 import { Divider, SiteFooter } from "@/components/site";
@@ -22,6 +23,8 @@ export default function Home() {
           playsInline
           aria-hidden
         />
+        {/* Voile noir léger pour la lisibilité du texte sur la vidéo */}
+        <div className="absolute inset-0 bg-black/25" aria-hidden />
         <div
           className="absolute inset-0 bg-gradient-to-b from-cocoa/45 via-sienna/15 to-cocoa/55"
           aria-hidden
@@ -117,11 +120,11 @@ export default function Home() {
         <div className="absolute inset-0 bg-cocoa/45" aria-hidden />
         <div className="relative z-10 px-6 py-20 text-center">
           <p className="script text-4xl sm:text-5xl text-cream/95 -rotate-2">
-            rendez-vous au Maroc…
+            {wedding.closing.script}
           </p>
           <Divider light />
           <p className="font-serif italic text-2xl text-cream">
-            les pieds dans le sable, le cœur dans les étoiles
+            {wedding.closing.line}
           </p>
         </div>
       </section>
@@ -133,10 +136,15 @@ export default function Home() {
           répondez-nous vite !
         </p>
         <p className="font-light max-w-xl mx-auto text-cream/90">
-          Chaque invitation contient un lien personnel (ou un QR code) vers votre
-          formulaire de réponse. Un doute, une question ? Contactez-nous
-          directement.
+          Un onglet dédié sur le site vous permet de répondre directement en
+          ligne. Un doute, une question ? Contactez-nous directement.
         </p>
+        <Link
+          href="/rsvp"
+          className="mt-8 inline-block rounded-full bg-cream px-8 py-3 font-medium text-sienna transition hover:bg-sand"
+        >
+          Répondre en ligne
+        </Link>
         <p className="smallcaps mt-8 text-cream/75">
           Réponse souhaitée avant le {wedding.rsvpDeadline}
         </p>

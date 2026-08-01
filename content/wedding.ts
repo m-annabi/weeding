@@ -10,12 +10,12 @@ export const wedding = {
   },
 
   // Date & heure
-  displayDate: "Samedi 12 septembre 2026",
-  date: "2026-09-12",
+  displayDate: "Samedi 29 mai 2027",
+  date: "2027-05-29",
   ceremonyTime: "15h00",
 
   // Date limite de réponse affichée aux invités
-  rsvpDeadline: "1er juillet 2026",
+  rsvpDeadline: "15 septembre 2026",
 
   // Lieu
   venue: {
@@ -32,14 +32,14 @@ export const wedding = {
     band: "/images/kasbah.jpg",
   },
 
-  // Les deux blocs de bienvenue sous le héro (média + texte, alternés)
+  // Les blocs de bienvenue sous le héro (média + texte, alternés)
   story: [
     {
       label: "Merci d'être là",
       title: "Célébrer notre amour, ensemble",
       paragraphs: [
-        "Merci du fond du cœur de faire le voyage pour nous. Ce mariage, c'est bien sûr la célébration de notre amour — mais c'est surtout l'occasion de passer du temps avec les gens qu'on aime.",
-        "On a choisi un endroit qui nous ressemble : chaleureux, intimiste et simple. Pas de grandes cérémonies figées — juste vous, nous, l'océan, et quelques jours suspendus.",
+        "Plus qu'un mariage, c'est une invitation à vivre des souvenirs ensemble. Merci du fond du cœur de faire le voyage pour nous. Ce mariage, c'est bien sûr la célébration de notre amour — mais c'est surtout l'occasion de passer du temps avec les gens qu'on aime.",
+        "On a choisi un endroit qui nous ressemble : chaleureux, intimiste et simple. Pas de grandes cérémonies — juste vous, nous, l'océan, et quelques jours qui comptent vraiment.",
       ],
       media: { type: "image", src: "/images/couple.jpg", alt: "Maureen et Akan au soleil couchant" },
     },
@@ -47,12 +47,27 @@ export const wedding = {
       label: "Notre amour du voyage",
       title: "On vous emmène au Maroc",
       paragraphs: [
-        "Voyager fait partie de nous. Alors pour le plus beau jour de notre vie, on a eu envie de partager cette passion avec vous — en vous emmenant là où notre cœur a chaviré.",
-        "Sidi Kaouki : un village de pêcheurs au sud d'Essaouira, des couchers de soleil incendiaires, des tajines face à l'océan et le temps qui ralentit. Vous allez comprendre pourquoi on aime tant cet endroit.",
+        "Voyager fait partie de nous. Alors pour un jour aussi important, on a voulu partager cette passion avec vous, en vous emmenant dans un lieu qui nous ressemble.",
+        "Sidi Kaouki : un petit village de pêcheurs au sud d'Essaouira, entre couchers de soleil, tajines face à l'océan, surfeurs et animaux en liberté. On espère que vous comprendrez, une fois sur place, pourquoi on aime tant cet endroit.",
       ],
       media: { type: "video", src: "/videos/tajine-ocean.mp4", alt: "Tajine face à l'océan à Sidi Kaouki" },
     },
+    {
+      label: "Notre intention",
+      title: "Pour ces quelques jours",
+      paragraphs: [
+        "On a voulu un mariage authentique, entourés des personnes qu'on aime le plus — une trentaine en tout. L'envie, c'est simple : que chacun vienne comme il est, et qu'on se retrouve sans autre attente que d'être ensemble.",
+        "Du jeudi 27 au dimanche 30 mai 2027, on prendra le temps de tout savourer : des repas partagés, quelques activités pour rire ensemble, et le plaisir de découvrir les lieux à notre rythme — et quelque part au milieu de tout ça, se dire oui.",
+      ],
+      media: { type: "image", src: "/images/galerie-kasbah.jpg", alt: "La Kasbah d'Eau" },
+    },
   ],
+
+  // Bande image de fin de page
+  closing: {
+    script: "rendez-vous au Maroc…",
+    line: "pour se créer des souvenirs ensemble",
+  },
 
   // Aéroports pour rejoindre la kasbah (codes utilisés dans le formulaire RSVP et le planning des arrivées)
   airports: [
