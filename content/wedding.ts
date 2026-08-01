@@ -144,7 +144,7 @@ export const wedding = {
       paragraphs: [
         "Vous pouvez arriver dès 14h. On profite d'une soirée tranquille, avec un repas à la kasbah pour ceux qui le souhaitent.",
       ],
-      media: { src: "/images/galerie-porte.jpg", alt: "Porte marocaine en bois sculpté" },
+      media: { type: "video", src: "/videos/programme-jeudi.mp4", alt: "Dromadaire sur la plage de Sidi Kaouki" },
     },
     {
       day: "Vendredi 28 mai",
@@ -155,7 +155,7 @@ export const wedding = {
         "Sur place, à l'hôtel, vous avez une salle de sport, une piscine, un billard, des échecs, et la plage juste en face pour profiter et vous ressourcer.",
         "Le soir, direction Essaouira : repas tous ensemble au restaurant, puis balade dans la ville.",
       ],
-      media: { src: "/images/galerie-essaouira.jpg", alt: "La plage d'Essaouira" },
+      media: { type: "video", src: "/videos/programme-vendredi.mp4", alt: "Kitesurf sur la plage de Sidi Kaouki" },
     },
     {
       day: "Samedi 29 mai",
@@ -164,7 +164,7 @@ export const wedding = {
       paragraphs: [
         "Le matin, quartier libre pour tout le monde. Nos témoins et nous serons de notre côté pour la cérémonie religieuse en petit comité. L'après-midi, cérémonie tous ensemble, suivie d'un cocktail au bord de la piscine. Le soir, repas convivial à la kasbah et soirée animée.",
       ],
-      media: { src: "/images/galerie-kasbah.jpg", alt: "La kasbah aux murs ocres" },
+      media: { type: "video", src: "/videos/piscine-plage.mp4", alt: "La piscine de la kasbah face à la plage" },
     },
     {
       day: "Dimanche 30 mai",
@@ -173,13 +173,13 @@ export const wedding = {
       paragraphs: [
         "On termine ces quelques jours par un brunch ensemble, avant un retour tranquille à la maison.",
       ],
-      media: { src: "/images/hero-plage.jpg", alt: "La plage de Sidi Kaouki au couchant" },
+      media: { type: "video", src: "/videos/programme-dimanche.mp4", alt: "Un chat de la kasbah au soleil" },
     },
   ],
 
   // Note affichée sous le programme
   programmeNote:
-    "Chacun est libre d'arriver plus tôt ou plus tard à l'hôtel, et de partir quand il le souhaite. Pour rappel : on prend en charge l'hébergement, les petits déjeuners, le repas du vendredi soir, le repas du samedi soir et le brunch du dimanche — le reste (avion, trajet aller-retour, autres repas, activités) est à votre charge.",
+    "Chacun vient comme il peut et comme il veut : libre à vous d'arriver plus tôt, de repartir plus tard, de participer à tout ou de ne rien faire du tout. Rien n'est obligatoire — l'essentiel, c'est de profiter de ces quelques jours à votre rythme.",
 
   // Contacts utiles
   contacts: [

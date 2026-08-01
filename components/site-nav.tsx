@@ -32,13 +32,13 @@ export default function SiteNav({ overlay = false }: { overlay?: boolean }) {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         solid
-          ? "border-b border-linen/70 bg-cream/85 backdrop-blur-md"
+          ? "border-b border-linen/70 bg-ivory/85 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
       }`}
     >
       <nav
         className={`mx-auto flex max-w-5xl items-center justify-between gap-4 px-5 py-3.5 transition-colors duration-300 ${
-          solid ? "text-cocoa" : "text-cream"
+          solid ? "text-charcoal" : "text-ivory"
         }`}
       >
         <Link
@@ -46,7 +46,7 @@ export default function SiteNav({ overlay = false }: { overlay?: boolean }) {
           className="flex items-center gap-2.5 transition hover:opacity-70"
           aria-label="Accueil"
         >
-          <Sunburst className={`h-5 w-5 ${solid ? "text-camel" : "text-cream/90"}`} />
+          <Sunburst className={`h-5 w-5 ${solid ? "text-brass" : "text-ivory/90"}`} />
           <span className="font-serif italic text-lg leading-none">M & A</span>
         </Link>
         <div className="flex items-center gap-5 sm:gap-9">
@@ -57,7 +57,7 @@ export default function SiteNav({ overlay = false }: { overlay?: boolean }) {
                 key={l.href}
                 href={l.href}
                 className={`smallcaps !text-[0.62rem] sm:!text-[0.68rem] whitespace-nowrap transition hover:opacity-70 ${
-                  active ? (solid ? "text-sienna" : "underline underline-offset-8") : ""
+                  active ? (solid ? "text-majorelle" : "underline underline-offset-8") : ""
                 }`}
               >
                 {l.label}

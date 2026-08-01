@@ -42,15 +42,15 @@ export type ExistingRsvp = {
 };
 
 const inputCls =
-  "w-full rounded-lg border border-linen bg-white/70 px-4 py-2.5 font-light text-cocoa placeholder:text-cocoa/35 focus:outline-none focus:border-camel focus:ring-2 focus:ring-camel/20";
-const labelCls = "block text-sm font-medium text-cocoa/80 mb-1";
+  "w-full rounded-lg border border-linen bg-white/70 px-4 py-2.5 font-light text-charcoal placeholder:text-charcoal/35 focus:outline-none focus:border-brass focus:ring-2 focus:ring-brass/20";
+const labelCls = "block text-sm font-medium text-charcoal/80 mb-1";
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-serif text-2xl text-sienna mt-12 mb-5 flex items-center gap-4">
-      <span className="h-px flex-1 bg-camel/40" />
+    <h2 className="font-serif text-2xl text-charcoal mt-12 mb-5 flex items-center gap-4">
+      <span className="h-px flex-1 bg-brass/40" />
       {children}
-      <span className="h-px flex-1 bg-camel/40" />
+      <span className="h-px flex-1 bg-brass/40" />
     </h2>
   );
 }
@@ -64,8 +64,8 @@ function ParticipantFields({
 }) {
   const [diet, setDiet] = useState(defaults?.diet ?? "NONE");
   return (
-    <fieldset className="rounded-xl border border-linen bg-cream/70 p-5 space-y-4">
-      <legend className="px-2 font-serif text-lg text-terracotta">
+    <fieldset className="rounded-xl border border-linen bg-ivory/70 p-5 space-y-4">
+      <legend className="px-2 font-serif text-lg text-majorelle">
         Participant {index + 1}
       </legend>
       <div className="grid gap-4 sm:grid-cols-2">
@@ -156,7 +156,7 @@ function ParticipantFields({
           type="checkbox"
           name={`p${index}_childMenu`}
           defaultChecked={defaults?.childMenu}
-          className="h-4 w-4 accent-terracotta"
+          className="h-4 w-4 accent-majorelle"
         />
         Menu enfant
       </label>
@@ -200,12 +200,12 @@ export default function RsvpForm({
 
   if (state?.ok) {
     return (
-      <div className="mt-8 rounded-2xl border border-camel/50 bg-cream/80 px-6 py-14 text-center">
-        <Sunburst className="mx-auto h-10 w-10 text-camel mb-6" />
-        <p className="script text-4xl text-terracotta -rotate-1 mb-4">
+      <div className="mt-8 rounded-2xl border border-brass/50 bg-ivory/80 px-6 py-14 text-center">
+        <Sunburst className="mx-auto h-10 w-10 text-brass mb-6" />
+        <p className="script text-4xl text-majorelle -rotate-1 mb-4">
           {attending === "yes" ? "quelle joie !" : "merci pour votre réponse"}
         </p>
-        <p className="font-serif text-2xl text-sienna max-w-md mx-auto">
+        <p className="font-serif text-2xl text-charcoal max-w-md mx-auto">
           {state.message}
         </p>
         {attending === "yes" && (
@@ -213,7 +213,7 @@ export default function RsvpForm({
             Rendez-vous les pieds dans le sable à Sidi Kaouki ✨
           </p>
         )}
-        <p className="mt-6 font-light text-cocoa/60">
+        <p className="mt-6 font-light text-charcoal/60">
           Vous pouvez revenir sur cette page à tout moment pour modifier votre
           réponse ou compléter vos informations de vol.
         </p>
@@ -236,8 +236,8 @@ export default function RsvpForm({
         <label
           className={`cursor-pointer rounded-2xl border-2 p-5 text-center transition ${
             attending === "yes"
-              ? "border-terracotta bg-terracotta/10"
-              : "border-linen bg-cream/70 hover:border-camel"
+              ? "border-majorelle bg-majorelle/10"
+              : "border-linen bg-ivory/70 hover:border-brass"
           }`}
         >
           <input
@@ -250,15 +250,15 @@ export default function RsvpForm({
             className="sr-only"
           />
           <span className="mb-3 flex justify-center text-olive">{icons.check("h-8 w-8")}</span>
-          <span className="font-serif text-xl text-cocoa">
+          <span className="font-serif text-xl text-charcoal">
             Je serai présent(e)
           </span>
         </label>
         <label
           className={`cursor-pointer rounded-2xl border-2 p-5 text-center transition ${
             attending === "no"
-              ? "border-terracotta bg-terracotta/10"
-              : "border-linen bg-cream/70 hover:border-camel"
+              ? "border-majorelle bg-majorelle/10"
+              : "border-linen bg-ivory/70 hover:border-brass"
           }`}
         >
           <input
@@ -269,8 +269,8 @@ export default function RsvpForm({
             onChange={() => setAttending("no")}
             className="sr-only"
           />
-          <span className="mb-3 flex justify-center text-sienna/70">{icons.cross("h-8 w-8")}</span>
-          <span className="font-serif text-xl text-cocoa">
+          <span className="mb-3 flex justify-center text-charcoal/70">{icons.cross("h-8 w-8")}</span>
+          <span className="font-serif text-xl text-charcoal">
             Je ne pourrai malheureusement pas être présent(e)
           </span>
         </label>
@@ -283,7 +283,7 @@ export default function RsvpForm({
           <div>
             <label className={labelCls} htmlFor="count">
               Nombre de personnes présentes{" "}
-              <span className="text-cocoa/50">
+              <span className="text-charcoal/50">
                 (votre invitation couvre {maxGuests}{" "}
                 {maxGuests > 1 ? "personnes" : "personne"})
               </span>
@@ -360,8 +360,8 @@ export default function RsvpForm({
                 key={value}
                 className={`cursor-pointer rounded-2xl border-2 p-4 text-center transition ${
                   arrivalMode === value
-                    ? "border-terracotta bg-terracotta/10"
-                    : "border-linen bg-cream/70 hover:border-camel"
+                    ? "border-majorelle bg-majorelle/10"
+                    : "border-linen bg-ivory/70 hover:border-brass"
                 }`}
               >
                 <input
@@ -372,14 +372,14 @@ export default function RsvpForm({
                   onChange={() => setArrivalMode(value)}
                   className="sr-only"
                 />
-                <span className="mb-2 flex justify-center text-sienna">{icons[icon as "plane" | "car" | "home"]("h-6 w-6")}</span>
-                <span className="font-light text-cocoa">{label}</span>
+                <span className="mb-2 flex justify-center text-charcoal">{icons[icon as "plane" | "car" | "home"]("h-6 w-6")}</span>
+                <span className="font-light text-charcoal">{label}</span>
               </label>
             ))}
           </div>
 
           {arrivalMode === "PLANE" && (
-            <div className="space-y-4 rounded-xl border border-linen bg-cream/70 p-5">
+            <div className="space-y-4 rounded-xl border border-linen bg-ivory/70 p-5">
               <div>
                 <label className={labelCls} htmlFor="arrivalAirport">
                   Aéroport d&apos;arrivée
@@ -398,7 +398,7 @@ export default function RsvpForm({
                 </select>
               </div>
               <fieldset>
-                <legend className="font-serif text-lg text-terracotta mb-2">
+                <legend className="font-serif text-lg text-majorelle mb-2">
                   Arrivée
                 </legend>
                 <div className="grid gap-4 sm:grid-cols-3">
@@ -441,7 +441,7 @@ export default function RsvpForm({
                 </div>
               </fieldset>
               <fieldset>
-                <legend className="font-serif text-lg text-terracotta mb-2">
+                <legend className="font-serif text-lg text-majorelle mb-2">
                   Retour
                 </legend>
                 <div className="grid gap-4 sm:grid-cols-3">
@@ -489,7 +489,7 @@ export default function RsvpForm({
                     type="checkbox"
                     name="needsTransfer"
                     defaultChecked={existing?.needsTransfer}
-                    className="mt-1 h-4 w-4 accent-terracotta"
+                    className="mt-1 h-4 w-4 accent-majorelle"
                   />
                   <span>
                     <strong className="font-medium">Navette offerte</strong> —
@@ -498,7 +498,7 @@ export default function RsvpForm({
                   </span>
                 </label>
               )}
-              <p className="text-xs text-cocoa/50 font-light">
+              <p className="text-xs text-charcoal/50 font-light">
                 Les billets d&apos;avion et le trajet jusqu&apos;à la kasbah
                 sont à votre charge. Pas encore réservé ? Aucun souci :
                 répondez dès maintenant et revenez compléter vos infos de vol
@@ -510,7 +510,7 @@ export default function RsvpForm({
 
           {/* Hébergement */}
           <SectionTitle>Votre hébergement</SectionTitle>
-          <p className="rounded-xl bg-sage/15 border border-sage/40 px-4 py-3 text-sm font-light text-cocoa/80">
+          <p className="rounded-xl bg-sage/15 border border-sage/40 px-4 py-3 text-sm font-light text-charcoal/80">
             Nous privatisons la kasbah :{" "}
             <strong className="font-medium">l&apos;hébergement est offert</strong>.
             Les chambres étant limitées, certains invités seront logés dans des
@@ -528,8 +528,8 @@ export default function RsvpForm({
                 key={value}
                 className={`cursor-pointer rounded-2xl border-2 p-4 text-center transition ${
                   accommodation === value
-                    ? "border-terracotta bg-terracotta/10"
-                    : "border-linen bg-cream/70 hover:border-camel"
+                    ? "border-majorelle bg-majorelle/10"
+                    : "border-linen bg-ivory/70 hover:border-brass"
                 }`}
               >
                 <input
@@ -540,7 +540,7 @@ export default function RsvpForm({
                   onChange={() => setAccommodation(value)}
                   className="sr-only"
                 />
-                <span className="font-light text-cocoa">{label}</span>
+                <span className="font-light text-charcoal">{label}</span>
               </label>
             ))}
           </div>
@@ -565,7 +565,7 @@ export default function RsvpForm({
                 type="checkbox"
                 name="offersCarpool"
                 defaultChecked={existing?.offersCarpool}
-                className="h-4 w-4 accent-terracotta"
+                className="h-4 w-4 accent-majorelle"
               />
               Je peux proposer du covoiturage (voiture de location, trajets
               depuis l&apos;aéroport…)
@@ -587,7 +587,7 @@ export default function RsvpForm({
           />
 
           {state && !state.ok && (
-            <p className="rounded-xl bg-terracotta/10 border border-terracotta px-4 py-3 text-sienna">
+            <p className="rounded-xl bg-majorelle/10 border border-majorelle px-4 py-3 text-charcoal">
               {state.message}
             </p>
           )}
@@ -595,7 +595,7 @@ export default function RsvpForm({
           <button
             type="submit"
             disabled={pending}
-            className="smallcaps w-full rounded-full bg-sienna py-5 !text-xs text-cream shadow-lg shadow-sienna/25 transition hover:bg-terracotta disabled:opacity-60"
+            className="smallcaps w-full rounded-full bg-majorelle-deep py-5 !text-xs text-ivory shadow-lg shadow-charcoal/25 transition hover:bg-majorelle disabled:opacity-60"
           >
             {pending ? "Envoi en cours…" : "Envoyer ma réponse"}
           </button>

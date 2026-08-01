@@ -5,7 +5,7 @@ import { createLodging, deleteLodging, assignLodging } from "./actions";
 export const dynamic = "force-dynamic";
 
 const inputCls =
-  "rounded-xl border border-linen bg-white px-3 py-2 text-sm font-light focus:outline-none focus:border-terracotta";
+  "rounded-xl border border-linen bg-white px-3 py-2 text-sm font-light focus:outline-none focus:border-majorelle";
 
 function nights(arrival: string | null, departure: string | null) {
   if (!arrival || !departure) return null;
@@ -48,8 +48,8 @@ export default async function HebergementsPage() {
     <div className="space-y-10">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl text-sienna">Hébergements</h1>
-          <p className="font-light text-cocoa/60 lining-nums">
+          <h1 className="font-serif text-3xl text-charcoal">Hébergements</h1>
+          <p className="font-light text-charcoal/60 lining-nums">
             {totalWanted} personne{totalWanted > 1 ? "s" : ""} à loger ·{" "}
             {totalCapacity} place{totalCapacity > 1 ? "s" : ""} au total ·{" "}
             {unassigned.length} invitation{unassigned.length > 1 ? "s" : ""} non
@@ -61,7 +61,7 @@ export default async function HebergementsPage() {
             <a
               key={f}
               href={`/api/admin/export?format=${f}&type=logements`}
-              className="rounded-full border border-cocoa/20 bg-white/80 px-4 py-2 text-sm hover:border-terracotta hover:text-terracotta transition"
+              className="rounded-full border border-charcoal/20 bg-white/80 px-4 py-2 text-sm hover:border-majorelle hover:text-majorelle transition"
             >
               ⬇ Rooming list {f.toUpperCase()}
             </a>
@@ -71,7 +71,7 @@ export default async function HebergementsPage() {
 
       {/* Logements & capacités */}
       <section className="rounded-2xl border border-linen bg-white/80 p-6">
-        <h2 className="font-serif text-xl text-sienna mb-4">
+        <h2 className="font-serif text-xl text-charcoal mb-4">
           🏰 Logements (kasbah & annexes)
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-6">
@@ -84,16 +84,16 @@ export default async function HebergementsPage() {
                 key={l.id}
                 className={`rounded-2xl border p-4 ${
                   over
-                    ? "border-terracotta bg-terracotta/10"
+                    ? "border-majorelle bg-majorelle/10"
                     : "border-linen bg-sand/40"
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
-                  <p className="font-serif text-lg text-cocoa">{l.name}</p>
+                  <p className="font-serif text-lg text-charcoal">{l.name}</p>
                   <form action={deleteLodging}>
                     <input type="hidden" name="id" value={l.id} />
                     <button
-                      className="text-cocoa/40 hover:text-sienna transition text-sm"
+                      className="text-charcoal/40 hover:text-majorelle transition text-sm"
                       title={`Supprimer ${l.name} (les invités redeviennent non attribués)`}
                     >
                       ✕
@@ -101,17 +101,17 @@ export default async function HebergementsPage() {
                   </form>
                 </div>
                 {l.note && (
-                  <p className="text-xs text-cocoa/50 font-light mb-2">{l.note}</p>
+                  <p className="text-xs text-charcoal/50 font-light mb-2">{l.note}</p>
                 )}
                 <div className="h-2 rounded-full bg-linen overflow-hidden mt-2">
                   <div
-                    className={`h-full rounded-full ${over ? "bg-sienna" : "bg-terracotta"}`}
+                    className={`h-full rounded-full ${over ? "bg-majorelle-deep" : "bg-majorelle"}`}
                     style={{
                       width: `${l.capacity > 0 ? Math.min((used / l.capacity) * 100, 100) : 0}%`,
                     }}
                   />
                 </div>
-                <p className="mt-1 text-sm text-cocoa/60 font-light lining-nums">
+                <p className="mt-1 text-sm text-charcoal/60 font-light lining-nums">
                   {used}/{l.capacity} place{l.capacity > 1 ? "s" : ""}
                   {over && " — dépassement !"}
                   {full && !over && " — complet"}
@@ -120,7 +120,7 @@ export default async function HebergementsPage() {
             );
           })}
           {lodgings.length === 0 && (
-            <p className="text-sm text-cocoa/40 font-light sm:col-span-3">
+            <p className="text-sm text-charcoal/40 font-light sm:col-span-3">
               Créez la kasbah et vos logements annexes ci-dessous (le nombre de
               places compte en personnes).
             </p>
@@ -128,7 +128,7 @@ export default async function HebergementsPage() {
         </div>
         <form action={createLodging} className="flex flex-wrap gap-2 items-end">
           <div className="flex flex-col gap-1">
-            <label className="text-xs text-cocoa/60">Nom du logement *</label>
+            <label className="text-xs text-charcoal/60">Nom du logement *</label>
             <input
               name="name"
               required
@@ -137,7 +137,7 @@ export default async function HebergementsPage() {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-xs text-cocoa/60">Places</label>
+            <label className="text-xs text-charcoal/60">Places</label>
             <input
               name="capacity"
               type="number"
@@ -147,14 +147,14 @@ export default async function HebergementsPage() {
             />
           </div>
           <div className="flex flex-col gap-1 flex-1 min-w-40">
-            <label className="text-xs text-cocoa/60">Note (optionnel)</label>
+            <label className="text-xs text-charcoal/60">Note (optionnel)</label>
             <input
               name="note"
               placeholder="À 5 min à pied, 4 chambres…"
               className={inputCls}
             />
           </div>
-          <button className="rounded-full bg-terracotta px-4 py-2 text-sm text-cream hover:bg-sienna transition">
+          <button className="rounded-full bg-majorelle px-4 py-2 text-sm text-ivory hover:bg-majorelle-deep transition">
             Ajouter / mettre à jour
           </button>
         </form>
@@ -162,18 +162,18 @@ export default async function HebergementsPage() {
 
       {/* Attribution */}
       <section>
-        <h2 className="font-serif text-2xl text-sienna mb-4">
+        <h2 className="font-serif text-2xl text-charcoal mb-4">
           🛏️ Répartition des invités
         </h2>
         {wanting.length === 0 ? (
-          <p className="text-sm text-cocoa/40 font-light">
+          <p className="text-sm text-charcoal/40 font-light">
             Aucune invitation confirmée ne demande de logement pour le moment.
           </p>
         ) : (
           <div className="overflow-x-auto rounded-2xl border border-linen bg-white/80">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-linen text-left text-xs uppercase tracking-wider text-cocoa/50">
+                <tr className="border-b border-linen text-left text-xs uppercase tracking-wider text-charcoal/50">
                   <th className="px-4 py-3">Invitation</th>
                   <th className="px-4 py-3 text-center">Pers.</th>
                   <th className="px-4 py-3">Séjour</th>
@@ -187,10 +187,10 @@ export default async function HebergementsPage() {
                   return (
                     <tr key={g.id} className="border-b border-linen/60 last:border-0">
                       <td className="px-4 py-3">
-                        <p className="font-medium text-cocoa">
+                        <p className="font-medium text-charcoal">
                           {g.firstName} {g.lastName}
                         </p>
-                        <p className="text-xs text-cocoa/50 font-light">
+                        <p className="text-xs text-charcoal/50 font-light">
                           {r.participants
                             .map((p) => `${p.firstName} ${p.lastName}`)
                             .join(", ")}
@@ -204,11 +204,11 @@ export default async function HebergementsPage() {
                           <>
                             {r.arrivalDate} → {r.departureDate}
                             {n && (
-                              <span className="text-cocoa/50"> ({n} nuits)</span>
+                              <span className="text-charcoal/50"> ({n} nuits)</span>
                             )}
                           </>
                         ) : (
-                          <span className="text-sienna">dates à préciser</span>
+                          <span className="text-charcoal">dates à préciser</span>
                         )}
                       </td>
                       <td className="px-4 py-3">
@@ -226,7 +226,7 @@ export default async function HebergementsPage() {
                               </option>
                             ))}
                           </select>
-                          <button className="rounded-full border border-cocoa/20 px-3 py-1 text-xs hover:border-terracotta hover:text-terracotta transition">
+                          <button className="rounded-full border border-charcoal/20 px-3 py-1 text-xs hover:border-majorelle hover:text-majorelle transition">
                             OK
                           </button>
                         </form>
@@ -243,7 +243,7 @@ export default async function HebergementsPage() {
       {/* S'organisent eux-mêmes */}
       {selfOrganized.length > 0 && (
         <section className="rounded-2xl border border-linen bg-white/80 p-5">
-          <p className="font-serif text-lg text-sienna mb-2">
+          <p className="font-serif text-lg text-charcoal mb-2">
             📍 S&apos;organisent par eux-mêmes
           </p>
           <ul className="space-y-1 text-sm">
@@ -252,7 +252,7 @@ export default async function HebergementsPage() {
                 <strong className="font-medium">
                   {g.firstName} {g.lastName}
                 </strong>{" "}
-                <span className="text-cocoa/60 font-light">
+                <span className="text-charcoal/60 font-light">
                   {g.rsvp?.accommodationOther ?? "lieu non précisé"}
                 </span>
               </li>

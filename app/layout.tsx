@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Jost, Caveat } from "next/font/google";
+import { Fraunces, Jost } from "next/font/google";
 import { wedding } from "@/content/wedding";
 import "./globals.css";
 
@@ -17,12 +17,6 @@ const jost = Jost({
   variable: "--font-jost",
 });
 
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-hand",
-});
-
 export const metadata: Metadata = {
   title: `${wedding.couple.partner1} & ${wedding.couple.partner2} — Mariage`,
   description: `Mariage de ${wedding.couple.partner1} et ${wedding.couple.partner2} — ${wedding.displayDate}`,
@@ -36,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${fraunces.variable} ${jost.variable} ${caveat.variable} antialiased`}
+        className={`${fraunces.variable} ${jost.variable} antialiased`}
       >
         {children}
       </body>
