@@ -131,6 +131,7 @@ export const wedding = {
       paragraphs: [
         "Vous pouvez arriver dès 14h. On profite d'une soirée tranquille, avec un repas à la kasbah pour ceux qui le souhaitent.",
       ],
+      media: { src: "/images/galerie-porte.jpg", alt: "Porte marocaine en bois sculpté" },
     },
     {
       day: "Vendredi 28 mai",
@@ -141,6 +142,7 @@ export const wedding = {
         "Sur place, à l'hôtel, vous avez une salle de sport, une piscine, un billard, des échecs, et la plage juste en face pour profiter et vous ressourcer.",
         "Le soir, direction Essaouira : repas tous ensemble au restaurant, puis balade dans la ville.",
       ],
+      media: { src: "/images/galerie-essaouira.jpg", alt: "La plage d'Essaouira" },
     },
     {
       day: "Samedi 29 mai",
@@ -149,6 +151,7 @@ export const wedding = {
       paragraphs: [
         "Le matin, quartier libre pour tout le monde. Nos témoins et nous serons de notre côté pour la cérémonie religieuse en petit comité. L'après-midi, cérémonie tous ensemble, suivie d'un cocktail au bord de la piscine. Le soir, repas convivial à la kasbah et soirée animée.",
       ],
+      media: { src: "/images/galerie-kasbah.jpg", alt: "La kasbah aux murs ocres" },
     },
     {
       day: "Dimanche 30 mai",
@@ -157,6 +160,7 @@ export const wedding = {
       paragraphs: [
         "On termine ces quelques jours par un brunch ensemble, avant un retour tranquille à la maison.",
       ],
+      media: { src: "/images/hero-plage.jpg", alt: "La plage de Sidi Kaouki au couchant" },
     },
   ],
 

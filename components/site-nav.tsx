@@ -9,7 +9,6 @@ const LINKS = [
   { href: "/infos", label: "Infos pratiques" },
   { href: "/programme", label: "Programme" },
   { href: "/rsvp", label: "RSVP" },
-  { href: "/contacts", label: "Contacts" },
 ];
 
 /**

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { wedding } from "@/content/wedding";
 import { icons, type IconName } from "@/components/ornaments";
 import { PageHeader, SiteFooter } from "@/components/site";
@@ -10,30 +11,56 @@ export default function ProgrammePage() {
   return (
     <>
       <SiteNav />
-      <main className="mx-auto max-w-3xl px-6 pb-24">
+      <main className="mx-auto max-w-4xl px-6 pb-24">
         <PageHeader label={wedding.displayRangeShort} title="Le programme" />
 
-        <ol className="mt-10 relative border-s border-camel/50 ms-4 space-y-12">
-          {wedding.programme.map((day) => (
-            <li key={day.day} className="ms-9 relative">
-              <span
-                className="absolute -start-14 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-cream border border-camel/50 text-sienna"
-                aria-hidden
+        <div className="mt-12 space-y-16 sm:space-y-20">
+          {wedding.programme.map((day, i) => (
+            <section
+              key={day.day}
+              className="grid items-center gap-8 md:grid-cols-2 md:gap-12"
+            >
+              <div
+                className={`arch relative overflow-hidden border border-camel/40 p-1.5 bg-cream/70 aspect-[3/4] max-w-xs mx-auto w-full ${
+                  i % 2 === 1 ? "md:order-2" : ""
+                }`}
               >
-                {icons[day.icon as IconName]("h-5 w-5")}
-              </span>
-              <p className="smallcaps text-terracotta">{day.day}</p>
-              <h2 className="font-serif text-2xl text-cocoa mt-1">{day.title}</h2>
-              <div className="mt-2 space-y-3 font-light text-cocoa/70">
-                {day.paragraphs.map((p) => (
-                  <p key={p}>{p}</p>
-                ))}
+                <div className="arch relative h-full w-full overflow-hidden">
+                  <Image
+                    src={day.media.src}
+                    alt={day.media.alt}
+                    fill
+                    sizes="(max-width: 768px) 90vw, 320px"
+                    className="object-cover"
+                  />
+                </div>
               </div>
-            </li>
+              <div
+                className={`text-center md:text-left ${
+                  i % 2 === 1 ? "md:order-1" : ""
+                }`}
+              >
+                <span
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-cream border border-camel/50 text-sienna mb-4"
+                  aria-hidden
+                >
+                  {icons[day.icon as IconName]("h-5 w-5")}
+                </span>
+                <p className="smallcaps text-terracotta">{day.day}</p>
+                <h2 className="font-serif text-2xl sm:text-3xl text-cocoa mt-1">
+                  {day.title}
+                </h2>
+                <div className="mt-3 space-y-3 font-light text-cocoa/70">
+                  {day.paragraphs.map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+                </div>
+              </div>
+            </section>
           ))}
-        </ol>
+        </div>
 
-        <p className="mt-14 rounded-xl border border-linen bg-cream/60 p-6 font-light text-cocoa/70">
+        <p className="mt-16 rounded-xl border border-linen bg-cream/60 p-6 font-light text-cocoa/70">
           {wedding.programmeNote}
         </p>
       </main>
