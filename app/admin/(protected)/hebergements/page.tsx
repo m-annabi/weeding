@@ -1,6 +1,11 @@
 import { prisma } from "@/lib/prisma";
 import { getGuestsFull } from "@/lib/stats";
-import { createLodging, deleteLodging, assignLodging } from "./actions";
+import {
+  createLodging,
+  deleteLodging,
+  assignLodging,
+  assignWishedLodging,
+} from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -34,14 +39,48 @@ export default async function HebergementsPage() {
   const pax = (g: (typeof guests)[number]) =>
     g.rsvp?.attending ? g.rsvp.participants.length : g.maxGuests;
 
-  const assignedPax = new Map<string, number>();
+  const definitivePax = new Map<string, number>();
+  const wishedPax = new Map<string, number>();
   for (const g of wanting) {
-    if (!g.lodgingId) continue;
-    assignedPax.set(g.lodgingId, (assignedPax.get(g.lodgingId) ?? 0) + pax(g));
+    if (g.lodgingId)
+      definitivePax.set(g.lodgingId, (definitivePax.get(g.lodgingId) ?? 0) + pax(g));
+    if (g.wishedLodgingId)
+      wishedPax.set(
+        g.wishedLodgingId,
+        (wishedPax.get(g.wishedLodgingId) ?? 0) + pax(g)
+      );
   }
   const unassigned = wanting.filter((g) => !g.lodgingId);
   const totalWanted = wanting.reduce((s, g) => s + pax(g), 0);
   const totalCapacity = lodgings.reduce((s, l) => s + l.capacity, 0);
+
+  const statusBadge = (g: (typeof guests)[number]) =>
+    g.rsvp?.attending ? (
+      <span className="inline-block rounded-full border border-olive/40 bg-olive/15 px-2.5 py-0.5 text-xs text-olive whitespace-nowrap">
+        ✅ Confirmé
+      </span>
+    ) : (
+      <span className="inline-block rounded-full border border-linen bg-sand px-2.5 py-0.5 text-xs text-cocoa/60 whitespace-nowrap">
+        ⏳ En attente
+      </span>
+    );
+
+  const invitationCell = (g: (typeof guests)[number]) => (
+    <>
+      <p className="font-medium text-cocoa">
+        {g.firstName} {g.lastName}
+      </p>
+      <p className="text-xs text-cocoa/50 font-light">
+        {g.rsvp?.attending
+          ? g.rsvp.participants
+              .map((p) => `${p.firstName} ${p.lastName}`)
+              .join(", ")
+          : g.partnerName
+            ? `avec ${g.partnerName}`
+            : ""}
+      </p>
+    </>
+  );
 
   return (
     <div className="space-y-10">
@@ -51,8 +90,8 @@ export default async function HebergementsPage() {
           <p className="font-light text-cocoa/60 lining-nums">
             {totalWanted} personne{totalWanted > 1 ? "s" : ""} à loger ·{" "}
             {totalCapacity} place{totalCapacity > 1 ? "s" : ""} au total ·{" "}
-            {unassigned.length} invitation{unassigned.length > 1 ? "s" : ""} non
-            attribuée{unassigned.length > 1 ? "s" : ""}
+            {unassigned.length} invitation{unassigned.length > 1 ? "s" : ""} sans
+            logement définitif
           </p>
         </div>
         <div className="flex gap-2">
@@ -75,8 +114,8 @@ export default async function HebergementsPage() {
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-6">
           {lodgings.map((l) => {
-            const used = assignedPax.get(l.id) ?? 0;
-            const full = l.capacity > 0 && used >= l.capacity;
+            const wished = wishedPax.get(l.id) ?? 0;
+            const used = definitivePax.get(l.id) ?? 0;
             const over = l.capacity > 0 && used > l.capacity;
             return (
               <div
@@ -102,7 +141,24 @@ export default async function HebergementsPage() {
                 {l.note && (
                   <p className="text-xs text-cocoa/50 font-light mb-2">{l.note}</p>
                 )}
-                <div className="h-2 rounded-full bg-linen overflow-hidden mt-2">
+                <p className="mt-2 text-xs uppercase tracking-wider text-cocoa/40">
+                  Souhaité
+                </p>
+                <div className="h-1.5 rounded-full bg-linen overflow-hidden mt-1">
+                  <div
+                    className="h-full rounded-full bg-camel"
+                    style={{
+                      width: `${l.capacity > 0 ? Math.min((wished / l.capacity) * 100, 100) : 0}%`,
+                    }}
+                  />
+                </div>
+                <p className="mt-0.5 text-xs text-cocoa/60 font-light lining-nums">
+                  {wished}/{l.capacity}
+                </p>
+                <p className="mt-2 text-xs uppercase tracking-wider text-cocoa/40">
+                  Définitif
+                </p>
+                <div className="h-1.5 rounded-full bg-linen overflow-hidden mt-1">
                   <div
                     className={`h-full rounded-full ${over ? "bg-sienna" : "bg-terracotta"}`}
                     style={{
@@ -110,10 +166,9 @@ export default async function HebergementsPage() {
                     }}
                   />
                 </div>
-                <p className="mt-1 text-sm text-cocoa/60 font-light lining-nums">
-                  {used}/{l.capacity} place{l.capacity > 1 ? "s" : ""}
+                <p className="mt-0.5 text-xs text-cocoa/60 font-light lining-nums">
+                  {used}/{l.capacity}
                   {over && " — dépassement !"}
-                  {full && !over && " — complet"}
                 </p>
               </div>
             );
@@ -159,11 +214,65 @@ export default async function HebergementsPage() {
         </form>
       </section>
 
-      {/* Attribution */}
+      {/* Répartition souhaitée (plan de référence) */}
       <section>
-        <h2 className="font-serif text-2xl text-sienna mb-4">
-          🛏️ Répartition des invités
+        <h2 className="font-serif text-2xl text-sienna mb-1">
+          🧭 Répartition souhaitée
         </h2>
+        <p className="text-sm text-cocoa/50 font-light mb-4">
+          Votre plan de référence — il ne bouge pas quand vous ajustez le
+          définitif.
+        </p>
+        <div className="overflow-x-auto rounded-2xl border border-linen bg-white/80">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-linen text-left text-xs uppercase tracking-wider text-cocoa/50">
+                <th className="px-4 py-3">Invitation</th>
+                <th className="px-4 py-3 text-center">Pers.</th>
+                <th className="px-4 py-3">Logement souhaité</th>
+              </tr>
+            </thead>
+            <tbody>
+              {wanting.map((g) => (
+                <tr key={g.id} className="border-b border-linen/60 last:border-0">
+                  <td className="px-4 py-3">{invitationCell(g)}</td>
+                  <td className="px-4 py-3 text-center lining-nums">{pax(g)}</td>
+                  <td className="px-4 py-3">
+                    <form action={assignWishedLodging} className="flex gap-2">
+                      <input type="hidden" name="guestId" value={g.id} />
+                      <select
+                        name="lodgingId"
+                        defaultValue={g.wishedLodgingId ?? ""}
+                        className={`${inputCls} min-w-44`}
+                      >
+                        <option value="">— Non défini —</option>
+                        {lodgings.map((l) => (
+                          <option key={l.id} value={l.id}>
+                            {l.name}
+                          </option>
+                        ))}
+                      </select>
+                      <button className="rounded-full border border-cocoa/20 px-3 py-1 text-xs hover:border-terracotta hover:text-terracotta transition">
+                        OK
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* Répartition définitive */}
+      <section>
+        <h2 className="font-serif text-2xl text-sienna mb-1">
+          🛏️ Répartition définitive
+        </h2>
+        <p className="text-sm text-cocoa/50 font-light mb-4">
+          L&apos;attribution réelle, à ajuster au fil des réponses — c&apos;est
+          elle qui alimente la rooming list exportée.
+        </p>
         {wanting.length === 0 ? (
           <p className="text-sm text-cocoa/40 font-light">
             Aucune invitation à loger pour le moment.
@@ -177,7 +286,7 @@ export default async function HebergementsPage() {
                   <th className="px-4 py-3 text-center">Pers.</th>
                   <th className="px-4 py-3">Statut</th>
                   <th className="px-4 py-3">Séjour</th>
-                  <th className="px-4 py-3">Logement attribué</th>
+                  <th className="px-4 py-3">Logement définitif</th>
                 </tr>
               </thead>
               <tbody>
@@ -186,37 +295,14 @@ export default async function HebergementsPage() {
                   const n = nights(r?.arrivalDate ?? null, r?.departureDate ?? null);
                   return (
                     <tr key={g.id} className="border-b border-linen/60 last:border-0">
-                      <td className="px-4 py-3">
-                        <p className="font-medium text-cocoa">
-                          {g.firstName} {g.lastName}
-                        </p>
-                        <p className="text-xs text-cocoa/50 font-light">
-                          {r?.attending
-                            ? r.participants
-                                .map((p) => `${p.firstName} ${p.lastName}`)
-                                .join(", ")
-                            : g.partnerName
-                              ? `avec ${g.partnerName}`
-                              : ""}
-                        </p>
-                      </td>
+                      <td className="px-4 py-3">{invitationCell(g)}</td>
                       <td className="px-4 py-3 text-center lining-nums">
                         {pax(g)}
                         {!r?.attending && (
                           <span className="text-cocoa/40"> prévues</span>
                         )}
                       </td>
-                      <td className="px-4 py-3">
-                        {r?.attending ? (
-                          <span className="inline-block rounded-full border border-olive/40 bg-olive/15 px-2.5 py-0.5 text-xs text-olive whitespace-nowrap">
-                            ✅ Confirmé
-                          </span>
-                        ) : (
-                          <span className="inline-block rounded-full border border-linen bg-sand px-2.5 py-0.5 text-xs text-cocoa/60 whitespace-nowrap">
-                            ⏳ En attente
-                          </span>
-                        )}
-                      </td>
+                      <td className="px-4 py-3">{statusBadge(g)}</td>
                       <td className="px-4 py-3 font-light lining-nums">
                         {r?.arrivalDate && r?.departureDate ? (
                           <>

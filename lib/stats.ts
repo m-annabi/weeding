@@ -5,6 +5,7 @@ export async function getGuestsFull() {
     include: {
       group: true,
       lodging: true,
+      wishedLodging: true,
       rsvp: { include: { participants: true } },
     },
     orderBy: [{ lastName: "asc" }, { firstName: "asc" }],

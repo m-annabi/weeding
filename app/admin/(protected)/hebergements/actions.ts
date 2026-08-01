@@ -49,3 +49,15 @@ export async function assignLodging(formData: FormData) {
   });
   revalidate();
 }
+
+export async function assignWishedLodging(formData: FormData) {
+  await requireAdmin();
+  const guestId = String(formData.get("guestId") ?? "");
+  if (!guestId) return;
+  const wishedLodgingId = String(formData.get("lodgingId") ?? "") || null;
+  await prisma.guest.update({
+    where: { id: guestId },
+    data: { wishedLodgingId },
+  });
+  revalidate();
+}

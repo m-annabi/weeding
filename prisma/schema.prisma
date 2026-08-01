@@ -28,9 +28,12 @@ model Guest {
   maxGuests Int      @default(1)
   groupId   String?
   group     Group?   @relation(fields: [groupId], references: [id], onDelete: SetNull)
-  // Logement attribué par les mariés (kasbah ou logement annexe)
+  // Logement définitif attribué par les mariés (kasbah ou logement annexe)
   lodgingId String?
-  lodging   Lodging? @relation(fields: [lodgingId], references: [id], onDelete: SetNull)
+  lodging   Lodging? @relation("definitive", fields: [lodgingId], references: [id], onDelete: SetNull)
+  // Logement souhaité (plan de référence des mariés, ex. rooming list)
+  wishedLodgingId String?
+  wishedLodging   Lodging? @relation("wished", fields: [wishedLodgingId], references: [id], onDelete: SetNull)
   // Date d'envoi de l'invitation par email depuis l'admin
   invitationSentAt DateTime?
   rsvp      Rsvp?
@@ -43,7 +46,8 @@ model Lodging {
   // Nombre de places (personnes, pas chambres)
   capacity Int     @default(0)
   note     String?
-  guests   Guest[]
+  guests        Guest[] @relation("definitive")
+  wishedGuests  Guest[] @relation("wished")
 }
 
 model Rsvp {
