@@ -20,6 +20,8 @@ model Guest {
   token     String   @unique @default(cuid())
   firstName String
   lastName  String
+  // Conjoint(e) / seconde personne couverte par l'invitation (affichage + recherche)
+  partnerName String?
   email     String?
   phone     String?
   // Nombre maximum de personnes couvertes par cette invitation (invité inclus)
@@ -29,6 +31,8 @@ model Guest {
   // Logement attribué par les mariés (kasbah ou logement annexe)
   lodgingId String?
   lodging   Lodging? @relation(fields: [lodgingId], references: [id], onDelete: SetNull)
+  // Date d'envoi de l'invitation par email depuis l'admin
+  invitationSentAt DateTime?
   rsvp      Rsvp?
   createdAt DateTime @default(now())
 }

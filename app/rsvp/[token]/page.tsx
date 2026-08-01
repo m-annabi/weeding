@@ -90,6 +90,7 @@ export default async function RsvpPage({
             <p className="smallcaps text-olive mb-4">Invitation pour</p>
             <p className="font-serif text-3xl text-cocoa">
               {guest.firstName} {guest.lastName}
+              {guest.partnerName ? ` & ${guest.partnerName}` : ""}
             </p>
             <p className="font-light text-cocoa/70 mt-4 max-w-md mx-auto">
               Nous serions honorés de vous compter parmi nous, les pieds dans le

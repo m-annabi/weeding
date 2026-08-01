@@ -25,12 +25,18 @@ export async function findInvitation(
   }
 
   const guests = await prisma.guest.findMany({
-    select: { token: true, firstName: true, lastName: true },
+    select: { token: true, firstName: true, lastName: true, partnerName: true },
   });
   const matches = guests.filter((g) => {
     const full = normalize(`${g.firstName} ${g.lastName}`);
     const reversed = normalize(`${g.lastName} ${g.firstName}`);
-    return full === name || reversed === name || full.includes(name);
+    const partner = g.partnerName ? normalize(g.partnerName) : "";
+    return (
+      full === name ||
+      reversed === name ||
+      full.includes(name) ||
+      (partner !== "" && (partner === name || partner.includes(name)))
+    );
   });
 
   if (matches.length === 1) redirect(`/rsvp/${matches[0].token}`);

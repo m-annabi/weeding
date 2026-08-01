@@ -4,8 +4,10 @@ import { getGuestsFull, guestStatus } from "@/lib/stats";
 import {
   createGuest,
   deleteGuest,
+  updateGuest,
   createGroup,
   deleteGroup,
+  sendInvitation,
 } from "./actions";
 import CopyLinkButton from "./copy-link-button";
 
@@ -23,15 +25,28 @@ const STATUS_BADGE = {
 export default async function InvitesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ group?: string; status?: string }>;
+  searchParams: Promise<{
+    group?: string;
+    status?: string;
+    mail?: string;
+    msg?: string;
+    edit?: string;
+  }>;
 }) {
-  const { group: groupFilter, status: statusFilter } = await searchParams;
-  const [allGuests, groups] = await Promise.all([
+  const {
+    group: groupFilter,
+    status: statusFilter,
+    mail,
+    msg,
+    edit,
+  } = await searchParams;
+  const [allGuests, groups, lodgings] = await Promise.all([
     getGuestsFull(),
     prisma.group.findMany({
       orderBy: { name: "asc" },
       include: { _count: { select: { guests: true } } },
     }),
+    prisma.lodging.findMany({ orderBy: { name: "asc" } }),
   ]);
 
   const guests = allGuests.filter((g) => {
@@ -51,6 +66,17 @@ export default async function InvitesPage({
 
   return (
     <div className="space-y-10">
+      {mail && msg && (
+        <p
+          className={`rounded-xl border px-4 py-3 text-sm ${
+            mail === "ok"
+              ? "border-olive/40 bg-olive/10 text-olive"
+              : "border-terracotta bg-terracotta/10 text-sienna"
+          }`}
+        >
+          {mail === "ok" ? "✅" : "⚠️"} {msg}
+        </p>
+      )}
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-serif text-3xl text-sienna">Invités & groupes</h1>
@@ -88,6 +114,14 @@ export default async function InvitesPage({
           <div className="flex flex-col gap-1">
             <label className="text-xs text-cocoa/60">Nom *</label>
             <input name="lastName" required className={inputCls} />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-xs text-cocoa/60">Conjoint(e)</label>
+            <input
+              name="partnerName"
+              placeholder="ex : Giuliano Conti"
+              className={inputCls}
+            />
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-xs text-cocoa/60">Email</label>
@@ -194,10 +228,99 @@ export default async function InvitesPage({
             {guests.map((g) => {
               const status = guestStatus(g);
               const badge = STATUS_BADGE[status];
+              if (edit === g.id) {
+                return (
+                  <tr key={g.id} className="border-b border-linen/60 last:border-0 bg-sand/40">
+                    <td colSpan={7} className="px-4 py-4">
+                      <form
+                        action={updateGuest}
+                        className="grid gap-3 sm:grid-cols-2 lg:grid-cols-7 items-end"
+                      >
+                        <input type="hidden" name="id" value={g.id} />
+                        <div className="flex flex-col gap-1">
+                          <label className="text-xs text-cocoa/60">Prénom *</label>
+                          <input name="firstName" required defaultValue={g.firstName} className={inputCls} />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label className="text-xs text-cocoa/60">Nom *</label>
+                          <input name="lastName" required defaultValue={g.lastName} className={inputCls} />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label className="text-xs text-cocoa/60">Conjoint(e)</label>
+                          <input
+                            name="partnerName"
+                            defaultValue={g.partnerName ?? ""}
+                            placeholder="ex : Giuliano Conti"
+                            className={inputCls}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label className="text-xs text-cocoa/60">Email</label>
+                          <input name="email" type="email" defaultValue={g.email ?? ""} className={inputCls} />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label className="text-xs text-cocoa/60">Téléphone</label>
+                          <input name="phone" defaultValue={g.phone ?? ""} className={inputCls} />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label className="text-xs text-cocoa/60">Places</label>
+                          <input
+                            name="maxGuests"
+                            type="number"
+                            min={1}
+                            max={20}
+                            defaultValue={g.maxGuests}
+                            className={inputCls}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label className="text-xs text-cocoa/60">Groupe</label>
+                          <select name="groupId" defaultValue={g.groupId ?? ""} className={inputCls}>
+                            <option value="">— Aucun —</option>
+                            {groups.map((grp) => (
+                              <option key={grp.id} value={grp.id}>
+                                {grp.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label className="text-xs text-cocoa/60">Hébergement</label>
+                          <select name="lodgingId" defaultValue={g.lodgingId ?? ""} className={inputCls}>
+                            <option value="">— Aucun —</option>
+                            {lodgings.map((l) => (
+                              <option key={l.id} value={l.id}>
+                                {l.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="flex gap-2 lg:col-span-7 justify-end">
+                          <Link
+                            href={filterUrl({})}
+                            className="rounded-full border border-cocoa/20 px-4 py-2 text-sm hover:border-cocoa transition"
+                          >
+                            Annuler
+                          </Link>
+                          <button className="rounded-full bg-terracotta px-5 py-2 text-sm text-cream hover:bg-sienna transition">
+                            Enregistrer
+                          </button>
+                        </div>
+                      </form>
+                    </td>
+                  </tr>
+                );
+              }
               return (
                 <tr key={g.id} className="border-b border-linen/60 last:border-0">
                   <td className="px-4 py-3 font-medium text-cocoa">
                     {g.firstName} {g.lastName}
+                    {g.partnerName && (
+                      <span className="font-light text-cocoa/60">
+                        {" "}
+                        &amp; {g.partnerName}
+                      </span>
+                    )}
                   </td>
                   <td className="px-4 py-3 font-light">
                     {g.group?.name ?? <span className="text-cocoa/30">—</span>}
@@ -222,6 +345,32 @@ export default async function InvitesPage({
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-1.5">
+                      {(g.email || g.rsvp?.email) && (
+                        <form action={sendInvitation}>
+                          <input type="hidden" name="id" value={g.id} />
+                          <button
+                            className={`rounded-full border px-3 py-1 text-xs transition whitespace-nowrap ${
+                              g.invitationSentAt
+                                ? "border-olive/40 text-olive hover:border-olive"
+                                : "border-terracotta/60 text-terracotta hover:bg-terracotta hover:text-cream"
+                            }`}
+                            title={
+                              g.invitationSentAt
+                                ? `Envoyée le ${g.invitationSentAt.toLocaleDateString("fr-FR")} — renvoyer`
+                                : "Envoyer l'invitation par email"
+                            }
+                          >
+                            {g.invitationSentAt ? "✉ ✓" : "✉ Envoyer"}
+                          </button>
+                        </form>
+                      )}
+                      <Link
+                        href={`${filterUrl({})}${filterUrl({}).includes("?") ? "&" : "?"}edit=${g.id}`}
+                        className="rounded-full border border-cocoa/20 px-3 py-1 text-xs hover:border-terracotta hover:text-terracotta transition"
+                        title="Modifier l'invitation"
+                      >
+                        ✏️
+                      </Link>
                       <CopyLinkButton token={g.token} />
                       <a
                         href={`/api/admin/qr/${g.token}`}

@@ -189,6 +189,17 @@ export const wedding = {
     { name: "Karim", role: "Témoin", phone: "06 00 00 00 04" },
   ],
 
+  // Email d'invitation envoyé depuis /admin/invites
+  invitationEmail: {
+    subject: "Notre mariage au Maroc — votre invitation 💌",
+    intro:
+      "On se marie ! Et on aimerait plus que tout que vous soyez là. Rendez-vous à la Kasbah d'Eau, un petit coin de paradis face à l'océan, à Sidi Kaouki au Maroc.",
+    linkLabel: "Répondre à l'invitation",
+    outro:
+      "Sur votre page personnelle, vous trouverez toutes les infos pratiques (comment venir, où vous dormirez, le programme) et le formulaire de réponse — vous pourrez y revenir à tout moment pour modifier votre réponse.",
+    signature: "Avec tout notre amour,",
+  },
+
   // Une navette aéroport ⇄ kasbah est-elle offerte par les mariés ?
   // (false = les invités gèrent leur trajet ; on collecte quand même vols et horaires)
   transferOffered: false,
