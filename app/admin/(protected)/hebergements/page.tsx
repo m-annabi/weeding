@@ -21,27 +21,26 @@ export default async function HebergementsPage() {
     prisma.lodging.findMany({ orderBy: { name: "asc" } }),
   ]);
 
-  // Invitations confirmées qui souhaitent être logées par les mariés
-  const wanting = guests.filter(
-    (g) => g.rsvp?.attending && g.rsvp.accommodation === "KASBAH"
-  );
+  // Tous les invités à loger : ceux qui n'ont pas décliné et ne
+  // s'organisent pas par eux-mêmes. Avant réponse, on compte les places
+  // prévues (maxGuests) ; après confirmation, les participants réels.
+  const declined = (g: (typeof guests)[number]) => g.rsvp && !g.rsvp.attending;
   const selfOrganized = guests.filter(
     (g) => g.rsvp?.attending && g.rsvp.accommodation === "OTHER"
   );
+  const wanting = guests.filter(
+    (g) => !declined(g) && !selfOrganized.includes(g)
+  );
+  const pax = (g: (typeof guests)[number]) =>
+    g.rsvp?.attending ? g.rsvp.participants.length : g.maxGuests;
 
   const assignedPax = new Map<string, number>();
   for (const g of wanting) {
     if (!g.lodgingId) continue;
-    assignedPax.set(
-      g.lodgingId,
-      (assignedPax.get(g.lodgingId) ?? 0) + g.rsvp!.participants.length
-    );
+    assignedPax.set(g.lodgingId, (assignedPax.get(g.lodgingId) ?? 0) + pax(g));
   }
   const unassigned = wanting.filter((g) => !g.lodgingId);
-  const totalWanted = wanting.reduce(
-    (s, g) => s + g.rsvp!.participants.length,
-    0
-  );
+  const totalWanted = wanting.reduce((s, g) => s + pax(g), 0);
   const totalCapacity = lodgings.reduce((s, l) => s + l.capacity, 0);
 
   return (
@@ -167,7 +166,7 @@ export default async function HebergementsPage() {
         </h2>
         {wanting.length === 0 ? (
           <p className="text-sm text-cocoa/40 font-light">
-            Aucune invitation confirmée ne demande de logement pour le moment.
+            Aucune invitation à loger pour le moment.
           </p>
         ) : (
           <div className="overflow-x-auto rounded-2xl border border-linen bg-white/80">
@@ -176,14 +175,15 @@ export default async function HebergementsPage() {
                 <tr className="border-b border-linen text-left text-xs uppercase tracking-wider text-cocoa/50">
                   <th className="px-4 py-3">Invitation</th>
                   <th className="px-4 py-3 text-center">Pers.</th>
+                  <th className="px-4 py-3">Statut</th>
                   <th className="px-4 py-3">Séjour</th>
                   <th className="px-4 py-3">Logement attribué</th>
                 </tr>
               </thead>
               <tbody>
                 {wanting.map((g) => {
-                  const r = g.rsvp!;
-                  const n = nights(r.arrivalDate, r.departureDate);
+                  const r = g.rsvp;
+                  const n = nights(r?.arrivalDate ?? null, r?.departureDate ?? null);
                   return (
                     <tr key={g.id} className="border-b border-linen/60 last:border-0">
                       <td className="px-4 py-3">
@@ -191,24 +191,44 @@ export default async function HebergementsPage() {
                           {g.firstName} {g.lastName}
                         </p>
                         <p className="text-xs text-cocoa/50 font-light">
-                          {r.participants
-                            .map((p) => `${p.firstName} ${p.lastName}`)
-                            .join(", ")}
+                          {r?.attending
+                            ? r.participants
+                                .map((p) => `${p.firstName} ${p.lastName}`)
+                                .join(", ")
+                            : g.partnerName
+                              ? `avec ${g.partnerName}`
+                              : ""}
                         </p>
                       </td>
                       <td className="px-4 py-3 text-center lining-nums">
-                        {r.participants.length}
+                        {pax(g)}
+                        {!r?.attending && (
+                          <span className="text-cocoa/40"> prévues</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3">
+                        {r?.attending ? (
+                          <span className="inline-block rounded-full border border-olive/40 bg-olive/15 px-2.5 py-0.5 text-xs text-olive whitespace-nowrap">
+                            ✅ Confirmé
+                          </span>
+                        ) : (
+                          <span className="inline-block rounded-full border border-linen bg-sand px-2.5 py-0.5 text-xs text-cocoa/60 whitespace-nowrap">
+                            ⏳ En attente
+                          </span>
+                        )}
                       </td>
                       <td className="px-4 py-3 font-light lining-nums">
-                        {r.arrivalDate && r.departureDate ? (
+                        {r?.arrivalDate && r?.departureDate ? (
                           <>
                             {r.arrivalDate} → {r.departureDate}
                             {n && (
                               <span className="text-cocoa/50"> ({n} nuits)</span>
                             )}
                           </>
-                        ) : (
+                        ) : r?.attending ? (
                           <span className="text-sienna">dates à préciser</span>
+                        ) : (
+                          <span className="text-cocoa/40">—</span>
                         )}
                       </td>
                       <td className="px-4 py-3">
