@@ -56,14 +56,14 @@ export default async function RsvpPage({
         style={{ backgroundImage: `url(${wedding.images.band})` }}
       >
         <div
-          className="absolute inset-0 bg-gradient-to-b from-charcoal/55 via-charcoal/30 to-charcoal/65"
+          className="absolute inset-0 bg-gradient-to-b from-cocoa/55 via-sienna/30 to-cocoa/65"
           aria-hidden
         />
         <div className="relative z-10 mx-auto max-w-2xl px-6 pt-16 pb-32 text-center">
-          <p className="smallcaps text-ivory/90 mb-6">{wedding.displayDate}</p>
-          <h1 className="font-serif italic font-light text-5xl sm:text-7xl text-ivory leading-none drop-shadow-[0_2px_16px_rgba(85,64,44,0.5)]">
+          <p className="smallcaps text-cream/90 mb-6">{wedding.displayDate}</p>
+          <h1 className="font-serif italic font-light text-5xl sm:text-7xl text-cream leading-none drop-shadow-[0_2px_16px_rgba(85,64,44,0.5)]">
             {wedding.couple.partner1}
-            <span className="mx-3 not-italic text-3xl sm:text-4xl text-ivory/70 align-middle">
+            <span className="mx-3 not-italic text-3xl sm:text-4xl text-cream/70 align-middle">
               &
             </span>
             {wedding.couple.partner2}
@@ -72,11 +72,11 @@ export default async function RsvpPage({
             className="flex items-center justify-center gap-5 my-5"
             aria-hidden
           >
-            <span className="h-px w-16 bg-ivory/50" />
-            <Sunburst className="h-6 w-6 text-ivory" />
-            <span className="h-px w-16 bg-ivory/50" />
+            <span className="h-px w-16 bg-cream/50" />
+            <Sunburst className="h-6 w-6 text-cream" />
+            <span className="h-px w-16 bg-cream/50" />
           </div>
-          <p className="smallcaps text-ivory/85">
+          <p className="smallcaps text-cream/85">
             {wedding.venue.name} · Sidi Kaouki · Maroc
           </p>
         </div>
@@ -84,14 +84,14 @@ export default async function RsvpPage({
 
       <div className="mx-auto max-w-2xl px-6 pb-20">
         {/* Carton d'invitation */}
-        <div className="arch relative z-10 -mt-20 border border-brass/50 bg-ivory p-2 shadow-[0_10px_40px_rgba(85,64,44,0.16)]">
-          <div className="arch border border-brass/40 border-dashed px-6 pt-12 pb-8 text-center">
-            <Sunburst className="mx-auto h-7 w-7 text-brass mb-4" />
+        <div className="arch relative z-10 -mt-20 border border-camel/50 bg-cream p-2 shadow-[0_10px_40px_rgba(85,64,44,0.16)]">
+          <div className="arch border border-camel/40 border-dashed px-6 pt-12 pb-8 text-center">
+            <Sunburst className="mx-auto h-7 w-7 text-camel mb-4" />
             <p className="smallcaps text-olive mb-4">Invitation pour</p>
-            <p className="font-serif text-3xl text-charcoal">
+            <p className="font-serif text-3xl text-cocoa">
               {guest.firstName} {guest.lastName}
             </p>
-            <p className="font-light text-charcoal/70 mt-4 max-w-md mx-auto">
+            <p className="font-light text-cocoa/70 mt-4 max-w-md mx-auto">
               Nous serions honorés de vous compter parmi nous, les pieds dans le
               sable. Merci de répondre avant le{" "}
               <strong className="font-medium highlight">{wedding.rsvpDeadline}</strong>.
@@ -110,11 +110,11 @@ export default async function RsvpPage({
         />
 
         <footer className="mt-14 text-center">
-          <Waves className="mx-auto h-5 w-14 text-brass mb-4" />
-          <p className="script text-3xl text-majorelle -rotate-1 mb-3">
+          <Waves className="mx-auto h-5 w-14 text-camel mb-4" />
+          <p className="script text-3xl text-terracotta -rotate-1 mb-3">
             on a hâte de vous voir !
           </p>
-          <p className="text-sm text-charcoal/50 font-light">
+          <p className="text-sm text-cocoa/50 font-light">
             Un problème avec le formulaire ? Contactez-nous directement.
           </p>
         </footer>

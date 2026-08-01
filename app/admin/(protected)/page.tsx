@@ -17,19 +17,19 @@ function Tile({
   return (
     <div
       className={`rounded-2xl border p-5 ${
-        accent ? "bg-majorelle text-ivory border-majorelle" : "bg-white/80 border-linen"
+        accent ? "bg-terracotta text-cream border-terracotta" : "bg-white/80 border-linen"
       }`}
     >
       <p
         className={`text-xs uppercase tracking-wider ${
-          accent ? "text-ivory/80" : "text-charcoal/50"
+          accent ? "text-cream/80" : "text-cocoa/50"
         }`}
       >
         {label}
       </p>
       <p className="font-serif text-4xl mt-1 lining-nums">{value}</p>
       {hint && (
-        <p className={`text-xs mt-1 ${accent ? "text-ivory/70" : "text-charcoal/40"}`}>
+        <p className={`text-xs mt-1 ${accent ? "text-cream/70" : "text-cocoa/40"}`}>
           {hint}
         </p>
       )}
@@ -50,19 +50,19 @@ function ListCard({
 }) {
   return (
     <div className="rounded-2xl border border-linen bg-white/80 p-6">
-      <h3 className="font-serif text-xl text-charcoal mb-3">
+      <h3 className="font-serif text-xl text-sienna mb-3">
         {icon} {title}
       </h3>
       {items.length === 0 ? (
-        <p className="text-sm text-charcoal/40 font-light">{empty}</p>
+        <p className="text-sm text-cocoa/40 font-light">{empty}</p>
       ) : (
         <ul className="space-y-2 text-sm">
           {items.map((item, i) => (
             <li key={i} className="flex gap-2">
-              <span className="font-medium text-charcoal whitespace-nowrap">
+              <span className="font-medium text-cocoa whitespace-nowrap">
                 {item.name} :
               </span>
-              <span className="text-charcoal/70 font-light">{item.detail}</span>
+              <span className="text-cocoa/70 font-light">{item.detail}</span>
             </li>
           ))}
         </ul>
@@ -91,8 +91,8 @@ export default async function DashboardPage() {
     <div className="space-y-10">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl text-charcoal">Tableau de bord</h1>
-          <p className="font-light text-charcoal/60">
+          <h1 className="font-serif text-3xl text-sienna">Tableau de bord</h1>
+          <p className="font-light text-cocoa/60">
             {stats.responded} réponse{stats.responded > 1 ? "s" : ""} sur{" "}
             {stats.totalGuests} invitation{stats.totalGuests > 1 ? "s" : ""} (
             {responseRate}%)
@@ -103,7 +103,7 @@ export default async function DashboardPage() {
             <a
               key={f}
               href={`/api/admin/export?format=${f}`}
-              className="rounded-full border border-charcoal/20 bg-white/80 px-4 py-2 text-sm hover:border-majorelle hover:text-majorelle transition"
+              className="rounded-full border border-cocoa/20 bg-white/80 px-4 py-2 text-sm hover:border-terracotta hover:text-terracotta transition"
             >
               ⬇ Export {f.toUpperCase()}
             </a>
@@ -122,14 +122,14 @@ export default async function DashboardPage() {
 
       {/* Repas */}
       <section>
-        <h2 className="font-serif text-2xl text-charcoal mb-4">🍽️ Repas</h2>
+        <h2 className="font-serif text-2xl text-sienna mb-4">🍽️ Repas</h2>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {diets.map((d) => (
             <Tile key={d.label} label={d.label} value={d.value} />
           ))}
         </div>
         {stats.otherDiet.length > 0 && (
-          <p className="mt-3 text-sm text-charcoal/60 font-light">
+          <p className="mt-3 text-sm text-cocoa/60 font-light">
             Autres régimes :{" "}
             {stats.otherDiet
               .map((p) => `${p.firstName} ${p.lastName} (${p.dietOther ?? "non précisé"})`)
@@ -163,10 +163,10 @@ export default async function DashboardPage() {
       {/* Voyage & navettes */}
       <section>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-serif text-2xl text-charcoal">✈️ Voyage & navettes</h2>
+          <h2 className="font-serif text-2xl text-sienna">✈️ Voyage & navettes</h2>
           <Link
             href="/admin/arrivees"
-            className="text-sm text-majorelle hover:text-majorelle underline underline-offset-4"
+            className="text-sm text-terracotta hover:text-sienna underline underline-offset-4"
           >
             Planning des arrivées →
           </Link>
@@ -188,7 +188,7 @@ export default async function DashboardPage() {
           />
         </div>
         {stats.carpoolOffers.length > 0 && (
-          <p className="mt-3 text-sm text-charcoal/60 font-light">
+          <p className="mt-3 text-sm text-cocoa/60 font-light">
             🤝 Covoiturage proposé par :{" "}
             {stats.carpoolOffers
               .map((g) => `${g.firstName} ${g.lastName}${g.rsvp?.phone ? ` (${g.rsvp.phone})` : ""}`)
@@ -200,12 +200,12 @@ export default async function DashboardPage() {
       {/* Par groupe */}
       <section>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-serif text-2xl text-charcoal">
+          <h2 className="font-serif text-2xl text-sienna">
             👨‍👩‍👧‍👦 Répartition par groupe
           </h2>
           <Link
             href="/admin/invites"
-            className="text-sm text-majorelle hover:text-majorelle underline underline-offset-4"
+            className="text-sm text-terracotta hover:text-sienna underline underline-offset-4"
           >
             Gérer les invités →
           </Link>
@@ -219,24 +219,24 @@ export default async function DashboardPage() {
                 className="rounded-2xl border border-linen bg-white/80 p-5"
               >
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
-                  <p className="font-serif text-lg text-charcoal w-44">{name}</p>
+                  <p className="font-serif text-lg text-cocoa w-44">{name}</p>
                   <div className="flex-1 min-w-40">
                     <div className="h-2 rounded-full bg-linen overflow-hidden">
                       <div
-                        className="h-full rounded-full bg-majorelle"
+                        className="h-full rounded-full bg-terracotta"
                         style={{ width: `${rate}%` }}
                       />
                     </div>
                   </div>
-                  <p className="text-sm text-charcoal/60 font-light whitespace-nowrap">
+                  <p className="text-sm text-cocoa/60 font-light whitespace-nowrap">
                     {g.responded}/{g.total} réponse{g.responded > 1 ? "s" : ""} ·{" "}
                     {g.attending} présent{g.attending > 1 ? "s" : ""} ·{" "}
                     {g.participants} participant{g.participants > 1 ? "s" : ""}
                   </p>
                 </div>
                 {g.pendingGuests.length > 0 && (
-                  <p className="mt-2 text-sm font-light text-charcoal/60">
-                    <span className="text-charcoal font-medium">À relancer :</span>{" "}
+                  <p className="mt-2 text-sm font-light text-cocoa/60">
+                    <span className="text-sienna font-medium">À relancer :</span>{" "}
                     {g.pendingGuests
                       .map(
                         (p) =>

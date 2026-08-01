@@ -20,7 +20,7 @@ function LegsTable({
 }) {
   if (legs.length === 0) {
     return (
-      <p className="text-sm text-charcoal/40 font-light">
+      <p className="text-sm text-cocoa/40 font-light">
         Aucun vol renseigné pour le moment.
       </p>
     );
@@ -41,17 +41,17 @@ function LegsTable({
         return (
           <div key={date} className="rounded-2xl border border-linen bg-white/80 overflow-hidden">
             <div className="flex flex-wrap items-center justify-between gap-2 bg-sand/70 px-5 py-3">
-              <p className="font-serif text-lg text-charcoal capitalize">
+              <p className="font-serif text-lg text-cocoa capitalize">
                 📅 {formatDate(date)}
               </p>
-              <p className="text-sm text-charcoal/60 font-light lining-nums">
+              <p className="text-sm text-cocoa/60 font-light lining-nums">
                 {pax} personne{pax > 1 ? "s" : ""} ·{" "}
                 {dayLegs.length} vol{dayLegs.length > 1 ? "s" : ""}
               </p>
             </div>
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-linen text-left text-xs uppercase tracking-wider text-charcoal/50">
+                <tr className="border-b border-linen text-left text-xs uppercase tracking-wider text-cocoa/50">
                   <th className="px-5 py-2">
                     {direction === "arrival" ? "Atterrissage" : "Décollage"}
                   </th>
@@ -66,8 +66,8 @@ function LegsTable({
               <tbody>
                 {dayLegs.map((leg, i) => (
                   <tr key={i} className="border-b border-linen/60 last:border-0">
-                    <td className="px-5 py-2.5 font-medium text-charcoal lining-nums">
-                      {leg.time ?? <span className="text-charcoal">à préciser</span>}
+                    <td className="px-5 py-2.5 font-medium text-cocoa lining-nums">
+                      {leg.time ?? <span className="text-sienna">à préciser</span>}
                     </td>
                     <td className="px-5 py-2.5 font-light">
                       {airportName(leg.airport)}
@@ -83,7 +83,7 @@ function LegsTable({
                           🤝 Propose
                         </span>
                       ) : (
-                        <span className="text-charcoal/30">—</span>
+                        <span className="text-cocoa/30">—</span>
                       )}
                     </td>
                     <td className="px-5 py-2.5 font-light">
@@ -110,8 +110,8 @@ export default async function ArriveesPage() {
     <div className="space-y-10">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl text-charcoal">Arrivées & départs</h1>
-          <p className="font-light text-charcoal/60">
+          <h1 className="font-serif text-3xl text-sienna">Arrivées & départs</h1>
+          <p className="font-light text-cocoa/60">
             Qui arrive quand et comment — {wedding.venue.name}
           </p>
         </div>
@@ -120,7 +120,7 @@ export default async function ArriveesPage() {
             <a
               key={f}
               href={`/api/admin/export?format=${f}&type=arrivees`}
-              className="rounded-full border border-charcoal/20 bg-white/80 px-4 py-2 text-sm hover:border-majorelle hover:text-majorelle transition"
+              className="rounded-full border border-cocoa/20 bg-white/80 px-4 py-2 text-sm hover:border-terracotta hover:text-terracotta transition"
             >
               ⬇ Planning {f.toUpperCase()}
             </a>
@@ -130,11 +130,11 @@ export default async function ArriveesPage() {
 
       {/* Invités à relancer */}
       {stats.missingTravelInfo.length > 0 && (
-        <div className="rounded-2xl border border-majorelle/50 bg-majorelle/10 p-5">
-          <p className="font-serif text-lg text-charcoal mb-2">
+        <div className="rounded-2xl border border-terracotta/50 bg-terracotta/10 p-5">
+          <p className="font-serif text-lg text-sienna mb-2">
             ⏳ Infos de voyage manquantes ({stats.missingTravelInfo.length})
           </p>
-          <p className="text-sm font-light text-charcoal/70 mb-3">
+          <p className="text-sm font-light text-cocoa/70 mb-3">
             Ces invités ont confirmé leur présence mais n&apos;ont pas encore
             renseigné leur mode d&apos;arrivée ou leur vol — pensez à les
             relancer :
@@ -145,7 +145,7 @@ export default async function ArriveesPage() {
                 <strong className="font-medium">
                   {g.firstName} {g.lastName}
                 </strong>{" "}
-                <span className="text-charcoal/60 font-light">
+                <span className="text-cocoa/60 font-light">
                   {[g.rsvp?.phone ?? g.phone, g.rsvp?.email ?? g.email]
                     .filter(Boolean)
                     .join(" · ") || "aucune coordonnée"}
@@ -157,12 +157,12 @@ export default async function ArriveesPage() {
       )}
 
       <section>
-        <h2 className="font-serif text-2xl text-charcoal mb-4">🛬 Arrivées</h2>
+        <h2 className="font-serif text-2xl text-sienna mb-4">🛬 Arrivées</h2>
         <LegsTable legs={arrivals} direction="arrival" />
       </section>
 
       <section>
-        <h2 className="font-serif text-2xl text-charcoal mb-4">🛫 Départs</h2>
+        <h2 className="font-serif text-2xl text-sienna mb-4">🛫 Départs</h2>
         <LegsTable legs={departures} direction="departure" />
       </section>
     </div>

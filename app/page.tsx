@@ -6,7 +6,7 @@ type StoryMedia =
   | { type: "slider"; images: readonly string[]; alt: string }
   | { type: "video"; src: string; alt: string }
   | { type: "image"; src: string; alt: string };
-import { Sunburst, OliveBranch } from "@/components/ornaments";
+import { Sunburst, OliveBranch, PalmLeaf } from "@/components/ornaments";
 import { Divider, SiteFooter } from "@/components/site";
 import SiteNav from "@/components/site-nav";
 import StorySlider from "@/components/story-slider";
@@ -32,40 +32,39 @@ export default function Home() {
         {/* Voile noir léger pour la lisibilité du texte sur la vidéo */}
         <div className="absolute inset-0 bg-black/25" aria-hidden />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-charcoal/45 via-charcoal/15 to-charcoal/55"
+          className="absolute inset-0 bg-gradient-to-b from-cocoa/45 via-sienna/15 to-cocoa/55"
           aria-hidden
         />
         <div className="relative z-10 mx-6 max-w-3xl px-4 pb-16 text-center">
-          <Sunburst className="mx-auto h-9 w-9 text-ivory/90 mb-6" />
-          <p className="smallcaps text-ivory/90 mb-8">
+          <Sunburst className="mx-auto h-9 w-9 text-cream/90 mb-6" />
+          <p className="smallcaps text-cream/90 mb-8">
             {couple.partner1} & {couple.partner2}
           </p>
-          <h1 className="font-serif italic font-light text-5xl sm:text-7xl text-ivory leading-tight drop-shadow-[0_2px_16px_rgba(0,0,0,0.35)]">
+          <h1 className="font-serif italic font-light text-5xl sm:text-7xl text-cream leading-tight drop-shadow-[0_2px_16px_rgba(85,64,44,0.5)]">
             Bienvenue à<br />notre mariage
           </h1>
           <Divider light />
-          <p className="font-serif text-2xl text-ivory mt-2">
+          <p className="font-serif text-2xl text-cream mt-2">
             {wedding.displayDate}
           </p>
-          <p className="smallcaps text-ivory/85 mt-3">
+          <p className="smallcaps text-cream/85 mt-3">
             {wedding.venue.name} · Sidi Kaouki · Maroc
           </p>
         </div>
-        {/* Indicateur de scroll : anneau fin + soleil, flottement discret */}
-        <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
-          <a
-            href="#suite"
-            aria-label="Découvrir la suite"
-            className="float-soft flex h-14 w-14 items-center justify-center rounded-full border border-ivory/60 bg-ivory/10 backdrop-blur-sm transition hover:bg-ivory/25"
-          >
-            <Sunburst className="h-6 w-6 text-ivory" />
-          </a>
+        {/* Languette en arche, signature de l'identité */}
+        <div className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2">
+          <div className="arch flex h-20 w-40 items-end justify-center bg-sand/95 pb-3">
+            <a href="#suite" aria-label="Découvrir la suite">
+              <Sunburst className="h-9 w-9 text-camel transition hover:text-sienna" />
+            </a>
+          </div>
         </div>
       </section>
 
       {/* ─── Notre histoire, notre concept ─── */}
-      <section id="suite" className="relative bg-sand/90 py-28 overflow-hidden scroll-mt-4">
-        <div className="relative max-w-5xl mx-auto px-6 space-y-28">
+      <section id="suite" className="relative bg-sand/90 py-24 overflow-hidden scroll-mt-4">
+        <PalmLeaf className="pointer-events-none absolute -left-10 -bottom-10 h-64 w-64 text-linen" />
+        <div className="relative max-w-5xl mx-auto px-6 space-y-24">
           {wedding.story.map((block, i) => {
             const media = block.media as StoryMedia;
             return (
@@ -74,7 +73,7 @@ export default function Home() {
               className="grid items-center gap-10 md:grid-cols-2 md:gap-16"
             >
               <div
-                className={`arch relative overflow-hidden border border-brass/40 p-1.5 bg-ivory/70 aspect-[3/4] max-w-md mx-auto w-full ${
+                className={`arch relative overflow-hidden border border-camel/40 p-1.5 bg-cream/70 aspect-[3/4] max-w-md mx-auto w-full ${
                   i % 2 === 1 ? "md:order-2" : ""
                 }`}
               >
@@ -105,13 +104,13 @@ export default function Home() {
               <div
                 className={`text-center md:text-left ${i % 2 === 1 ? "md:order-1" : ""}`}
               >
-                <p className="script text-3xl text-majorelle mb-3">
+                <p className="script text-3xl text-terracotta -rotate-1 mb-3">
                   {block.label.toLowerCase()}
                 </p>
-                <h2 className="font-serif text-4xl text-charcoal mb-6">
+                <h2 className="font-serif text-4xl text-sienna mb-6">
                   {block.title}
                 </h2>
-                <div className="space-y-4 font-light leading-relaxed text-charcoal/80">
+                <div className="space-y-4 font-light leading-relaxed text-cocoa/80">
                   {block.paragraphs.map((p) => (
                     <p key={p}>{p}</p>
                   ))}
@@ -129,35 +128,35 @@ export default function Home() {
         className="relative flex min-h-[55vh] items-center justify-center bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: `url(${images.band})` }}
       >
-        <div className="absolute inset-0 bg-charcoal/45" aria-hidden />
+        <div className="absolute inset-0 bg-cocoa/45" aria-hidden />
         <div className="relative z-10 px-6 py-20 text-center">
-          <p className="script text-4xl sm:text-5xl text-ivory/95">
+          <p className="script text-4xl sm:text-5xl text-cream/95 -rotate-2">
             {wedding.closing.script}
           </p>
           <Divider light />
-          <p className="font-serif italic text-2xl text-ivory">
+          <p className="font-serif italic text-2xl text-cream">
             {wedding.closing.line}
           </p>
         </div>
       </section>
 
       {/* ─── RSVP ─── */}
-      <section className="bg-majorelle text-ivory py-24 text-center px-6">
-        <Sunburst className="mx-auto h-8 w-8 text-ivory/80 mb-6" />
-        <p className="script text-4xl sm:text-5xl mb-5">
+      <section className="bg-toffee text-cream py-20 text-center px-6">
+        <Sunburst className="mx-auto h-8 w-8 text-cream/80 mb-6" />
+        <p className="script text-4xl sm:text-5xl mb-5 -rotate-1">
           répondez-nous vite !
         </p>
-        <p className="font-light max-w-xl mx-auto text-ivory/90">
+        <p className="font-light max-w-xl mx-auto text-cream/90">
           Un onglet dédié sur le site vous permet de répondre directement en
           ligne. Un doute, une question ? Contactez-nous directement.
         </p>
         <Link
           href="/rsvp"
-          className="mt-8 inline-block rounded-full bg-ivory px-8 py-3 font-medium text-majorelle transition hover:bg-sand"
+          className="mt-8 inline-block rounded-full bg-cream px-8 py-3 font-medium text-sienna transition hover:bg-sand"
         >
           Répondre en ligne
         </Link>
-        <p className="smallcaps mt-8 text-ivory/75">
+        <p className="smallcaps mt-8 text-cream/75">
           Réponse souhaitée avant le {wedding.rsvpDeadline}
         </p>
       </section>

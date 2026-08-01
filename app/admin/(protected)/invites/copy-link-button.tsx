@@ -16,7 +16,7 @@ export default function CopyLinkButton({ token }: { token: string }) {
       className={`rounded-full border px-3 py-1 text-xs transition ${
         copied
           ? "border-olive bg-olive/10 text-olive"
-          : "border-charcoal/20 hover:border-majorelle hover:text-majorelle"
+          : "border-cocoa/20 hover:border-terracotta hover:text-terracotta"
       }`}
       title="Copier le lien personnel"
     >

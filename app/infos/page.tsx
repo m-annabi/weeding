@@ -15,7 +15,7 @@ export default function InfosPage() {
 
         <div className="grid gap-6 sm:grid-cols-2 mt-8">
           <Card icon="calendar" title="La date" className="sm:col-span-2">
-            <p className="text-2xl font-serif text-charcoal">{wedding.displayRange}</p>
+            <p className="text-2xl font-serif text-cocoa">{wedding.displayRange}</p>
             <p className="mt-3">
               Merci de confirmer votre présence avant le{" "}
               <strong className="font-medium highlight">{wedding.rsvpDeadline}</strong>.
@@ -23,9 +23,9 @@ export default function InfosPage() {
           </Card>
 
           <Card icon="mapPin" title="Le lieu" className="sm:col-span-2">
-            <p className="font-medium text-charcoal">{wedding.venue.name}</p>
+            <p className="font-medium text-cocoa">{wedding.venue.name}</p>
             <p className="mb-5">{wedding.venue.address}</p>
-            <div className="arch overflow-hidden border border-linen p-1.5 bg-ivory/70">
+            <div className="arch overflow-hidden border border-linen p-1.5 bg-cream/70">
               <iframe
                 src={mapsEmbedUrl()}
                 title={`Carte — ${wedding.venue.name}`}
@@ -38,10 +38,10 @@ export default function InfosPage() {
               href={mapsLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-5 inline-block text-charcoal"
+              className="group mt-5 inline-block text-sienna"
             >
               <span className="smallcaps">Ouvrir dans Google Maps</span>
-              <Squiggle className="mt-1 h-2 w-full text-brass transition group-hover:text-majorelle" />
+              <Squiggle className="mt-1 h-2 w-full text-camel transition group-hover:text-sienna" />
             </a>
           </Card>
 
@@ -53,20 +53,20 @@ export default function InfosPage() {
                   {i > 0 && (
                     <>
                       <span
-                        className="hidden md:block flex-1 border-t-2 border-dashed border-brass/60 mt-7"
+                        className="hidden md:block flex-1 border-t-2 border-dashed border-camel/60 mt-7"
                         aria-hidden
                       />
                       <span
-                        className="md:hidden h-8 border-s-2 border-dashed border-brass/60"
+                        className="md:hidden h-8 border-s-2 border-dashed border-camel/60"
                         aria-hidden
                       />
                     </>
                   )}
                   <div className="flex flex-col items-center text-center md:w-52">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-sand/70 border border-brass/50 text-brass">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-sand/70 border border-camel/50 text-sienna">
                       {icons[step.icon as IconName]("h-6 w-6")}
                     </span>
-                    <p className="smallcaps text-majorelle mt-3">{step.step}</p>
+                    <p className="smallcaps text-terracotta mt-3">{step.step}</p>
                     <p className="text-sm mt-1">{step.text}</p>
                   </div>
                 </div>
@@ -78,7 +78,7 @@ export default function InfosPage() {
                   key={a.code}
                   className="rounded-lg border border-linen bg-sand/60 px-4 py-3 text-center"
                 >
-                  <p className="font-medium text-charcoal">
+                  <p className="font-medium text-cocoa">
                     {a.name}{" "}
                     <span className="text-xs text-olive">({a.code})</span>
                   </p>
@@ -128,11 +128,11 @@ export default function InfosPage() {
                 </ul>
               </div>
               <div>
-                <p className="smallcaps text-majorelle mb-3">Restent à votre charge</p>
+                <p className="smallcaps text-terracotta mb-3">Restent à votre charge</p>
                 <ul className="space-y-2 list-none">
                   {wedding.covered.excluded.map((c) => (
                     <li key={c} className="flex items-start gap-3">
-                      <span className="mt-1 text-majorelle">{icons.cross("h-4 w-4")}</span>
+                      <span className="mt-1 text-terracotta">{icons.cross("h-4 w-4")}</span>
                       <span>{c}</span>
                     </li>
                   ))}

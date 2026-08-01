@@ -1,18 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette « riad contemporain » — ivoire chaud, charbon doux,
-     bleu Majorelle, olive profond, champagne doré */
-  --color-ivory: #fbf8f2;
-  --color-sand: #f4efe5;
-  --color-linen: #e7e0d0;
-  --color-champagne: #d8c69c;
-  --color-brass: #bda06a;
-  --color-majorelle: #3e4c9e;
-  --color-majorelle-deep: #2f3b7d;
-  --color-charcoal: #34332e;
-  --color-olive: #5b5f3b;
-  --color-sage: #a9ac94;
+  /* Palette « coucher de soleil sur une plage marocaine » —
+     sable, ivoire, camel, terracotta douce, olive */
+  --color-cream: #faf4e8;
+  --color-sand: #f1e5cd;
+  --color-linen: #e4d3b3;
+  --color-nude: #cfa477;
+  --color-camel: #c1935f;
+  --color-toffee: #a97a4c;
+  --color-terracotta: #c07a52;
+  --color-sienna: #96603f;
+  --color-cocoa: #55402c;
+  --color-olive: #78754f;
+  --color-sage: #b0aa88;
 }
 
 /* Les polices next/font sont des variables définies sur <body>,
@@ -23,24 +24,21 @@
 }
 
 body {
-  background-color: var(--color-ivory);
-  color: var(--color-charcoal);
+  background-color: var(--color-cream);
+  color: var(--color-cocoa);
   font-family: var(--font-jost), system-ui, sans-serif;
   /* Grain de papier très léger, comme un faire-part imprimé */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
 }
 
-/* Arche — clin d'œil aux patios de riad */
+/* Arche marocaine */
 .arch {
   border-radius: 50% 50% 0 0 / 28% 28% 0 0;
 }
 
-/* Accents éditoriaux : italique serif léger (remplace l'écriture manuscrite) */
+/* Écriture manuscrite (accents, petits mots) */
 .script {
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-style: italic;
-  font-weight: 340;
-  letter-spacing: 0.02em;
+  font-family: var(--font-hand), cursive;
 }
 
 /* Étiquettes éditoriales en petites capitales espacées */
@@ -51,30 +49,16 @@ body {
   font-weight: 500;
 }
 
-/* Surlignage doux, discret, en champagne */
+/* Surlignage doux façon marqueur, comme sur les moodboards */
 .highlight {
   background-image: linear-gradient(
     to top,
-    color-mix(in srgb, var(--color-champagne) 45%, transparent) 38%,
+    color-mix(in srgb, var(--color-linen) 75%, transparent) 38%,
     transparent 38%
   );
 }
 
-/* Flottement discret (indicateur de scroll) */
-@keyframes float-soft {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(6px);
-  }
-}
-.float-soft {
-  animation: float-soft 3.2s ease-in-out infinite;
-}
-
 ::selection {
-  background-color: var(--color-majorelle);
-  color: var(--color-ivory);
+  background-color: var(--color-terracotta);
+  color: var(--color-cream);
 }
