@@ -32,7 +32,9 @@ const HEADERS = [
   "Groupe",
   "Prénom",
   "Nom",
+  "Conjoint(e)",
   "Statut",
+  "Places",
   "Nb participants",
   "Participants",
   "Régimes",
@@ -50,6 +52,7 @@ const HEADERS = [
   "Navette",
   "Hébergement",
   "Covoiturage",
+  "Invitation envoyée",
   "Commentaire",
 ];
 
@@ -75,7 +78,9 @@ function guestRow(g: GuestFull): (string | number)[] {
     g.group?.name ?? "",
     g.firstName,
     g.lastName,
+    g.partnerName ?? "",
     STATUS_LABELS[status],
+    g.maxGuests,
     status === "attending" ? parts.length : 0,
     parts.map((p) => `${p.firstName} ${p.lastName}`).join(" | "),
     diets,
@@ -93,6 +98,7 @@ function guestRow(g: GuestFull): (string | number)[] {
     r?.attending ? (r.needsTransfer ? "Oui" : "Non") : "",
     accommodationLabel(g),
     r?.attending ? (r.offersCarpool ? "Oui" : "Non") : "",
+    g.invitationSentAt ? g.invitationSentAt.toISOString().slice(0, 10) : "",
     r?.comment ?? "",
   ];
 }
@@ -203,14 +209,14 @@ function toPdf(guests: GuestFull[]) {
       const row = guestRow(g);
       return [
         row[0],
-        `${row[1]} ${row[2]}`,
-        row[3],
+        `${row[1]} ${row[2]}${row[3] ? ` & ${row[3]}` : ""}`,
         row[4],
-        row[5],
         row[6],
         row[7],
+        row[8],
         row[9],
-        [row[10], row[11]].filter(Boolean).join("\n"),
+        row[11],
+        [row[12], row[13]].filter(Boolean).join("\n"),
       ];
     }),
     styles: { fontSize: 7.5, cellPadding: 1.5, overflow: "linebreak" },
@@ -319,14 +325,23 @@ const ROOM_HEADERS = [
   "Invitation",
   "Participants",
   "Personnes",
+  "Statut",
   "Arrivée",
   "Départ",
   "Téléphone",
 ];
 
+/** Personnes attendues : participants réels si confirmé, sinon places prévues. */
+function roomPax(g: GuestFull) {
+  return g.rsvp?.attending ? g.rsvp.participants.length : g.maxGuests;
+}
+
 function roomingByLodging(guests: GuestFull[]) {
+  // Tous les invités à loger : ni déclinés, ni organisés par eux-mêmes
   const wanting = guests.filter(
-    (g) => g.rsvp?.attending && g.rsvp.accommodation === "KASBAH"
+    (g) =>
+      !(g.rsvp && !g.rsvp.attending) &&
+      !(g.rsvp?.attending && g.rsvp.accommodation === "OTHER")
   );
   const byLodging = new Map<string, GuestFull[]>();
   for (const g of wanting) {
@@ -338,15 +353,20 @@ function roomingByLodging(guests: GuestFull[]) {
 }
 
 function roomRow(g: GuestFull): (string | number)[] {
-  const r = g.rsvp!;
+  const r = g.rsvp;
   return [
     g.lodging?.name ?? "Non attribué",
     `${g.firstName} ${g.lastName}`,
-    r.participants.map((p) => `${p.firstName} ${p.lastName}`).join(" | "),
-    r.participants.length,
-    r.arrivalDate ?? "",
-    r.departureDate ?? "",
-    r.phone ?? g.phone ?? "",
+    r?.attending
+      ? r.participants.map((p) => `${p.firstName} ${p.lastName}`).join(" | ")
+      : g.partnerName
+        ? `avec ${g.partnerName}`
+        : "",
+    roomPax(g),
+    r?.attending ? "Confirmé" : "En attente",
+    r?.arrivalDate ?? "",
+    r?.departureDate ?? "",
+    r?.phone ?? g.phone ?? "",
   ];
 }
 
@@ -374,7 +394,7 @@ function roomingPdf(guests: GuestFull[]) {
 
   let y = 22;
   for (const [lodgingName, group] of roomingByLodging(guests).entries()) {
-    const pax = group.reduce((s, g) => s + g.rsvp!.participants.length, 0);
+    const pax = group.reduce((s, g) => s + roomPax(g), 0);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
     doc.text(`${lodgingName} — ${pax} personne(s)`, 14, y + 4);
