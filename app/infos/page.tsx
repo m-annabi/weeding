@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { wedding, mapsEmbedUrl, mapsLink } from "@/content/wedding";
-import { Squiggle, icons } from "@/components/ornaments";
+import { Squiggle, icons, type IconName } from "@/components/ornaments";
 import { Card, PageHeader, SiteFooter, Tick } from "@/components/site";
 import SiteNav from "@/components/site-nav";
 
@@ -46,6 +46,32 @@ export default function InfosPage() {
           </Card>
 
           <Card icon="plane" title="Comment venir ?" className="sm:col-span-2">
+            {/* Itinéraire en 3 étapes : avion → voiture → kasbah */}
+            <div className="mb-8 flex flex-col items-center gap-2 md:flex-row md:items-start md:gap-0">
+              {wedding.journey.map((step, i) => (
+                <div key={step.step} className="contents">
+                  {i > 0 && (
+                    <>
+                      <span
+                        className="hidden md:block flex-1 border-t-2 border-dashed border-camel/60 mt-7"
+                        aria-hidden
+                      />
+                      <span
+                        className="md:hidden h-8 border-s-2 border-dashed border-camel/60"
+                        aria-hidden
+                      />
+                    </>
+                  )}
+                  <div className="flex flex-col items-center text-center md:w-52">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-sand/70 border border-camel/50 text-sienna">
+                      {icons[step.icon as IconName]("h-6 w-6")}
+                    </span>
+                    <p className="smallcaps text-terracotta mt-3">{step.step}</p>
+                    <p className="text-sm mt-1">{step.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
             <div className="grid gap-2 sm:grid-cols-3 mb-5">
               {wedding.airports.map((a) => (
                 <div

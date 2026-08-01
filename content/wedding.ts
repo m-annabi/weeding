@@ -79,6 +79,13 @@ export const wedding = {
     { code: "ESU", name: "Essaouira-Mogador", drive: "à ≈ 20 min de la kasbah" },
   ],
 
+  // Itinéraire en 3 étapes affiché en tête de « Comment venir ? »
+  journey: [
+    { icon: "plane", step: "1 — L'avion", text: "Atterrissez à Marrakech, Agadir ou Essaouira" },
+    { icon: "car", step: "2 — La voiture", text: "Chauffeur ou voiture de location jusqu'à la kasbah" },
+    { icon: "home", step: "Vous y êtes", text: "Kasbah d'Eau, plage de Sidi Kaouki" },
+  ],
+
   // Conseils d'accès affichés dans la carte « Comment venir » (parking inclus)
   travelTips: [
     "Marrakech (RAK) reste l'aéroport le mieux desservi si vous cherchez un vol depuis chez vous.",
