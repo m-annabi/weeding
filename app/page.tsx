@@ -1,9 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { wedding } from "@/content/wedding";
+
+type StoryMedia =
+  | { type: "slider"; images: readonly string[]; alt: string }
+  | { type: "video"; src: string; alt: string }
+  | { type: "image"; src: string; alt: string };
 import { Sunburst, OliveBranch, PalmLeaf } from "@/components/ornaments";
 import { Divider, SiteFooter } from "@/components/site";
 import SiteNav from "@/components/site-nav";
+import StorySlider from "@/components/story-slider";
 
 export default function Home() {
   const { couple, images } = wedding;
@@ -59,7 +65,9 @@ export default function Home() {
       <section id="suite" className="relative bg-sand/90 py-24 overflow-hidden scroll-mt-4">
         <PalmLeaf className="pointer-events-none absolute -left-10 -bottom-10 h-64 w-64 text-linen" />
         <div className="relative max-w-5xl mx-auto px-6 space-y-24">
-          {wedding.story.map((block, i) => (
+          {wedding.story.map((block, i) => {
+            const media = block.media as StoryMedia;
+            return (
             <div
               key={block.title}
               className="grid items-center gap-10 md:grid-cols-2 md:gap-16"
@@ -70,20 +78,22 @@ export default function Home() {
                 }`}
               >
                 <div className="arch relative h-full w-full overflow-hidden">
-                  {block.media.type === "video" ? (
+                  {media.type === "slider" ? (
+                    <StorySlider images={[...media.images]} alt={media.alt} />
+                  ) : media.type === "video" ? (
                     <video
                       className="h-full w-full object-cover"
-                      src={block.media.src}
+                      src={media.src}
                       autoPlay
                       muted
                       loop
                       playsInline
-                      aria-label={block.media.alt}
+                      aria-label={media.alt}
                     />
                   ) : (
                     <Image
-                      src={block.media.src}
-                      alt={block.media.alt}
+                      src={media.src}
+                      alt={media.alt}
                       fill
                       sizes="(max-width: 768px) 90vw, 440px"
                       className="object-cover"
@@ -108,7 +118,8 @@ export default function Home() {
                 <OliveBranch className="mt-8 h-6 w-16 text-olive inline-block" />
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

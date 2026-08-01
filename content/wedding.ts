@@ -43,7 +43,20 @@ export const wedding = {
         "Plus qu'un mariage, c'est une invitation à vivre des moments qu'on n'oubliera pas. Merci du fond du cœur de faire le voyage pour nous. Ce mariage, c'est bien sûr la célébration de notre amour — mais c'est surtout l'occasion de passer du temps avec les gens qu'on aime.",
         "On a choisi un endroit qui nous ressemble : chaleureux, intimiste et simple. Pas de grandes cérémonies — juste vous, nous, l'océan, et quelques jours qui comptent vraiment.",
       ],
-      media: { type: "image", src: "/images/couple.jpg", alt: "Maureen et Akan au soleil couchant" },
+      // Diaporama : la photo du couple d'abord, puis tous les souvenirs de voyage
+      // (public/images/souvenirs, ordre chronologique depuis 2020)
+      media: {
+        type: "slider",
+        images: [
+          "/images/couple.jpg",
+          ...Array.from(
+            { length: 32 },
+            (_, i) =>
+              `/images/souvenirs/souvenir-${String(i + 1).padStart(2, "0")}.jpg`
+          ),
+        ],
+        alt: "Nos voyages et nos moments ensemble depuis 2020",
+      },
     },
     {
       label: "Notre amour du voyage",
