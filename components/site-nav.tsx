@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Sunburst } from "@/components/ornaments";
+import { wedding } from "@/content/wedding";
 
 const LINKS = [
   { href: "/infos", label: "Infos pratiques" },
@@ -47,7 +48,9 @@ export default function SiteNav({ overlay = false }: { overlay?: boolean }) {
           aria-label="Accueil"
         >
           <Sunburst className={`h-5 w-5 ${solid ? "text-camel" : "text-cream/90"}`} />
-          <span className="font-serif italic text-lg leading-none">M & A</span>
+          <span className="font-serif italic text-base sm:text-lg leading-none whitespace-nowrap">
+            {wedding.displayRangeShort}
+          </span>
         </Link>
         <div className="flex items-center gap-5 sm:gap-9">
           {LINKS.map((l) => {

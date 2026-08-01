@@ -141,7 +141,7 @@ export default function Home() {
       </section>
 
       {/* ─── RSVP ─── */}
-      <section className="bg-toffee text-cream py-20 text-center px-6">
+      <section className="bg-cocoa text-cream py-20 text-center px-6">
         <Sunburst className="mx-auto h-8 w-8 text-cream/80 mb-6" />
         <p className="script text-4xl sm:text-5xl mb-5 -rotate-1">
           répondez-nous vite !
