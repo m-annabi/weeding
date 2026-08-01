@@ -107,14 +107,15 @@ export const wedding = {
     included: [
       "l'hébergement",
       "les petits déjeuners",
-      "le brunch du dimanche",
-      "le repas du samedi soir",
       "le repas du vendredi soir",
+      "le repas du samedi soir",
+      "le brunch du dimanche",
     ],
     excluded: [
       "le billet d'avion",
       "le trajet aller-retour jusqu'à la kasbah",
       "les autres repas",
+      "les activités",
     ],
   },
 
@@ -162,7 +163,7 @@ export const wedding = {
 
   // Note affichée sous le programme
   programmeNote:
-    "Chacun est libre d'arriver plus tôt ou plus tard à l'hôtel, et de partir quand il le souhaite. Pour rappel : on prend en charge l'hébergement, les petits déjeuners, le brunch du dimanche, le repas du samedi soir et le repas du vendredi soir — le reste (avion, trajet aller-retour, autres repas) est à votre charge.",
+    "Chacun est libre d'arriver plus tôt ou plus tard à l'hôtel, et de partir quand il le souhaite. Pour rappel : on prend en charge l'hébergement, les petits déjeuners, le repas du vendredi soir, le repas du samedi soir et le brunch du dimanche — le reste (avion, trajet aller-retour, autres repas, activités) est à votre charge.",
 
   // Contacts utiles
   contacts: [
