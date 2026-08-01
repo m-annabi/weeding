@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 export default function StorySlider({
   images,
   alt,
-  interval = 4000,
+  interval = 2000,
 }: {
   images: string[];
   alt: string;

@@ -31,7 +31,7 @@ export const wedding = {
   images: {
     heroVideo: "/videos/hero-plage.mp4",
     heroPoster: "/images/hero-poster.jpg",
-    band: "/images/kasbah.jpg",
+    band: "/images/kasbah-d-eau.jpg",
   },
 
   // Les blocs de bienvenue sous le héro (média + texte, alternés)
@@ -43,20 +43,7 @@ export const wedding = {
         "Plus qu'un mariage, c'est une invitation à vivre des moments qu'on n'oubliera pas. Merci du fond du cœur de faire le voyage pour nous. Ce mariage, c'est bien sûr la célébration de notre amour — mais c'est surtout l'occasion de passer du temps avec les gens qu'on aime.",
         "On a choisi un endroit qui nous ressemble : chaleureux, intimiste et simple. Pas de grandes cérémonies — juste vous, nous, l'océan, et quelques jours qui comptent vraiment.",
       ],
-      // Diaporama : la photo du couple d'abord, puis tous les souvenirs de voyage
-      // (public/images/souvenirs, ordre chronologique depuis 2020)
-      media: {
-        type: "slider",
-        images: [
-          "/images/couple.jpg",
-          ...Array.from(
-            { length: 32 },
-            (_, i) =>
-              `/images/souvenirs/souvenir-${String(i + 1).padStart(2, "0")}.jpg`
-          ),
-        ],
-        alt: "Nos voyages et nos moments ensemble depuis 2020",
-      },
+      media: { type: "image", src: "/images/couple.jpg", alt: "Maureen et Akan au soleil couchant" },
     },
     {
       label: "Notre amour du voyage",
@@ -74,7 +61,17 @@ export const wedding = {
         "On a voulu un mariage authentique, entourés des personnes qu'on aime le plus — une trentaine en tout. L'envie, c'est simple : que chacun vienne comme il est, sans autre attente que de profiter les uns des autres.",
         "Du jeudi 27 au dimanche 30 mai 2027, on prendra le temps de tout savourer : des repas partagés, quelques activités et de bons fous rires, le plaisir de découvrir les lieux à notre rythme — et quelque part au milieu de tout ça, se dire oui.",
       ],
-      media: { type: "video", src: "/videos/piscine-plage.mp4", alt: "La piscine de la kasbah face à la plage de Sidi Kaouki" },
+      // Diaporama : tous les souvenirs de voyage (public/images/souvenirs,
+      // ordre chronologique depuis 2020)
+      media: {
+        type: "slider",
+        images: Array.from(
+          { length: 32 },
+          (_, i) =>
+            `/images/souvenirs/souvenir-${String(i + 1).padStart(2, "0")}.jpg`
+        ),
+        alt: "Nos voyages et nos moments ensemble depuis 2020",
+      },
     },
   ],
 
