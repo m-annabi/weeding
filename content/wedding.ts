@@ -83,7 +83,6 @@ export const wedding = {
   travelTips: [
     "Marrakech (RAK) reste l'aéroport le mieux desservi si vous cherchez un vol depuis chez vous.",
     "Essaouira (ESU) est tout près, mais c'est un petit aéroport qui dessert peu de villes : il y a peu de chances que ce soit celui que vous trouviez pour votre trajet. Si vous avez la chance d'y avoir un vol direct, tant mieux !",
-    "Les billets d'avion et les trajets jusqu'à la kasbah restent à votre charge, mais dites-nous vos horaires dans le formulaire : on sera ravis de vous aider à vous organiser entre invités, covoiturage compris.",
     "Le plus simple reste de réserver un chauffeur qui vous emmène et vous ramène, très simple à organiser — comptez en moyenne 70 à 85€ le trajet aller, et autant pour le retour. N'hésitez pas à vous mutualiser à plusieurs pour réduire les coûts.",
     "Si vous vous en sentez, vous pouvez aussi louer une voiture — sachez juste que les routes ne sont pas toujours en très bon état. Un parking gratuit est disponible à la kasbah.",
   ],
