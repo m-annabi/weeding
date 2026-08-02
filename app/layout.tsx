@@ -3,11 +3,13 @@ import { Fraunces, Jost, Caveat } from "next/font/google";
 import { wedding } from "@/content/wedding";
 import "./globals.css";
 
+// Pas d'axe optique (opsz) : Fraunces change sinon le dessin de certaines
+// lettres (f bouclé, j écourté) dans les grands titres — on garde les
+// mêmes glyphes à toutes les tailles.
 const fraunces = Fraunces({
   subsets: ["latin"],
   weight: "variable",
   style: ["normal", "italic"],
-  axes: ["opsz"],
   variable: "--font-fraunces",
 });
 

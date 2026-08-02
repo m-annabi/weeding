@@ -208,7 +208,7 @@ export default function Home() {
       {/* ─── RSVP ─── */}
       <section className="texture-ocre text-cream py-20 text-center px-6">
         <span className="mx-auto mb-6 block w-fit text-cream/85">
-          {icons.plant("h-8 w-8")}
+          {icons.surf("h-8 w-8")}
         </span>
         <p className="script text-4xl sm:text-5xl mb-5 -rotate-1">
           répondez-nous vite !
