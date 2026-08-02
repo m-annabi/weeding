@@ -231,7 +231,7 @@ export const wedding = {
       "Avant de tout vous dévoiler, on voulait juste vous dire : on est vraiment heureux de vous compter dans nos vies.",
     linkLabel: "Ouvrir votre invitation",
     outro:
-      "Vous pourrez y indiquer votre date d'arrivée, votre logement et vos préférences alimentaires — vous pourrez y revenir à tout moment pour modifier votre réponse.",
+      "Vous pourrez y indiquer si vous serez des nôtres — et si c'est oui, votre date d'arrivée, votre logement et vos préférences alimentaires. Vous pourrez y revenir à tout moment pour modifier votre réponse.",
     sitePitch:
       "Toutes les infos pratiques (comment venir, où vous dormirez, le programme) sont disponibles sur notre site.",
     signature: "Prêts pour le voyage ?",

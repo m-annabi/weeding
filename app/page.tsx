@@ -136,7 +136,7 @@ export default function Home() {
               </div>
               {i === 1 ? (
                 /* Dos de carte postale : bloc ocre texturé, timbre et cachet */
-                <div className="texture-olive relative rounded-2xl p-8 sm:p-10 text-center md:text-left text-cream shadow-[0_16px_44px_rgba(85,64,44,0.16)] md:order-1">
+                <div className="texture-olive relative rounded-2xl p-8 pt-20 sm:p-10 text-center md:text-left text-cream shadow-[0_16px_44px_rgba(85,64,44,0.16)] md:order-1">
                   <div
                     className="absolute top-5 right-5 rotate-3 border-2 border-dashed border-cream/60 p-1.5"
                     aria-hidden
