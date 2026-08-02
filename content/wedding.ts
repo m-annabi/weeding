@@ -228,11 +228,14 @@ export const wedding = {
   invitationEmail: {
     subject: "Notre mariage au Maroc — votre invitation 💌",
     intro:
-      "On se marie ! Et on aimerait plus que tout que vous soyez là. Rendez-vous à la Kasbah d'Eau, un petit coin de paradis face à l'océan, à Sidi Kaouki au Maroc.",
-    linkLabel: "Répondre à l'invitation",
+      "Avant de tout vous dévoiler, on voulait juste vous dire : on est vraiment heureux de vous compter dans nos vies.",
+    linkLabel: "Ouvrir votre invitation",
     outro:
-      "Sur votre page personnelle, vous trouverez toutes les infos pratiques (comment venir, où vous dormirez, le programme) et le formulaire de réponse — vous pourrez y revenir à tout moment pour modifier votre réponse.",
-    signature: "Avec tout notre amour,",
+      "Vous pourrez y indiquer votre date d'arrivée, votre logement et vos préférences alimentaires — vous pourrez y revenir à tout moment pour modifier votre réponse.",
+    sitePitch:
+      "Toutes les infos pratiques (comment venir, où vous dormirez, le programme) sont disponibles sur notre site :",
+    signature: "Prêts pour le voyage ?",
+    ps: "PS : préparez vos tongs.",
   },
 
   // Une navette aéroport ⇄ kasbah est-elle offerte par les mariés ?
