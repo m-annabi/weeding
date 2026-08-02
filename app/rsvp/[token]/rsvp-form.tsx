@@ -397,6 +397,11 @@ export default function RsvpForm({
           {/* Voyage */}
           <SectionTitle>Votre vol</SectionTitle>
           <div className="space-y-4 rounded-xl border border-linen bg-cream/70 p-5">
+              <p className="rounded-lg bg-sage/15 border border-sage/40 px-4 py-3 text-sm font-light text-cocoa/80">
+                Pas encore réservé ? Aucun souci : répondez dès maintenant et
+                revenez compléter vos infos de vol sur cette même page plus
+                tard.
+              </p>
               <div>
                 <label className={labelCls} htmlFor="arrivalAirport">
                   Aéroport d&apos;arrivée
@@ -515,22 +520,16 @@ export default function RsvpForm({
                   </span>
                 </label>
               )}
-              <p className="text-xs text-cocoa/50 font-light">
-                Les billets d&apos;avion et le trajet jusqu&apos;à la kasbah
-                sont à votre charge. Pas encore réservé ? Aucun souci :
-                répondez dès maintenant et revenez compléter vos infos de vol
-                sur cette même page plus tard.
-              </p>
           </div>
 
           {/* Hébergement */}
           <SectionTitle>Votre hébergement</SectionTitle>
           <p className="rounded-xl bg-sage/15 border border-sage/40 px-4 py-3 text-sm font-light text-cocoa/80">
             Nous privatisons la kasbah :{" "}
-            <strong className="font-medium">l&apos;hébergement est offert</strong>.
-            Les chambres étant limitées, certains invités seront logés dans des
-            logements annexes à quelques minutes — nous nous occupons de la
-            répartition.
+            <strong className="font-medium">l&apos;hébergement est offert</strong>{" "}
+            et tout le monde sera logé à l&apos;hôtel — nous nous occupons de
+            la répartition des chambres. Si vous préférez loger ailleurs,
+            l&apos;organisation reste de votre côté.
           </p>
           <div className="grid gap-3 sm:grid-cols-2">
             {(
