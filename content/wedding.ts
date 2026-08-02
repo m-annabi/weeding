@@ -233,7 +233,7 @@ export const wedding = {
     outro:
       "Vous pourrez y indiquer votre date d'arrivée, votre logement et vos préférences alimentaires — vous pourrez y revenir à tout moment pour modifier votre réponse.",
     sitePitch:
-      "Toutes les infos pratiques (comment venir, où vous dormirez, le programme) sont disponibles sur notre site :",
+      "Toutes les infos pratiques (comment venir, où vous dormirez, le programme) sont disponibles sur notre site.",
     signature: "Prêts pour le voyage ?",
     ps: "PS : préparez vos tongs.",
   },
