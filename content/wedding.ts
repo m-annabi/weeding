@@ -52,7 +52,17 @@ export const wedding = {
         "Voyager fait partie de nous. Alors pour un jour aussi important, on a voulu partager cette passion avec vous, en vous emmenant là où on se sent chez nous.",
         "Sidi Kaouki : un petit village de pêcheurs au sud d'Essaouira, entre couchers de soleil, tajines face à l'océan, surfeurs et animaux en liberté. On espère que vous comprendrez, une fois sur place, pourquoi on aime tant cet endroit.",
       ],
-      media: { type: "video", src: "/videos/tajine-ocean.mp4", alt: "Tajine face à l'océan à Sidi Kaouki" },
+      // Diaporama : tous les souvenirs de voyage (public/images/souvenirs,
+      // ordre chronologique)
+      media: {
+        type: "slider",
+        images: Array.from(
+          { length: 25 },
+          (_, i) =>
+            `/images/souvenirs/souvenir-${String(i + 1).padStart(2, "0")}.jpg`
+        ),
+        alt: "Nos voyages et nos moments ensemble depuis 2019",
+      },
     },
     {
       label: "Notre intention",
@@ -61,17 +71,7 @@ export const wedding = {
         "On a voulu un mariage authentique, entourés des personnes qu'on aime le plus — une trentaine en tout. L'envie, c'est simple : que chacun vienne comme il est, sans autre attente que de profiter les uns des autres.",
         "Du jeudi 27 au dimanche 30 mai 2027, on prendra le temps de tout savourer : des repas partagés, quelques activités et de bons fous rires, le plaisir de découvrir les lieux à notre rythme — et quelque part au milieu de tout ça, se dire oui.",
       ],
-      // Diaporama : tous les souvenirs de voyage (public/images/souvenirs,
-      // ordre chronologique depuis 2020)
-      media: {
-        type: "slider",
-        images: Array.from(
-          { length: 32 },
-          (_, i) =>
-            `/images/souvenirs/souvenir-${String(i + 1).padStart(2, "0")}.jpg`
-        ),
-        alt: "Nos voyages et nos moments ensemble depuis 2019",
-      },
+      media: { type: "video", src: "/videos/tajine-ocean.mp4", alt: "Tajine face à l'océan à Sidi Kaouki" },
     },
   ],
 

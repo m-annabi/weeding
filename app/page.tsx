@@ -96,33 +96,13 @@ export default function Home() {
             >
               {/* Trois écrins différents : arche, ovale sur ombre ocre, polaroid */}
               <div
-                className={`relative max-w-md mx-auto w-full ${
+                className={`relative max-w-sm mx-auto w-full ${
                   i % 2 === 1 ? "md:order-2" : ""
                 }`}
               >
-                {i === 0 && (
-                  <div className="arch relative overflow-hidden border border-camel/40 p-1.5 bg-cream/70 aspect-[3/4]">
-                    <div className="arch relative h-full w-full overflow-hidden">
-                      {mediaEl}
-                    </div>
-                  </div>
-                )}
-                {i === 1 && (
-                  <div className="airmail relative rotate-1 bg-white p-2.5 shadow-[0_16px_44px_rgba(85,64,44,0.18)]">
-                    <div className="relative aspect-[3/4] overflow-hidden">
-                      {mediaEl}
-                    </div>
-                    {/* Timbre soleil, comme une carte envoyée de Sidi Kaouki */}
-                    <div
-                      className="absolute top-5 right-5 rotate-6 border-2 border-dashed border-camel/70 bg-cream/95 p-1.5 shadow-sm"
-                      aria-hidden
-                    >
-                      <Sunburst className="h-8 w-8 text-terracotta" />
-                    </div>
-                  </div>
-                )}
-                {i === 2 && (
-                  <div className="relative -rotate-2 bg-white p-3 pb-16 shadow-[0_16px_44px_rgba(85,64,44,0.2)]">
+                {i === 1 ? (
+                  /* Polaroid des souvenirs de voyage */
+                  <div className="relative -rotate-2 bg-white p-2.5 pb-14 shadow-[0_16px_44px_rgba(85,64,44,0.2)]">
                     <div className="relative aspect-[3/4] overflow-hidden">
                       {mediaEl}
                     </div>
@@ -130,8 +110,40 @@ export default function Home() {
                       nos souvenirs depuis 2019…
                     </p>
                   </div>
+                ) : (
+                  /* Arche marocaine (blocs 1 et 3) */
+                  <div className="arch relative overflow-hidden border border-camel/40 p-1.5 bg-cream/70 aspect-[3/4]">
+                    <div className="arch relative h-full w-full overflow-hidden">
+                      {mediaEl}
+                    </div>
+                  </div>
                 )}
               </div>
+              {i === 1 ? (
+                /* Dos de carte postale : bloc ocre texturé, timbre et cachet */
+                <div className="texture-olive relative rounded-2xl p-8 sm:p-10 text-center md:text-left text-cream shadow-[0_16px_44px_rgba(85,64,44,0.16)] md:order-1">
+                  <div
+                    className="absolute top-5 right-5 rotate-3 border-2 border-dashed border-cream/60 p-1.5"
+                    aria-hidden
+                  >
+                    <Sunburst className="h-8 w-8 text-cream/90" />
+                  </div>
+                  <Waves
+                    className="absolute top-10 right-24 hidden h-5 w-12 -rotate-12 text-cream/40 sm:block"
+                  />
+                  <p className="script text-3xl text-cream -rotate-1 mb-3 md:pr-16">
+                    {block.label.toLowerCase()}
+                  </p>
+                  <h2 className="font-serif text-4xl text-cream mb-6 md:pr-14">
+                    {block.title}
+                  </h2>
+                  <div className="space-y-4 font-light leading-relaxed text-cream/90">
+                    {block.paragraphs.map((p) => (
+                      <p key={p}>{p}</p>
+                    ))}
+                  </div>
+                </div>
+              ) : (
               <div
                 className={`text-center md:text-left ${i % 2 === 1 ? "md:order-1" : ""}`}
               >
@@ -148,12 +160,11 @@ export default function Home() {
                 </div>
                 {i === 0 ? (
                   <OliveBranch className="mt-8 h-6 w-16 text-olive inline-block" />
-                ) : i === 1 ? (
-                  <Waves className="mt-8 h-5 w-14 text-camel inline-block" />
                 ) : (
                   <Sunburst className="mt-8 h-7 w-7 text-terracotta inline-block" />
                 )}
               </div>
+              )}
             </div>
             );
           })}
@@ -178,7 +189,7 @@ export default function Home() {
       </section>
 
       {/* ─── RSVP ─── */}
-      <section className="texture-olive text-cream py-20 text-center px-6">
+      <section className="texture-ocre text-cream py-20 text-center px-6">
         <Sunburst className="mx-auto h-8 w-8 text-cream/80 mb-6" />
         <p className="script text-4xl sm:text-5xl mb-5 -rotate-1">
           répondez-nous vite !

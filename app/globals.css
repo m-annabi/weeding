@@ -60,9 +60,9 @@ body {
 
 /* Fonds texturés façon papier — comme l'intérieur ocre de l'enveloppe */
 .texture-ocre {
-  background-color: var(--color-terracotta);
+  background-color: #8f5830;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.11'/%3E%3C/svg%3E"),
-    linear-gradient(165deg, #bd7a42 0%, #b26d36 55%, #9e5e2a 100%);
+    linear-gradient(165deg, #99633a 0%, #8f5830 55%, #7a4a26 100%);
 }
 .texture-olive {
   background-color: var(--color-olive);
@@ -70,22 +70,10 @@ body {
     linear-gradient(160deg, #837b4e 0%, #7c7448 55%, #6c6540 100%);
 }
 
-/* Liseré « par avion » (rayures ocre/olive), pour la carte postale */
-.airmail {
-  border: 7px solid;
-  border-image: repeating-linear-gradient(
-      45deg,
-      var(--color-terracotta) 0 9px,
-      #fdfaf2 9px 18px,
-      var(--color-olive) 18px 27px,
-      #fdfaf2 27px 36px
-    )
-    7;
-}
-
-/* Filtre chaud léger pour harmoniser les photos avec la palette */
+/* Filtre chaud pour harmoniser les photos avec la palette,
+   légèrement assombri façon overlay */
 .warm-filter {
-  filter: sepia(0.2) saturate(0.95) contrast(0.97) brightness(1.03);
+  filter: sepia(0.22) saturate(0.95) contrast(0.98) brightness(0.95);
 }
 
 ::selection {

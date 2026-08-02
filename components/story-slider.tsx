@@ -48,9 +48,13 @@ export default function StorySlider({
           />
         ) : null
       )}
-      {/* Voile terracotta très léger, dans les tons du site */}
+      {/* Voile chaud légèrement foncé, dans les tons du site */}
       <div
         className="pointer-events-none absolute inset-0 bg-terracotta/10 mix-blend-multiply"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-cocoa/15 mix-blend-multiply"
         aria-hidden
       />
     </div>
