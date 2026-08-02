@@ -8,15 +8,14 @@ export function InvitationCard({ className = "" }: { className?: string }) {
   const { couple, displayDate, displayRangeShort, venue } = wedding;
   return (
     <div
-      className={`texture-olive relative overflow-hidden rounded-[4px] ${className}`}
+      className={`texture-moss relative overflow-hidden rounded-[4px] ${className}`}
     >
-      <div className="kilim-band absolute inset-y-0 left-1.5 w-9" aria-hidden />
-      <div className="kilim-band absolute inset-y-0 right-1.5 w-9" aria-hidden />
-      <div className="relative mx-12 flex h-full flex-col items-center justify-center gap-2.5 px-1 py-7 text-center text-cream">
-        <p className="font-serif text-[19px] uppercase leading-[1.25] tracking-[0.1em]">
+      <div className="kilim-band absolute inset-y-0 left-3 w-11" aria-hidden />
+      <div className="kilim-band absolute inset-y-0 right-3 w-11" aria-hidden />
+      <div className="relative mx-14 flex h-full flex-col items-center justify-center gap-2.5 px-0.5 py-7 text-center text-cream">
+        <p className="font-serif text-[19px] uppercase leading-[1.3] tracking-[0.1em]">
           {couple.partner1}
-          <br />
-          <span className="text-[15px] tracking-[0.14em]">& {couple.partner2}</span>
+          <br />& {couple.partner2}
         </p>
         <p className="script -rotate-2 text-[19px] leading-snug text-cream/95">
           vous invitent à<br />
@@ -25,15 +24,15 @@ export function InvitationCard({ className = "" }: { className?: string }) {
           leur mariage
         </p>
         <span
-          className="mx-auto block h-1.5 w-1.5 rotate-45 bg-[#c98d5c]"
+          className="mx-auto block h-2 w-2.5 [clip-path:polygon(50%_0,100%_50%,50%_100%,0_50%)] bg-[#b0552e]"
           aria-hidden
         />
-        <div className="font-serif text-[11.5px] leading-relaxed">
+        <div className="font-serif text-[10.5px] leading-relaxed">
           <p>{displayDate}</p>
           <p>{venue.name}</p>
           <p>Sidi Kaouki · Maroc</p>
         </div>
-        <p className="smallcaps !text-[7px] !tracking-[0.28em] text-cream/80">
+        <p className="smallcaps whitespace-nowrap !text-[7px] !tracking-[0.18em] text-cream/85">
           Séjour {displayRangeShort}
         </p>
       </div>
