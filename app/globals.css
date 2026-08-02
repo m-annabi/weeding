@@ -70,10 +70,9 @@ body {
     linear-gradient(160deg, #837b4e 0%, #7c7448 55%, #6c6540 100%);
 }
 
-/* Filtre chaud pour harmoniser les photos avec la palette,
-   légèrement assombri façon overlay */
+/* Filtre chaud doré pour harmoniser les photos avec la palette */
 .warm-filter {
-  filter: sepia(0.22) saturate(0.95) contrast(0.98) brightness(0.95);
+  filter: sepia(0.28) saturate(1.12) contrast(0.99) brightness(0.99);
 }
 
 ::selection {

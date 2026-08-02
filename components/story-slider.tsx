@@ -48,13 +48,13 @@ export default function StorySlider({
           />
         ) : null
       )}
-      {/* Voile chaud légèrement foncé, dans les tons du site */}
+      {/* Voile chaud : légère profondeur terracotta + lumière dorée */}
       <div
-        className="pointer-events-none absolute inset-0 bg-terracotta/10 mix-blend-multiply"
+        className="pointer-events-none absolute inset-0 bg-terracotta/15 mix-blend-multiply"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-0 bg-cocoa/15 mix-blend-multiply"
+        className="pointer-events-none absolute inset-0 bg-camel/30 mix-blend-soft-light"
         aria-hidden
       />
     </div>
