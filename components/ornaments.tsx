@@ -206,6 +206,13 @@ export const icons = {
       <path vectorEffect="non-scaling-stroke" d="M14.8 6.5c-1.5 3.8-3 7.6-4.3 11.4" strokeWidth="1.1" />
     </Icon>
   ),
+  suitcase: (c?: string) => (
+    <Icon className={c}>
+      <rect vectorEffect="non-scaling-stroke" x="4" y="7.8" width="16" height="12" rx="2.2" />
+      <path vectorEffect="non-scaling-stroke" d="M9.2 7.8V6.1a1.8 1.8 0 011.8-1.8h2a1.8 1.8 0 011.8 1.8v1.7" />
+      <path vectorEffect="non-scaling-stroke" d="M8.3 7.8v12M15.7 7.8v12" strokeWidth="1.1" />
+    </Icon>
+  ),
   plant: (c?: string) => (
     <Icon className={c}>
       <path vectorEffect="non-scaling-stroke" d="M9 20.8h6l.9-4.2H8.1z" />

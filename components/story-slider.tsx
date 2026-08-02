@@ -12,7 +12,7 @@ export default function StorySlider({
   images,
   alt,
   labels,
-  interval = 1000,
+  interval = 1250,
 }: {
   images: string[];
   alt: string;

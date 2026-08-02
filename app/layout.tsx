@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${fraunces.variable} ${jost.variable} ${caveat.variable} antialiased`}
+        className={`${fraunces.variable} ${jost.variable} ${caveat.variable}`}
       >
         {children}
       </body>

@@ -137,8 +137,8 @@ export const wedding = {
 
   // Dress code
   dressCode: [
-    "Pas de dress code imposé, on veut avant tout que vous soyez à l'aise. Pour le samedi, jour du mariage, on vous demande simplement de prévoir une tenue habillée.",
-    "Pour le reste du séjour, venez comme vous en avez envie — confortable, décontracté, à votre image.",
+    "Pas de dress code imposé, on veut avant tout que vous soyez à l'aise. Le samedi, on compte sur une tenue habillée, digne d'un mariage.",
+    "Le reste du séjour, venez comme vous en avez envie — confortable, décontracté, à votre image.",
   ],
 
   // Hébergement : la kasbah est privatisée et les logements sont offerts
@@ -174,7 +174,7 @@ export const wedding = {
     {
       day: "Jeudi 27 mai",
       title: "Arrivée à l'hôtel",
-      icon: "home",
+      icon: "suitcase",
       paragraphs: [
         "Vous pouvez arriver dès 14h. On profite d'une soirée tranquille, avec un repas à la kasbah pour ceux qui le souhaitent.",
       ],
