@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { wedding } from "@/content/wedding";
+import { icons, type IconName } from "@/components/ornaments";
 import { PageHeader, SiteFooter } from "@/components/site";
 import SiteNav from "@/components/site-nav";
 
@@ -45,7 +46,12 @@ export default function ProgrammePage() {
                   </div>
                 </div>
                 <div>
-                  <p className="smallcaps text-terracotta">{day.day}</p>
+                  <p className="smallcaps text-terracotta flex items-center gap-2">
+                    <span className="text-camel">
+                      {icons[day.icon as IconName]("h-5 w-5")}
+                    </span>
+                    {day.day}
+                  </p>
                   <h2 className="font-serif text-2xl text-cocoa mt-1">
                     {day.title}
                   </h2>

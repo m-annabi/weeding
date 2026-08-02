@@ -11,7 +11,13 @@ type StoryMedia =
     }
   | { type: "video"; src: string; alt: string }
   | { type: "image"; src: string; alt: string };
-import { Sunburst, OliveBranch, PalmLeaf, Waves } from "@/components/ornaments";
+import {
+  Sunburst,
+  OliveBranch,
+  PalmLeaf,
+  Waves,
+  icons,
+} from "@/components/ornaments";
 import { Divider, SiteFooter } from "@/components/site";
 import SiteNav from "@/components/site-nav";
 import StorySlider from "@/components/story-slider";
@@ -170,7 +176,9 @@ export default function Home() {
                 {i === 0 ? (
                   <OliveBranch className="mt-8 h-6 w-16 text-olive inline-block" />
                 ) : (
-                  <Sunburst className="mt-8 h-7 w-7 text-terracotta inline-block" />
+                  <span className="mt-8 inline-block text-olive">
+                    {icons.tajine("h-8 w-8")}
+                  </span>
                 )}
               </div>
               )}
@@ -199,7 +207,9 @@ export default function Home() {
 
       {/* ─── RSVP ─── */}
       <section className="texture-ocre text-cream py-20 text-center px-6">
-        <Sunburst className="mx-auto h-8 w-8 text-cream/80 mb-6" />
+        <span className="mx-auto mb-6 block w-fit text-cream/85">
+          {icons.plant("h-8 w-8")}
+        </span>
         <p className="script text-4xl sm:text-5xl mb-5 -rotate-1">
           répondez-nous vite !
         </p>

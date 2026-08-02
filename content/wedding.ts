@@ -3,6 +3,36 @@
  * Aucune autre partie du code n'a besoin d'être touchée.
  */
 
+// Diaporama des souvenirs : [fichier (public/images/souvenirs), lieu affiché].
+// Le lieu est aussi dans le nom du fichier — impossible de les désynchroniser.
+const SOUVENIRS: ReadonlyArray<readonly [string, string]> = [
+  ["01-santorin", "Santorin"],
+  ["02-santorin", "Santorin"],
+  ["03-tenerife", "Tenerife"],
+  ["04-fuerteventura", "Fuerteventura"],
+  ["05-florence", "Florence"],
+  ["06-cinque-terre", "Cinque Terre"],
+  ["07-dubai", "Dubaï"],
+  ["08-dubai", "Dubaï"],
+  ["09-koh-phi-phi", "Koh Phi Phi"],
+  ["10-ubud", "Ubud"],
+  ["11-bali", "Bali"],
+  ["12-bali", "Bali"],
+  ["13-nusa-penida", "Nusa Penida"],
+  ["14-le-caire", "Le Caire"],
+  ["15-louxor", "Louxor"],
+  ["16-morgins", "Morgins"],
+  ["17-morgins", "Morgins"],
+  ["18-lisbonne", "Lisbonne"],
+  ["19-fronalpstock", "Fronalpstock"],
+  ["20-ile-maurice", "Île Maurice"],
+  ["21-les-diablerets", "Les Diablerets"],
+  ["22-tokyo", "Tokyo"],
+  ["23-singapour", "Singapour"],
+  ["24-phuket", "Phuket"],
+  ["25-koh-samui", "Koh Samui"],
+];
+
 export const wedding = {
   couple: {
     partner1: "Maureen",
@@ -52,43 +82,12 @@ export const wedding = {
         "Voyager fait partie de nous. Alors pour un jour aussi important, on a voulu partager cette passion avec vous, en vous emmenant là où on se sent chez nous.",
         "Sidi Kaouki : un petit village de pêcheurs au sud d'Essaouira, entre couchers de soleil, tajines face à l'océan, surfeurs et animaux en liberté. On espère que vous comprendrez, une fois sur place, pourquoi on aime tant cet endroit.",
       ],
-      // Diaporama : tous les souvenirs de voyage (public/images/souvenirs,
-      // ordre chronologique). labels[i] = lieu affiché sur la photo i+1
-      // (chaîne vide = pas d'étiquette).
+      // Diaporama : tous les souvenirs de voyage (liste SOUVENIRS en haut
+      // de ce fichier — fichier et lieu appariés à la source).
       media: {
         type: "slider",
-        images: Array.from(
-          { length: 25 },
-          (_, i) =>
-            `/images/souvenirs/souvenir-${String(i + 1).padStart(2, "0")}.jpg`
-        ),
-        labels: [
-          "Santorin", // 1
-          "Santorin", // 2
-          "Tenerife", // 3
-          "Fuerteventura", // 4
-          "Florence", // 5
-          "Cinque Terre", // 6
-          "Dubaï", // 7
-          "Dubaï", // 8
-          "Koh Phi Phi", // 9
-          "Ubud", // 10
-          "Bali", // 11
-          "Bali", // 12
-          "Nusa Penida", // 13
-          "Le Caire", // 14
-          "Louxor", // 15
-          "Morgins", // 16
-          "Morgins", // 17
-          "Lisbonne", // 18
-          "Fronalpstock", // 19
-          "Île Maurice", // 20
-          "Les Diablerets", // 21
-          "Tokyo", // 22
-          "Singapour", // 23
-          "Phuket", // 24
-          "Koh Samui", // 25
-        ],
+        images: SOUVENIRS.map(([f]) => `/images/souvenirs/${f}.jpg`),
+        labels: SOUVENIRS.map(([, lieu]) => lieu),
         alt: "Nos voyages et nos moments ensemble depuis 2019",
       },
     },
@@ -184,7 +183,7 @@ export const wedding = {
     {
       day: "Vendredi 28 mai",
       title: "Une journée libre, à vivre comme vous le sentez",
-      icon: "sun",
+      icon: "surf",
       paragraphs: [
         "On organisera quelques activités selon l'envie du moment — surf, quad, hammam, yoga. Rien d'obligatoire : ceux qui ont envie nous rejoignent, ceux qui préfèrent un moment pour eux ou se poser à la piscine en profitent aussi.",
         "Sur place, à l'hôtel, vous avez une salle de sport, une piscine, un billard, des échecs, et la plage juste en face pour profiter et vous ressourcer.",
@@ -204,7 +203,7 @@ export const wedding = {
     {
       day: "Dimanche 30 mai",
       title: "Brunch et retour tranquille",
-      icon: "dinner",
+      icon: "tajine",
       paragraphs: [
         "On termine ces quelques jours par un brunch ensemble, avant un retour tranquille à la maison.",
       ],
