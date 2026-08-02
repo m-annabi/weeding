@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { wedding } from "@/content/wedding";
 import { Sunburst, icons } from "@/components/ornaments";
+import InvitationReveal from "@/components/invitation-reveal";
 import RsvpForm from "./rsvp-form";
 
 export const dynamic = "force-dynamic";
@@ -50,54 +51,21 @@ export default async function RsvpPage({
 
   return (
     <main className="min-h-screen bg-sand/50">
-      {/* ─── Bandeau image ─── */}
-      <header
-        className="relative bg-cover bg-center md:bg-fixed"
-        style={{ backgroundImage: `url(${wedding.images.band})` }}
-      >
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-cocoa/55 via-sienna/30 to-cocoa/65"
-          aria-hidden
-        />
-        <div className="relative z-10 mx-auto max-w-2xl px-6 pt-16 pb-32 text-center">
-          <p className="smallcaps text-cream/90 mb-6">{wedding.displayDate}</p>
-          <h1 className="font-serif italic font-light text-5xl sm:text-7xl text-cream leading-none drop-shadow-[0_2px_16px_rgba(85,64,44,0.5)]">
-            {wedding.couple.partner1}
-            <span className="mx-3 not-italic text-3xl sm:text-4xl text-cream/70 align-middle">
-              &
-            </span>
-            {wedding.couple.partner2}
-          </h1>
-          <div
-            className="flex items-center justify-center gap-5 my-5"
-            aria-hidden
-          >
-            <span className="h-px w-16 bg-cream/50" />
-            <Sunburst className="h-6 w-6 text-cream" />
-            <span className="h-px w-16 bg-cream/50" />
-          </div>
-          <p className="smallcaps text-cream/85">
-            {wedding.venue.name} · Sidi Kaouki · Maroc
+      <div className="mx-auto max-w-2xl px-6 pt-6 pb-20">
+        {/* L'enveloppe s'ouvre, la carte kilim sort (façon Paperless Post) */}
+        <InvitationReveal />
+        <div className="invite-after mt-10 text-center">
+          <Sunburst className="mx-auto h-7 w-7 text-camel mb-4" />
+          <p className="smallcaps text-olive mb-4">Invitation pour</p>
+          <p className="font-serif text-3xl text-cocoa">
+            {guest.firstName} {guest.lastName}
+            {guest.partnerName ? ` & ${guest.partnerName}` : ""}
           </p>
-        </div>
-      </header>
-
-      <div className="mx-auto max-w-2xl px-6 pb-20">
-        {/* Carton d'invitation */}
-        <div className="arch relative z-10 -mt-20 border border-camel/50 bg-cream p-2 shadow-[0_10px_40px_rgba(85,64,44,0.16)]">
-          <div className="arch border border-camel/40 border-dashed px-6 pt-12 pb-8 text-center">
-            <Sunburst className="mx-auto h-7 w-7 text-camel mb-4" />
-            <p className="smallcaps text-olive mb-4">Invitation pour</p>
-            <p className="font-serif text-3xl text-cocoa">
-              {guest.firstName} {guest.lastName}
-              {guest.partnerName ? ` & ${guest.partnerName}` : ""}
-            </p>
-            <p className="font-light text-cocoa/70 mt-4 max-w-md mx-auto">
-              Nous serions honorés de vous compter parmi nous, les pieds dans le
-              sable. Merci de répondre avant le{" "}
-              <strong className="font-medium highlight">{wedding.rsvpDeadline}</strong>.
-            </p>
-          </div>
+          <p className="font-light text-cocoa/70 mt-4 max-w-md mx-auto">
+            Nous serions honorés de vous compter parmi nous, les pieds dans le
+            sable. Merci de répondre avant le{" "}
+            <strong className="font-medium highlight">{wedding.rsvpDeadline}</strong>.
+          </p>
         </div>
 
         <RsvpForm
