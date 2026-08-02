@@ -53,7 +53,8 @@ export const wedding = {
         "Sidi Kaouki : un petit village de pêcheurs au sud d'Essaouira, entre couchers de soleil, tajines face à l'océan, surfeurs et animaux en liberté. On espère que vous comprendrez, une fois sur place, pourquoi on aime tant cet endroit.",
       ],
       // Diaporama : tous les souvenirs de voyage (public/images/souvenirs,
-      // ordre chronologique)
+      // ordre chronologique). labels[i] = lieu affiché sur la photo i+1
+      // (chaîne vide = pas d'étiquette).
       media: {
         type: "slider",
         images: Array.from(
@@ -61,6 +62,33 @@ export const wedding = {
           (_, i) =>
             `/images/souvenirs/souvenir-${String(i + 1).padStart(2, "0")}.jpg`
         ),
+        labels: [
+          "Santorin", // 1
+          "Santorin", // 2
+          "Tenerife", // 3
+          "Fuerteventura", // 4
+          "Florence", // 5
+          "Cinque Terre", // 6
+          "Dubaï", // 7
+          "Dubaï", // 8
+          "Koh Phi Phi", // 9
+          "Ubud", // 10
+          "Bali", // 11
+          "Bali", // 12
+          "Nusa Penida", // 13
+          "Le Caire", // 14
+          "Louxor", // 15
+          "Morgins", // 16
+          "Morgins", // 17
+          "Lisbonne", // 18
+          "Fronalpstock", // 19
+          "Île Maurice", // 20
+          "Les Diablerets", // 21
+          "Tokyo", // 22
+          "Singapour", // 23
+          "Phuket", // 24
+          "Koh Samui", // 25
+        ],
         alt: "Nos voyages et nos moments ensemble depuis 2019",
       },
     },

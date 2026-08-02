@@ -3,7 +3,12 @@ import Link from "next/link";
 import { wedding } from "@/content/wedding";
 
 type StoryMedia =
-  | { type: "slider"; images: readonly string[]; alt: string }
+  | {
+      type: "slider";
+      images: readonly string[];
+      labels?: readonly string[];
+      alt: string;
+    }
   | { type: "video"; src: string; alt: string }
   | { type: "image"; src: string; alt: string };
 import { Sunburst, OliveBranch, PalmLeaf, Waves } from "@/components/ornaments";
@@ -69,7 +74,11 @@ export default function Home() {
             const media = block.media as StoryMedia;
             const mediaEl =
               media.type === "slider" ? (
-                <StorySlider images={[...media.images]} alt={media.alt} />
+                <StorySlider
+                  images={[...media.images]}
+                  labels={media.labels ? [...media.labels] : undefined}
+                  alt={media.alt}
+                />
               ) : media.type === "video" ? (
                 <video
                   className="h-full w-full object-cover"
