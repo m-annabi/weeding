@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { wedding } from "@/content/wedding";
-import { Sunburst, Waves } from "@/components/ornaments";
+import { Sunburst, icons } from "@/components/ornaments";
 import RsvpForm from "./rsvp-form";
 
 export const dynamic = "force-dynamic";
@@ -23,7 +23,8 @@ export default async function RsvpPage({
         attending: guest.rsvp.attending,
         email: guest.rsvp.email,
         phone: guest.rsvp.phone,
-        arrivalMode: guest.rsvp.arrivalMode,
+        fullStay: guest.rsvp.fullStay,
+        stayDetails: guest.rsvp.stayDetails,
         arrivalAirport: guest.rsvp.arrivalAirport,
         arrivalDate: guest.rsvp.arrivalDate,
         arrivalTime: guest.rsvp.arrivalTime,
@@ -34,7 +35,6 @@ export default async function RsvpPage({
         needsTransfer: guest.rsvp.needsTransfer,
         accommodation: guest.rsvp.accommodation,
         accommodationOther: guest.rsvp.accommodationOther,
-        offersCarpool: guest.rsvp.offersCarpool,
         comment: guest.rsvp.comment,
         participants: guest.rsvp.participants.map((p) => ({
           firstName: p.firstName,
@@ -111,7 +111,9 @@ export default async function RsvpPage({
         />
 
         <footer className="mt-14 text-center">
-          <Waves className="mx-auto h-5 w-14 text-camel mb-4" />
+          <span className="mx-auto mb-4 block w-fit text-camel">
+            {icons.tongs("h-8 w-8")}
+          </span>
           <p className="script text-3xl text-terracotta -rotate-1 mb-3">
             on a hâte de vous voir !
           </p>

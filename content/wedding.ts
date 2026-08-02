@@ -93,7 +93,7 @@ export const wedding = {
     },
     {
       label: "Notre intention",
-      title: "Pour ces quelques jours",
+      title: "Pour cette parenthèse",
       paragraphs: [
         "On a voulu un mariage authentique, entourés des personnes qu'on aime le plus — une trentaine en tout. L'envie, c'est simple : que chacun vienne comme il est, sans autre attente que de profiter les uns des autres.",
         "Du jeudi 27 au dimanche 30 mai 2027, on prendra le temps de tout savourer : des repas partagés, quelques activités et de bons fous rires, le plaisir de découvrir les lieux à notre rythme — et quelque part au milieu de tout ça, se dire oui.",
@@ -153,7 +153,8 @@ export const wedding = {
 
   // Ce qui est pris en charge (transparence sur les coûts)
   covered: {
-    intro: "Pour être transparents sur l'organisation :",
+    intro:
+      "C'était important pour nous que ce voyage reste accessible à chacun. L'idée, c'est de passer un moment tous ensemble en limitant autant que possible l'impact financier pour vous. Voici le détail de ce qu'on prend en charge, et de ce qui reste de votre côté.",
     included: [
       "l'hébergement",
       "les petits déjeuners",

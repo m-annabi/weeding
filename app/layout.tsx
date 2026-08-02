@@ -6,7 +6,7 @@ import "./globals.css";
 // Pas d'axe optique (opsz) : Fraunces change sinon le dessin de certaines
 // lettres (f bouclé, j écourté) dans les grands titres — on garde les
 // mêmes glyphes à toutes les tailles.
-const fraunces = Fraunces({
+const serif = Fraunces({
   subsets: ["latin"],
   weight: "variable",
   style: ["normal", "italic"],
@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${fraunces.variable} ${jost.variable} ${caveat.variable}`}
+        className={`${serif.variable} ${jost.variable} ${caveat.variable}`}
       >
         {children}
       </body>

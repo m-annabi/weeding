@@ -9,7 +9,6 @@ const DIET_OPTIONS = [
   { value: "VEGETARIAN", label: "Végétarien" },
   { value: "VEGAN", label: "Vegan" },
   { value: "HALAL", label: "Halal" },
-  { value: "GLUTEN_FREE", label: "Sans gluten" },
   { value: "OTHER", label: "Autre (préciser)" },
 ];
 
@@ -17,7 +16,8 @@ export type ExistingRsvp = {
   attending: boolean;
   email: string | null;
   phone: string | null;
-  arrivalMode: string | null;
+  fullStay: boolean | null;
+  stayDetails: string | null;
   arrivalAirport: string | null;
   arrivalDate: string | null;
   arrivalTime: string | null;
@@ -28,7 +28,6 @@ export type ExistingRsvp = {
   needsTransfer: boolean;
   accommodation: string | null;
   accommodationOther: string | null;
-  offersCarpool: boolean;
   comment: string | null;
   participants: {
     firstName: string;
@@ -193,7 +192,9 @@ export default function RsvpForm({
       ? existing.participants.length
       : 1
   );
-  const [arrivalMode, setArrivalMode] = useState(existing?.arrivalMode ?? "");
+  const [fullStay, setFullStay] = useState<"yes" | "no" | "">(
+    existing?.fullStay == null ? "" : existing.fullStay ? "yes" : "no"
+  );
   const [accommodation, setAccommodation] = useState(
     existing?.accommodation ?? ""
   );
@@ -346,40 +347,56 @@ export default function RsvpForm({
             </div>
           </div>
 
-          {/* Voyage */}
-          <SectionTitle>Votre voyage</SectionTitle>
-          <div className="grid gap-3 sm:grid-cols-3">
+          {/* Séjour */}
+          <SectionTitle>Votre séjour</SectionTitle>
+          <p className="font-light text-cocoa/70">
+            Serez-vous bien présents du jeudi soir au dimanche ?
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
             {(
               [
-                ["PLANE", "plane", "J'arrive en avion"],
-                ["CAR", "car", "Je viens en voiture"],
-                ["ON_SITE", "home", "Je suis déjà sur place"],
+                ["yes", "Oui, du jeudi soir au dimanche"],
+                ["no", "Non, pas sur tout le séjour"],
               ] as const
-            ).map(([value, icon, label]) => (
+            ).map(([value, label]) => (
               <label
                 key={value}
                 className={`cursor-pointer rounded-2xl border-2 p-4 text-center transition ${
-                  arrivalMode === value
+                  fullStay === value
                     ? "border-terracotta bg-terracotta/10"
                     : "border-linen bg-cream/70 hover:border-camel"
                 }`}
               >
                 <input
                   type="radio"
-                  name="arrivalMode"
+                  name="fullStay"
                   value={value}
-                  checked={arrivalMode === value}
-                  onChange={() => setArrivalMode(value)}
+                  checked={fullStay === value}
+                  onChange={() => setFullStay(value)}
                   className="sr-only"
                 />
-                <span className="mb-2 flex justify-center text-sienna">{icons[icon as "plane" | "car" | "home"]("h-6 w-6")}</span>
                 <span className="font-light text-cocoa">{label}</span>
               </label>
             ))}
           </div>
+          {fullStay === "no" && (
+            <div>
+              <label className={labelCls} htmlFor="stayDetails">
+                Précisez quand vous serez présents
+              </label>
+              <input
+                id="stayDetails"
+                name="stayDetails"
+                placeholder="Du vendredi au dimanche…"
+                defaultValue={existing?.stayDetails ?? ""}
+                className={inputCls}
+              />
+            </div>
+          )}
 
-          {arrivalMode === "PLANE" && (
-            <div className="space-y-4 rounded-xl border border-linen bg-cream/70 p-5">
+          {/* Voyage */}
+          <SectionTitle>Votre vol</SectionTitle>
+          <div className="space-y-4 rounded-xl border border-linen bg-cream/70 p-5">
               <div>
                 <label className={labelCls} htmlFor="arrivalAirport">
                   Aéroport d&apos;arrivée
@@ -502,11 +519,9 @@ export default function RsvpForm({
                 Les billets d&apos;avion et le trajet jusqu&apos;à la kasbah
                 sont à votre charge. Pas encore réservé ? Aucun souci :
                 répondez dès maintenant et revenez compléter vos infos de vol
-                sur cette même page plus tard — elles nous aident à organiser
-                le covoiturage entre invités.
+                sur cette même page plus tard.
               </p>
-            </div>
-          )}
+          </div>
 
           {/* Hébergement */}
           <SectionTitle>Votre hébergement</SectionTitle>
@@ -559,18 +574,6 @@ export default function RsvpForm({
             </div>
           )}
 
-          {(arrivalMode === "PLANE" || arrivalMode === "CAR") && (
-            <label className="flex items-center gap-3 font-light">
-              <input
-                type="checkbox"
-                name="offersCarpool"
-                defaultChecked={existing?.offersCarpool}
-                className="h-4 w-4 accent-terracotta"
-              />
-              Je peux proposer du covoiturage (voiture de location, trajets
-              depuis l&apos;aéroport…)
-            </label>
-          )}
         </>
       )}
 

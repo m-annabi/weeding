@@ -5,7 +5,6 @@ import { prisma } from "@/lib/prisma";
 export type RsvpState = { ok: boolean; message: string } | null;
 
 const DIETS = ["NONE", "VEGETARIAN", "VEGAN", "HALAL", "GLUTEN_FREE", "OTHER"];
-const ARRIVAL_MODES = ["PLANE", "CAR", "ON_SITE"];
 const AIRPORTS = ["ESU", "RAK", "AGA"];
 const ACCOMMODATIONS = ["KASBAH", "OTHER"];
 
@@ -38,20 +37,22 @@ export async function submitRsvp(
     const v = str(name, 30);
     return v && allowed.includes(v) ? v : null;
   };
-  const arrivalMode = enumOf("arrivalMode", ARRIVAL_MODES);
-  const isPlane = arrivalMode === "PLANE";
-  const arrivalAirport = isPlane ? enumOf("arrivalAirport", AIRPORTS) : null;
-  const arrivalDate = isPlane ? str("arrivalDate", 10) : null;
-  const arrivalTime = isPlane ? str("arrivalTime", 5) : null;
-  const arrivalFlight = isPlane ? str("arrivalFlight", 20) : null;
-  const departureDate = isPlane ? str("departureDate", 10) : null;
-  const departureTime = isPlane ? str("departureTime", 5) : null;
-  const departureFlight = isPlane ? str("departureFlight", 20) : null;
-  const needsTransfer = isPlane && formData.get("needsTransfer") === "on";
+  // Tout le monde arrive en avion — plus de choix du mode de transport.
+  const fullStayRaw = str("fullStay", 5);
+  const fullStay =
+    fullStayRaw === "yes" ? true : fullStayRaw === "no" ? false : null;
+  const stayDetails = fullStay === false ? str("stayDetails", 300) : null;
+  const arrivalAirport = enumOf("arrivalAirport", AIRPORTS);
+  const arrivalDate = str("arrivalDate", 10);
+  const arrivalTime = str("arrivalTime", 5);
+  const arrivalFlight = str("arrivalFlight", 20);
+  const departureDate = str("departureDate", 10);
+  const departureTime = str("departureTime", 5);
+  const departureFlight = str("departureFlight", 20);
+  const needsTransfer = formData.get("needsTransfer") === "on";
   const accommodation = enumOf("accommodation", ACCOMMODATIONS);
   const accommodationOther =
     accommodation === "OTHER" ? str("accommodationOther", 300) : null;
-  const offersCarpool = formData.get("offersCarpool") === "on";
 
   type ParticipantInput = {
     firstName: string;
@@ -100,7 +101,9 @@ export async function submitRsvp(
 
   const travel = attending
     ? {
-        arrivalMode,
+        arrivalMode: "PLANE",
+        fullStay,
+        stayDetails,
         arrivalAirport,
         arrivalDate,
         arrivalTime,
@@ -111,10 +114,11 @@ export async function submitRsvp(
         needsTransfer,
         accommodation,
         accommodationOther,
-        offersCarpool,
       }
     : {
         arrivalMode: null,
+        fullStay: null,
+        stayDetails: null,
         arrivalAirport: null,
         arrivalDate: null,
         arrivalTime: null,
@@ -125,7 +129,6 @@ export async function submitRsvp(
         needsTransfer: false,
         accommodation: null,
         accommodationOther: null,
-        offersCarpool: false,
       };
 
   await prisma.$transaction(async (tx) => {

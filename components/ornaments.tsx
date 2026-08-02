@@ -200,6 +200,26 @@ export const icons = {
       <path vectorEffect="non-scaling-stroke" d="M3.8 16.2h16.4l-1.1 2.1a2 2 0 01-1.8 1.1H6.7a2 2 0 01-1.8-1.1z" />
     </Icon>
   ),
+  tongs: (c?: string) => (
+    <Icon className={c}>
+      <g transform="rotate(-10 8.2 12)">
+        <ellipse vectorEffect="non-scaling-stroke" cx="8.2" cy="12" rx="3.3" ry="6.4" />
+        <path
+          vectorEffect="non-scaling-stroke"
+          d="M8.2 9.6l-2.4 3M8.2 9.6l2.4 3M8.2 9.6V8.3"
+          strokeWidth="1.1"
+        />
+      </g>
+      <g transform="rotate(10 15.8 12)">
+        <ellipse vectorEffect="non-scaling-stroke" cx="15.8" cy="12" rx="3.3" ry="6.4" />
+        <path
+          vectorEffect="non-scaling-stroke"
+          d="M15.8 9.6l-2.4 3M15.8 9.6l2.4 3M15.8 9.6V8.3"
+          strokeWidth="1.1"
+        />
+      </g>
+    </Icon>
+  ),
   surf: (c?: string) => (
     <Icon className={c}>
       <path vectorEffect="non-scaling-stroke" d="M16.2 2.8c1.7 4.6.8 10.5-2.7 15-1.2 1.6-2.8 2.8-4.6 3.3-.6-1.8-.4-3.7.5-5.7C11.5 11 13.7 6.6 16.2 2.8z" />

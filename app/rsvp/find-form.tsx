@@ -14,8 +14,8 @@ export default function FindForm() {
       className="mx-auto mt-10 w-full max-w-md arch border border-linen bg-cream/60 px-8 pt-14 pb-10 text-center"
     >
       <p className="font-light text-cocoa/70 mb-6">
-        Indiquez le prénom et le nom figurant sur votre invitation : nous vous
-        emmenons vers votre formulaire personnel.
+        Indiquez votre prénom et votre nom : nous vous emmenons vers votre
+        formulaire personnel.
       </p>
       <input
         type="text"

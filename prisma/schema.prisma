@@ -68,6 +68,9 @@ model Rsvp {
   departureTime      String?
   departureFlight    String?
   needsTransfer      Boolean @default(false)
+  // Présence sur tout le séjour (du jeudi soir au dimanche)
+  fullStay           Boolean?
+  stayDetails        String?
   // KASBAH | OTHER
   accommodation      String?
   accommodationOther String?
