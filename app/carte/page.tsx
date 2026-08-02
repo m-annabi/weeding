@@ -4,7 +4,7 @@ import { InvitationCard } from "@/components/invitation-reveal";
 // l'image de l'email d'invitation via une capture headless).
 export default function CartePage() {
   return (
-    <main className="flex min-h-svh items-center justify-center bg-[#e6d9ba] p-8">
+    <main className="flex min-h-svh items-center justify-center bg-[#7c7448] p-8">
       <div className="w-[300px]" style={{ aspectRatio: "3 / 4.1" }}>
         <InvitationCard className="h-full w-full shadow-[0_18px_44px_rgba(85,64,44,0.28)]" />
       </div>
