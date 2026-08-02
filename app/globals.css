@@ -72,7 +72,7 @@ body {
 
 /* Filtre chaud doré pour harmoniser les photos avec la palette */
 .warm-filter {
-  filter: sepia(0.28) saturate(1.12) contrast(0.99) brightness(0.99);
+  filter: sepia(0.22) saturate(1.07) contrast(0.99) brightness(1);
 }
 
 ::selection {

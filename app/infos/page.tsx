@@ -143,6 +143,19 @@ export default function InfosPage() {
             <p>{wedding.localTransport}</p>
           </Accordion>
 
+          <Accordion
+            icon="hanger"
+            title="Dress code"
+            tint="bg-nude/15"
+            iconColor="text-nude"
+          >
+            <div className="space-y-4">
+              {wedding.dressCode.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+          </Accordion>
+
           {wedding.lodging.offered && (
             <Accordion
               icon="bed"
@@ -154,9 +167,19 @@ export default function InfosPage() {
                 Hébergement offert
               </p>
               <div className="space-y-4">
-                {wedding.lodging.notes.map((n) => (
-                  <p key={n}>{n}</p>
-                ))}
+                <p>{wedding.lodging.notes[0]}</p>
+                <p>
+                  Vous pouvez découvrir la Kasbah d&apos;Eau sur son site :{" "}
+                  <a
+                    href={wedding.lodging.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-sienna underline underline-offset-4 hover:text-terracotta transition"
+                  >
+                    kasbahdeau.com
+                  </a>
+                </p>
+                <p>{wedding.lodging.notes[1]}</p>
               </div>
             </Accordion>
           )}

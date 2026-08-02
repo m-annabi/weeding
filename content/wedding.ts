@@ -108,9 +108,16 @@ export const wedding = {
   localTransport:
     "Sur place, si besoin de vous déplacer, les taxis ne coûtent presque rien. On organisera aussi quelques sorties pour se balader à Essaouira, et vous serez bien sûr libres d'y aller quand bon vous semble.",
 
+  // Dress code
+  dressCode: [
+    "Pas de dress code imposé, on veut avant tout que vous soyez à l'aise. Pour le samedi, jour du mariage, on vous demande simplement de prévoir une tenue habillée.",
+    "Pour le reste du séjour, venez comme vous en avez envie — confortable, décontracté, à votre image.",
+  ],
+
   // Hébergement : la kasbah est privatisée et les logements sont offerts
   lodging: {
     offered: true,
+    website: "https://kasbahdeau.com",
     notes: [
       "On a voulu prendre en charge le logement pour permettre à chacun de venir. L'idée, c'est d'être tous au même endroit, ensemble, tout en respectant le rythme et la vie de chacun.",
       "Des chambres adaptées sont prévues pour les parents. Si vous avez des besoins essentiels (lit bébé, etc.), indiquez-les dans le formulaire — on s'occupe du reste.",

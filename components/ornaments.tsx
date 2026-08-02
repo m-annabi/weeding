@@ -186,6 +186,12 @@ export const icons = {
       <path d="M12 20s-7.5-4.8-7.5-10a4.3 4.3 0 017.5-2.9A4.3 4.3 0 0119.5 10c0 5.2-7.5 10-7.5 10z" />
     </Icon>
   ),
+  hanger: (c?: string) => (
+    <Icon className={c}>
+      <path d="M13.8 4.4a1.8 1.8 0 10-3.1 1.2" strokeWidth="1.1" />
+      <path d="M12 6.8v1.7l-8.3 5.9a1.4 1.4 0 00.8 2.5h15a1.4 1.4 0 00.8-2.5L12 8.5" />
+    </Icon>
+  ),
 } as const;
 
 export type IconName = keyof typeof icons;
