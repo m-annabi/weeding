@@ -17,6 +17,7 @@ export function renderInvitationEmail(firstName: string, rsvpUrl: string) {
   const { couple, displayRange, venue, rsvpDeadline, invitationEmail } = wedding;
   return `<!doctype html>
 <html lang="fr">
+  <head><meta charset="utf-8" /></head>
   <body style="margin:0;padding:0;background-color:#faf4e8;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#faf4e8;padding:32px 12px;">
       <tr><td align="center">

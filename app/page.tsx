@@ -177,7 +177,7 @@ export default function Home() {
                   <OliveBranch className="mt-8 h-6 w-16 text-olive inline-block" />
                 ) : (
                   <span className="mt-8 inline-block text-olive">
-                    {icons.tajine("h-8 w-8")}
+                    {icons.tongs("h-8 w-8")}
                   </span>
                 )}
               </div>
