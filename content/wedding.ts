@@ -70,7 +70,7 @@ export const wedding = {
           (_, i) =>
             `/images/souvenirs/souvenir-${String(i + 1).padStart(2, "0")}.jpg`
         ),
-        alt: "Nos voyages et nos moments ensemble depuis 2020",
+        alt: "Nos voyages et nos moments ensemble depuis 2019",
       },
     },
   ],

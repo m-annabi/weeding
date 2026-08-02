@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette « coucher de soleil sur une plage marocaine » —
-     sable, ivoire, camel, terracotta douce, olive */
+  /* Palette « faire-part kilim » — crème, lin, ocre rouille texturé,
+     olive kaki (inspirée du faire-part Paperless Post fourni) */
   --color-cream: #faf4e8;
-  --color-sand: #f1e5cd;
-  --color-linen: #e4d3b3;
+  --color-sand: #f0e4cc;
+  --color-linen: #e2d2b0;
   --color-nude: #cfa477;
-  --color-camel: #c1935f;
+  --color-camel: #bd8f58;
   --color-toffee: #a97a4c;
-  --color-terracotta: #c07a52;
-  --color-sienna: #96603f;
+  --color-terracotta: #b26d36;
+  --color-sienna: #92592a;
   --color-cocoa: #55402c;
-  --color-olive: #78754f;
-  --color-sage: #b0aa88;
+  --color-olive: #7c7448;
+  --color-sage: #b3ab7f;
 }
 
 /* Les polices next/font sont des variables définies sur <body>,
@@ -56,6 +56,36 @@ body {
     color-mix(in srgb, var(--color-linen) 75%, transparent) 38%,
     transparent 38%
   );
+}
+
+/* Fonds texturés façon papier — comme l'intérieur ocre de l'enveloppe */
+.texture-ocre {
+  background-color: var(--color-terracotta);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.11'/%3E%3C/svg%3E"),
+    linear-gradient(165deg, #bd7a42 0%, #b26d36 55%, #9e5e2a 100%);
+}
+.texture-olive {
+  background-color: var(--color-olive);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.10'/%3E%3C/svg%3E"),
+    linear-gradient(160deg, #837b4e 0%, #7c7448 55%, #6c6540 100%);
+}
+
+/* Liseré « par avion » (rayures ocre/olive), pour la carte postale */
+.airmail {
+  border: 7px solid;
+  border-image: repeating-linear-gradient(
+      45deg,
+      var(--color-terracotta) 0 9px,
+      #fdfaf2 9px 18px,
+      var(--color-olive) 18px 27px,
+      #fdfaf2 27px 36px
+    )
+    7;
+}
+
+/* Filtre chaud léger pour harmoniser les photos avec la palette */
+.warm-filter {
+  filter: sepia(0.2) saturate(0.95) contrast(0.97) brightness(1.03);
 }
 
 ::selection {

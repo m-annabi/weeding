@@ -42,12 +42,17 @@ export default function StorySlider({
             alt={alt}
             fill
             sizes="(max-width: 768px) 90vw, 440px"
-            className={`object-cover transition-opacity duration-500 ${
+            className={`object-cover warm-filter transition-opacity duration-500 ${
               i === index ? "opacity-100" : "opacity-0"
             }`}
           />
         ) : null
       )}
+      {/* Voile terracotta très léger, dans les tons du site */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-terracotta/10 mix-blend-multiply"
+        aria-hidden
+      />
     </div>
   );
 }

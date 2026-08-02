@@ -60,7 +60,7 @@ export default function ProgrammePage() {
           })}
         </div>
 
-        <p className="mt-10 rounded-xl border border-linen bg-cream/60 p-6 font-light text-cocoa/70 text-center">
+        <p className="texture-olive mt-10 rounded-xl p-7 font-light text-cream/95 text-center">
           {wedding.programmeNote}
         </p>
       </main>
