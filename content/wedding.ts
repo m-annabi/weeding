@@ -146,7 +146,7 @@ export const wedding = {
     offered: true,
     website: "https://kasbahdeau.com",
     notes: [
-      "On a voulu prendre en charge le logement pour permettre à chacun de venir. L'idée, c'est d'être tous au même endroit, ensemble, tout en respectant le rythme et la vie de chacun.",
+      "On a voulu prendre en charge le logement pour permettre à chacun de venir. L'idée, c'est d'être tous réunis au même endroit, tout en respectant le rythme et la vie de chacun.",
       "Des chambres adaptées sont prévues pour les parents. Si vous avez des besoins essentiels (lit bébé, etc.), indiquez-les dans le formulaire — on s'occupe du reste.",
     ],
   },
