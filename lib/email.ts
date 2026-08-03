@@ -5,7 +5,7 @@ import { wedding } from "@/content/wedding";
 export function siteUrl() {
   return (
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-    "https://weeding-three-phi.vercel.app"
+    "https://wedding-akan-maureen.vercel.app"
   );
 }
 
