@@ -1,7 +1,7 @@
 import { InvitationCard } from "@/components/invitation-reveal";
 
-// Page utilitaire : rendu isolé de la carte kilim (sert à générer
-// l'image de l'email d'invitation via une capture headless).
+// Page utilitaire : rendu isolé de la carte (sert à générer l'image de
+// l'email d'invitation via une capture headless — fond assorti à l'email).
 export default function CartePage() {
   return (
     <main className="flex min-h-svh items-center justify-center bg-[#7c7448] p-8">

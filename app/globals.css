@@ -98,7 +98,7 @@ body {
 .invite-envelope {
   position: absolute;
   left: 50%;
-  bottom: -24px;
+  bottom: -4px;
   width: 340px;
   height: 220px;
   transform: translateX(-50%);
@@ -170,10 +170,10 @@ body {
   position: absolute;
   inset: 46% 0 0;
   z-index: 2;
-  background: linear-gradient(180deg, #fbf7ec 0%, #f1e9d6 100%);
-  border: 1px solid #e0d3b4;
+  background: linear-gradient(180deg, #fdfaf1 0%, #efe5cd 100%);
+  border: 1px solid #d9c9a3;
   border-radius: 8px;
-  box-shadow: 0 14px 34px rgba(85, 64, 44, 0.18);
+  box-shadow: 0 16px 36px rgba(85, 64, 44, 0.26);
 }
 .invite-pocket::before {
   content: "";
@@ -211,7 +211,7 @@ body {
     z-index: 6;
   }
   100% {
-    transform: translate(-50%, -2%) scale(1.1);
+    transform: translate(-50%, -10%) scale(1.06);
     z-index: 6;
   }
 }
