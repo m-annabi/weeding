@@ -106,7 +106,7 @@ export function InvitationCard({ className = "" }: { className?: string }) {
             </textPath>
           </text>
         </svg>
-        <div className="flex min-h-0 flex-1 items-center justify-center pb-4">
+        <div className="flex min-h-0 flex-1 items-center justify-center pb-8">
           <ArchScene className="h-[134px]" />
         </div>
         <p className="mt-1 font-serif text-[16px] uppercase leading-tight tracking-[0.08em]">
