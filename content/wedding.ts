@@ -228,12 +228,12 @@ export const wedding = {
   invitationEmail: {
     subject: "Notre mariage au Maroc — votre invitation 💌",
     intro:
-      "On voulait vous l'annoncer nous-mêmes : on se marie, et on aimerait beaucoup que vous soyez là.",
+      "Comme vous le savez, on a un beau projet en 2027 : on se marie ! On espère sincèrement que vous pourrez venir, et on est ravis de vous inviter à célébrer ce moment avec nous.",
     linkLabel: "Ouvrir votre invitation",
     outro:
-      "Vous pourrez y confirmer ou non votre présence, indiquer votre date d'arrivée, votre logement et vos préférences alimentaires. Pas besoin de tout savoir dès maintenant — si certaines choses ne sont pas encore sûres, vous pourrez y revenir à tout moment pour modifier votre réponse.",
+      "Vous pourrez confirmer (ou non) votre présence, indiquer votre date d'arrivée, votre logement et vos préférences alimentaires. Rien n'est figé — vous pourrez revenir modifier votre réponse à tout moment.",
     sitePitch:
-      "Toutes les infos pratiques (comment venir, où vous dormirez, le programme) sont disponibles sur notre site.",
+      "Toutes les infos pratiques (accès, hébergement, programme) sont à retrouver sur notre site.",
     signature: "Prêts pour le voyage ?",
     ps: "PS : préparez vos tongs.",
   },
