@@ -177,7 +177,7 @@ export const wedding = {
       title: "Arrivée à l'hôtel",
       icon: "suitcase",
       paragraphs: [
-        "Vous pouvez arriver dès 14h. On profite d'une soirée tranquille, avec un repas à la kasbah pour ceux qui le souhaitent.",
+        "Vous pouvez arriver dès 15h. On profite d'une soirée tranquille, avec un repas à la kasbah pour ceux qui le souhaitent.",
       ],
       media: { type: "video", src: "/videos/programme-jeudi.mp4", alt: "Dromadaire sur la plage de Sidi Kaouki" },
     },

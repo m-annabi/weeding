@@ -119,6 +119,18 @@ export function InvitationCard({ className = "" }: { className?: string }) {
         <p className="smallcaps !text-[7px] !tracking-[0.3em] text-cream/90">
           se marient !
         </p>
+        {/* Deux alliances entrelacées, clin d'œil discret */}
+        <svg
+          viewBox="0 0 26 14"
+          className="h-[11px] w-[22px] opacity-90"
+          fill="none"
+          stroke="#d9b878"
+          strokeWidth="1.1"
+          aria-hidden
+        >
+          <circle cx="9.5" cy="7" r="5.2" />
+          <circle cx="16.5" cy="7" r="5.2" />
+        </svg>
         <p className="font-serif text-[15px] tracking-[0.18em]">
           29<span className="text-[#d9b878]"> · </span>05
           <span className="text-[#d9b878]"> · </span>27
