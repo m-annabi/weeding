@@ -30,8 +30,7 @@ export function renderInvitationEmail(firstName: string, rsvpUrl: string) {
         <p style="margin:0 0 6px;font-family:Georgia,serif;font-size:22px;color:#55402c;">${firstName}, une enveloppe vous attend&hellip;</p>
         <p style="margin:0 0 18px;font-size:15px;letter-spacing:3px;line-height:1;color:#bd8f58;">&#12316;&#12316;&#12316;</p>
         <p style="margin:0 auto 24px;max-width:430px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#6b543a;">${invitationEmail.intro}</p>
-        <a href="${rsvpUrl}" style="text-decoration:none;">
-          <table role="presentation" cellpadding="0" cellspacing="0" width="330" bgcolor="#9a9159" style="width:330px;max-width:92%;background-color:#9a9159;border-radius:6px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" width="330" bgcolor="#9a9159" style="width:330px;max-width:92%;background-color:#9a9159;border-radius:6px;">
             <tr><td style="padding:10px;">
               <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #e6dcba;">
                 <tr><td style="border:1px solid #bdb586;margin:0;padding:24px 14px 26px;" align="center">
@@ -54,8 +53,7 @@ export function renderInvitationEmail(firstName: string, rsvpUrl: string) {
                 </td></tr>
               </table>
             </td></tr>
-          </table>
-        </a>
+        </table>
         <table role="presentation" cellpadding="0" cellspacing="0" style="margin:26px auto 0;">
           <tr>
             <td bgcolor="#a85b3b" style="background-color:#a85b3b;border-radius:999px;">
