@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Sunburst } from "@/components/ornaments";
+import { Rings } from "@/components/ornaments";
 
 const LINKS = [
   { href: "/infos", label: "Infos pratiques" },
@@ -48,8 +48,8 @@ export default function SiteNav({ overlay = false }: { overlay?: boolean }) {
         >
           <span className="flex items-center gap-1.5 font-serif italic text-lg leading-none whitespace-nowrap">
             M
-            <Sunburst
-              className={`h-4 w-4 ${solid ? "text-camel" : "text-cream/90"}`}
+            <Rings
+              className={`h-3.5 w-6 ${solid ? "text-camel" : "text-cream/90"}`}
             />
             A
           </span>

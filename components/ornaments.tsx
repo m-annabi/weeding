@@ -27,6 +27,16 @@ export function Sunburst({ className = "h-8 w-8" }: SvgProps) {
   );
 }
 
+/** Deux alliances entrelacées (comme sur le faire-part). */
+export function Rings({ className = "h-4 w-7" }: SvgProps) {
+  return (
+    <svg viewBox="0 0 26 14" className={className} aria-hidden {...stroke}>
+      <circle vectorEffect="non-scaling-stroke" cx="9.5" cy="7" r="5.2" />
+      <circle vectorEffect="non-scaling-stroke" cx="16.5" cy="7" r="5.2" />
+    </svg>
+  );
+}
+
 /** Trois vagues fines. */
 export function Waves({ className = "h-6 w-16" }: SvgProps) {
   return (
