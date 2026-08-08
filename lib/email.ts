@@ -21,7 +21,7 @@ export function renderInvitationEmail(firstName: string, rsvpUrl: string) {
   <head><meta charset="utf-8" /></head>
   <body bgcolor="#faf4e8" style="margin:0;padding:0;background-color:#faf4e8;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#faf4e8" style="background-color:#faf4e8;">
-      <tr><td align="center" bgcolor="#faf4e8" style="background-color:#faf4e8;padding:0 12px 40px;">
+      <tr><td align="center" bgcolor="#faf4e8" style="background-color:#faf4e8;padding:34px 12px 40px;">
         <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 22px;">
           <tr>
             <td bgcolor="#f0e4cc" width="96" height="54" align="center" valign="middle" style="background-color:#f0e4cc;border-radius:48px 48px 0 0;font-size:26px;line-height:1;color:#bd8f58;">&#9788;</td>
